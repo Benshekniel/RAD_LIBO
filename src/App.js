@@ -2,6 +2,7 @@
 import React from 'react';
 import Sidebar from './Librarian/Sidebar';
 import SearchBar from './Librarian/SearchBar';
+import Dashboard from './Librarian/Dashboard';
 import './App.css'; // Import the CSS file for the main layout
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
     <div className="app">
       <Sidebar />
       <div className="main-content">
-        <SearchBar />
+        {/* <SearchBar /> */}
+        <Dashboard />
         {/* Other components go here */}
       </div>
     </div>

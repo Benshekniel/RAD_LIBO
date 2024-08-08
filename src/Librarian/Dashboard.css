@@ -1,0 +1,48 @@
+.dashboard-container {
+   display: flex;
+ }
+ 
+ .dashboard-content {
+   flex-grow: 1;
+   padding: 20px;
+ }
+ 
+ .dashboard-stats {
+   display: flex;
+   justify-content: space-around;
+   margin-bottom: 20px;
+ }
+ 
+ .stat-box {
+   background-color: #F6F6E9;
+   padding: 20px;
+   border-radius: 8px;
+   text-align: center;
+   width: 20%;
+ }
+ 
+ .stat-box h2 {
+   margin: 10px 0 0;
+   font-size: 2em;
+ }
+ 
+ .table-container {
+   max-height: 440px; 
+   overflow-y: auto; 
+ }
+ 
+ .table-container table {
+   width: 100%;
+   border-collapse: collapse;
+ }
+ 
+ .table-container th, .table-container td {
+   border: 1px solid #dddddd;
+   text-align: left;
+   padding: 8px;
+ }
+ 
+ .table-container th {
+   background-color: #f2f2f2;
+ }
+ 
