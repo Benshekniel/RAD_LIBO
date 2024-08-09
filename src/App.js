@@ -9,7 +9,7 @@ import './App.css'; // Import the CSS file for the main layout
 const App = () => {
   return (
     <div className="app">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="main-content">
         {/* <SearchBar /> */}
         {/* <Dashboard /> */}

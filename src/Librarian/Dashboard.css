@@ -26,11 +26,16 @@
    font-size: 2em;
  }
  
+ .table-container h2{
+  margin-bottom: 40px;
+}
  .table-container {
-   max-height: 440px; 
+   max-height: 400px; 
    overflow-y: auto; 
  }
  
+
+
  .table-container table {
    width: 100%;
    border-collapse: collapse;
