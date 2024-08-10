@@ -126,7 +126,7 @@ const ManageBooks = () => {
             </button>
           </div>
 
-          <div className="table-container">
+          <div className="table-container-mb">
             <table className="books-table">
               <thead>
                 <tr>

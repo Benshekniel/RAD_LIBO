@@ -10,7 +10,7 @@
    position: relative;
  }
  
- .table-container {
+ .table-container-db {
    max-height: 520px;
    overflow-y: auto;
    margin-top: 50px;

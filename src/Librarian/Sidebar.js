@@ -1,15 +1,8 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTachometerAlt,
-  faBook,
-  faUserGraduate,
-  faClipboardList,
-  faBookOpen,
-  faExclamationTriangle,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import "./Sidebar.css"; // Import the CSS file for styling
+import { faTachometerAlt, faBook, faUserGraduate, faClipboardList, faBookOpen, faExclamationTriangle, faSignOutAlt, } from "@fortawesome/free-solid-svg-icons";
+import "./Sidebar.css";
 import Logo from "./Images/Logo.png";
 import Librarian from "./Images/Librarian.jpeg";
 
@@ -31,45 +24,35 @@ const Sidebar = () => {
       </div>
       <div className="sidebar-menu">
         <ul>
-          <li
-            className={active === "Dashboard" ? "active" : ""}
-            onClick={() => setActive("Dashboard")}
-          >
-            <FontAwesomeIcon className="space" icon={faTachometerAlt} />{" "}
-            Dashboard
+          <li>
+            <NavLink to="/manage-dashboard" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Dashboard")}>
+              <FontAwesomeIcon className="space" icon={faTachometerAlt} /> Dashboard
+            </NavLink>
           </li>
-          <li
-            className={active === "Manage Books" ? "active" : ""}
-            onClick={() => setActive("Manage Books")}
-          >
-            <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
+          <li>
+            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Books")}>
+              <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
+            </NavLink>
           </li>
-          <li
-            className={active === "Manage Students" ? "active" : ""}
-            onClick={() => setActive("Manage Students")}
-          >
-            <FontAwesomeIcon className="space" icon={faUserGraduate} /> Manage
-            Students
+          <li>
+            <NavLink to="/manage-students" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Students")}>
+              <FontAwesomeIcon className="space" icon={faUserGraduate} /> Manage Students
+            </NavLink>
           </li>
-          <li
-            className={active === "Manage Requests" ? "active" : ""}
-            onClick={() => setActive("Manage Requests")}
-          >
-            <FontAwesomeIcon className="space" icon={faClipboardList} /> Manage
-            Requests
+          <li>
+            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Requests")}>
+              <FontAwesomeIcon className="space" icon={faClipboardList} /> Manage Requests
+            </NavLink>
           </li>
-          <li
-            className={active === "Issued Books" ? "active" : ""}
-            onClick={() => setActive("Issued Books")}
-          >
-            <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
+          <li>
+            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Issued Books")}>
+              <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
+            </NavLink>
           </li>
-          <li
-            className={active === "Defaulter Books" ? "active" : ""}
-            onClick={() => setActive("Defaulter Books")}
-          >
-            <FontAwesomeIcon className="space" icon={faExclamationTriangle} />{" "}
-            Defaulter Books
+          <li>
+            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Defaulter Books")}>
+              <FontAwesomeIcon className="space" icon={faExclamationTriangle} /> Defaulter Books
+            </NavLink>
           </li>
         </ul>
       </div>

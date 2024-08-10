@@ -79,7 +79,7 @@ const ManageRequests = () => {
       <div>
         <SearchBar />
         <div className="manage-defaulters-container">
-          <div className="table-container">
+          <div className="table-container-db">
             <table className="defaulters-table">
               <thead>
                 <tr>

@@ -10,7 +10,7 @@
    position: relative;
  }
  
- .table-container {
+ .table-container-ib {
    max-height: 520px;
    overflow-y: auto;
    margin-top: 50px;
@@ -46,7 +46,7 @@
    object-fit: cover;
  }
  
- .action-button {
+ .action-button-issued {
   width: 120px;
   padding: 10px;
   background-color: #ffdd44;

@@ -123,7 +123,7 @@ const ManageRequests = () => {
       <div>
         <SearchBar />
         <div className="manage-requests-container">
-          <div className="table-container">
+          <div className="table-container-mr">
             <table className="requests-table">
               <thead>
                 <tr>

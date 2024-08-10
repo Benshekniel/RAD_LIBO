@@ -80,8 +80,8 @@
   cursor: pointer;
 }
 
-.table-container {
-  width: 90%;
+.table-container-ms {
+  width: 70%;
   max-height: 480px;
   overflow-y: auto;
   margin-top: 100px;
@@ -92,7 +92,7 @@
 }
 
 .students-table {
-  width: 50%;
+  width: 100%;
   border-collapse: collapse;
 }
 

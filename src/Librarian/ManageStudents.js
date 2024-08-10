@@ -112,7 +112,7 @@ const ManageStudents = () => {
             </button>
           </div>
 
-          <div className="table-container">
+          <div className="table-container-ms">
             <table className="students-table">
               <thead>
                 <tr>

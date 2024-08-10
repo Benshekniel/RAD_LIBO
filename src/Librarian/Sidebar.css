@@ -1,100 +1,108 @@
 .sidebar {
-   width: 229px;
-   height: 100vh; /* Changed to viewport height */
-   background-color: #F6F6E9;
-   padding: 20px;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between; /* Space out content */
- }
- 
- .sidebar-logo {
-   display: flex;
-   align-items: center;
-   margin-left: 50px;
-   margin-bottom: 5px;
- }
- 
- .sidebar-logo img {
-   width: 40px;
-   height: 40px;
-   margin-right: 10px;
- }
- 
- .sidebar-logo h1 {
-   color: #0443A5;
- }
- 
- .sidebar-user {
-   display: flex;
-   align-items: center;
-   margin-bottom: 5px;
- }
- 
- .user-avatar {
-   width: 60px;
-   height: 60px;
-   border-radius: 50%;
-   margin-right: 10px;
- }
- 
- .user-info {
-   display: flex;
-   flex-direction: column;
- }
- 
- .user-info p {
-   margin: 0;
- }
- 
- .user-role {
-   color: grey;
-   font-size: 0.9em;
- }
- 
- .sidebar-menu ul {
-   list-style: none;
-   padding: 0;
- }
- 
- .sidebar-menu ul li {
-   display: flex;
-   align-items: center;
-   padding: 20px 0;
-   cursor: pointer;
-   color: black;
- }
- 
- .sidebar-menu ul li.active,
- .sidebar-menu ul li:hover {
-   background-color: #0443A5;
-   color: white;
- }
- 
- .sidebar-menu ul li .fa-icon {
-   margin-right: 10px;
- }
- 
- .space {
-   margin-right: 10px;
-   margin-left: 10px;
- }
- 
- .sidebar-menu ul li.active .fa-icon,
- .sidebar-menu ul li:hover .fa-icon {
-   color: white;
- }
- 
- .sidebar-logout {
-   display: flex;
-   align-items: center;
-   cursor: pointer;
-   color: black;
-   padding: 10px 0;
- }
- 
- .sidebar-logout:hover {
-   background-color: #0443A5;
-   color: white;
- }
- 
+  width: 229px;
+  height: 100vh; /* Changed to viewport height */
+  background-color: #F6F6E9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out content */
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+  margin-bottom: 5px;
+}
+
+.sidebar-logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.sidebar-logo h1 {
+  color: #0443A5;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.user-role {
+  color: grey;
+  font-size: 0.9em;
+}
+
+.sidebar-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu ul li {
+  padding: 10px 0;
+}
+
+.sidebar-menu ul li .fa-icon {
+  margin-right: 10px;
+}
+.sidebar-menu ul li {
+  padding: 2px;
+}
+
+.space {
+  margin-right: 10px;
+  margin-left: 10px;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+}
+
+.sidebar-menu ul li a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-menu ul li a:hover,
+.sidebar-menu ul li a.active-link {
+  background-color: #0443A5;
+  color: white;
+}
+
+.sidebar-menu ul li a.active-link .fa-icon {
+  color: white;
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: black;
+  padding: 10px 0;
+}
+
+.sidebar-logout:hover {
+  background-color: #0443A5;
+  color: white;
+}
+

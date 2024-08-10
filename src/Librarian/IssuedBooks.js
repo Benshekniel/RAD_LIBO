@@ -70,7 +70,7 @@ const ManageRequests = () => {
       <div>
         <SearchBar />
         <div className="manage-issues-container">
-          <div className="table-container">
+          <div className="table-container-ib">
             <table className="issues-table">
               <thead>
                 <tr>
@@ -97,7 +97,7 @@ const ManageRequests = () => {
                     <td>{issue.isbn}</td>
                     <td>{issue.stu_id}</td>
                     <td>
-                      <button className="action-button">
+                      <button className="action-button-issued">
                         Returned
                       </button>
                     </td>
