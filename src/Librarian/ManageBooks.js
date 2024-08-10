@@ -31,7 +31,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 1,
+      id: 2,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -41,7 +41,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 1,
+      id: 3,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -51,7 +51,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 1,
+      id: 4,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -61,7 +61,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 1,
+      id: 5,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -71,7 +71,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 1,
+      id: 6,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
