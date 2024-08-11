@@ -1,0 +1,33 @@
+/* SearchBar.css */
+.search-bar {
+   display: flex;
+   align-items: center;
+   background-color: #0A2A5C;
+   padding: 10px;
+   height: 80px;
+   width: 1230px;
+   
+ }
+ 
+ .search-bar input {
+   background-color: #F6F6E9;
+   border: none;
+   padding: 10px;
+   border-radius: 25px;
+   outline: none;
+   width: 300px;
+   height: 30px;
+   color: black;
+ }
+ 
+ .search-bar button {
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   margin-left: -40px;
+ }
+ 
+ .search-bar button .fa-icon {
+   color: black;
+ }
+ 
