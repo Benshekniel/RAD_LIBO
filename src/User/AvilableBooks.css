@@ -1,61 +1,3 @@
-/* Modal Styles */
-.add-book-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.add-book-form {
-  background-color: #f6f6e9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-  width: 400px;
-  max-width: 90%;
-  position: relative;
-}
-
-.add-book-form h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.add-book-form input {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.add-new-book-button {
-  margin-left: 60px;
-  width: 70%;
-  padding: 10px;
-  background-color: #ffdd44;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
 /* Table and Container Styles */
 .books-container {
   display: flex;
@@ -66,18 +8,6 @@
   padding: 20px;
   margin: 20px;
   position: relative;
-}
-
-.add-book-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ffdd44;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .table-container-mb {
@@ -116,17 +46,74 @@
   object-fit: cover;
 }
 
-.action-button {
-  border: none;
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  position: relative;
+  background-color: #f6f6e9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.popup-body {
+  display: flex;
+  align-items: flex-start;
+}
+
+.popup-book-image {
+  width: 100px;
+  height: 150px;
+  margin-right: 20px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.popup-details {
+  flex-grow: 1;
+}
+
+.close-button {
   background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
-  margin-left: 5px;
 }
 
-.edit-button {
-  color: #0443a5;
+.close-button:hover {
+  color: #ff0000;
 }
 
-.delete-button {
-  color: #d9534f;
+.borrow-button {
+  background-color: #ffdd44;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.borrow-button:hover {
+  background-color: #ffc107;
+}
+
+.button {
+  margin-top: 190px;
 }
