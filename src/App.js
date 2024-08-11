@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "./Librarian/Sidebar";
 import ManageBooks from './Librarian/ManageBooks';
 import ManageStudents from './Librarian/ManageStudents';
 import ManageRequests from './Librarian/ManageRequests';
 import IssuedBooks from './Librarian/IssuedBooks';
 import DefaulterBooks from './Librarian/DefaulterBooks';
 import Dashboard from './Librarian/Dashboard';
+import AvilableBooks from './User/AvilableBooks';
 
 const App = () => {
   return (
+    <>
+    <AvilableBooks />
     <Router>
       <div className="app-container">
         <div className="content-container">
@@ -25,6 +27,7 @@ const App = () => {
         </div>
       </div>
     </Router>
+    </>
   );
 };
 
