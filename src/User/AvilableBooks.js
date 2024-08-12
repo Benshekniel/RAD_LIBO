@@ -52,13 +52,13 @@ const ManageBooks = () => {
   };
 
   return (
-    <div className="books-container">
+    <div className="books-container-ab">
       <Sidebar />
       <div>
         <SearchBar />
-        <div className="manage-books-container">
-          <div className="table-container-mb">
-            <table className="books-table">
+        <div className="manage-abooks-container">
+          <div className="table-container-ab">
+            <table className="books-table-ab">
               <thead>
                 <tr>
                   <th></th>
@@ -77,7 +77,7 @@ const ManageBooks = () => {
                       <img
                         src={book.image}
                         alt={book.title}
-                        className="book-image"
+                        className="book-image-ab"
                       />
                     </td>
                     <td>{book.title}</td>

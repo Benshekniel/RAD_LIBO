@@ -1,16 +1,16 @@
 /* Table and Container Styles */
-.books-container {
+.books-container-rb {
    display: flex;
  }
  
- .manage-books-container {
+ .manage-books-container-rb {
    flex-grow: 1;
    padding: 20px;
    margin: 20px;
    position: relative;
  }
  
- .table-container-mb {
+ .table-container-rb {
    max-height: 500px;
    overflow-y: auto;
    margin-top: 100px;
@@ -20,27 +20,27 @@
    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
  }
  
- .books-table {
+ .books-table-rb {
    width: 100%;
    border-collapse: collapse;
  }
  
- .books-table th,
- .books-table td {
+ .books-table-rb th,
+ .books-table-rb td {
    text-align: left;
    padding: 10px;
    border-bottom: 1px solid #ddd;
  }
  
- .books-table th {
+ .books-table-rb th {
    background-color: #f6f6e9;
  }
  
- .books-table tr:hover {
+ .books-table-rb tr:hover {
    background-color: #f1f1f1;
  }
  
- .book-image {
+ .book-image-rb {
    width: 50px;
    height: 75px;
    object-fit: cover;
@@ -64,7 +64,7 @@
    text-align: center;
  }
  
- .delete-icon {
+ .delete-icon-rb {
    cursor: pointer;
    transition: color 0.3s ease;
  }

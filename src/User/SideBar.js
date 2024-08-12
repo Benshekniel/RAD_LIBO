@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; // Import the CSS file for styling
 import Logo from './Images/Logo.png';
 import UserImage from './Images/Librarian.jpeg';
 
-const Sidebar = () => {
+const SidebarUs= () => {
   const [active, setActive] = useState('Books');
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-logo">
+    <div className="sidebar-us">
+      <div className="sidebar-us-logo">
         <img src={Logo} alt="Logo" />
         <h1>Libo</h1>
       </div>
-      <div className="sidebar-user">
+      <div className="sidebar-us-user">
         <img src={UserImage} alt="User" className="user-avatar" />
         <div className="user-info">
           <p>akhouna labib</p>
           <p className="user-role">User</p>
         </div>
       </div>
-      <div className="sidebar-menu">
+      <div className="sidebar-us-menu">
         <ul>
-          <li className={active === 'Books' ? 'active' : ''} onClick={() => setActive('Books')}>
-            <FontAwesomeIcon className="space" icon={faBook} /> Avilable Books
+          <li>
+            <NavLink to="/manage-avilablebooks" className={active === 'Books' ? 'active-NavLink' : ''} onClick={() => setActive('Books')}>
+              <FontAwesomeIcon className="space" icon={faBook} /> Avilable Books
+            </NavLink>
           </li>
-          <li className={active === 'Requested Books' ? 'active' : ''} onClick={() => setActive('Requested Books')}>
-            <FontAwesomeIcon className="space" icon={faClipboardList} /> Requested Books
+          <li>
+            <NavLink to="/manage-returnbooks" className={active === 'Requested Books' ? 'active-NavLink' : ''} onClick={() => setActive('Requested Books')}>
+              <FontAwesomeIcon className="space" icon={faClipboardList} /> Requested Books
+            </NavLink>
           </li>
-          <li className={active === 'Pending to return' ? 'active' : ''} onClick={() => setActive('Pending to return')}>
-            <FontAwesomeIcon className="space" icon={faBookOpen} /> Pending to return
+          <li>
+            <NavLink to="/manage-requestedbooks" className={active === 'Pending to return' ? 'active-NavLink' : ''} onClick={() => setActive('Pending to return')}>
+              <FontAwesomeIcon className="space" icon={faBookOpen} /> Pending to return
+            </NavLink>
           </li>
         </ul>
       </div>
-      <div className="sidebar-logout">
+      <div className="sidebar-us-logout">
         <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
       </div>
     </div>
   );
 };
 
-export default Sidebar;
+export default SidebarUs;

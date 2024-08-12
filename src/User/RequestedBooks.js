@@ -45,13 +45,13 @@ const ManageBooks = () => {
   };
 
   return (
-    <div className="books-container">
+    <div className="books-container-rb">
       <Sidebar />
       <div>
         <SearchBar />
-        <div className="manage-books-container">
-          <div className="table-container-mb">
-            <table className="books-table">
+        <div className="manage-books-container-rb">
+          <div className="table-container-rb">
+            <table className="books-table-rb">
               <thead>
                 <tr>
                   <th></th>
@@ -71,7 +71,7 @@ const ManageBooks = () => {
                       <img
                         src={book.image}
                         alt={book.title}
-                        className="book-image"
+                        className="book-image-rb"
                       />
                     </td>
                     <td>{book.title}</td>
@@ -95,7 +95,7 @@ const ManageBooks = () => {
                     <td className="action-column">
                       <FontAwesomeIcon
                         icon={faTrashAlt}
-                        className={`delete-icon ${
+                        className={`delete-icon-rb ${
                           book.status === "Pending"
                             ? "icon-active"
                             : "icon-disabled"

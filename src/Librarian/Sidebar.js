@@ -25,32 +25,32 @@ const Sidebar = () => {
       <div className="sidebar-menu">
         <ul>
           <li>
-            <NavLink to="/manage-dashboard" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Dashboard")}>
+            <NavLink to="/manage-dashboard" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Dashboard")}>
               <FontAwesomeIcon className="space" icon={faTachometerAlt} /> Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Books")}>
+            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Books")}>
               <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-students" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Students")}>
+            <NavLink to="/manage-students" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Students")}>
               <FontAwesomeIcon className="space" icon={faUserGraduate} /> Manage Students
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Manage Requests")}>
+            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Requests")}>
               <FontAwesomeIcon className="space" icon={faClipboardList} /> Manage Requests
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Issued Books")}>
+            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Issued Books")}>
               <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? "active-link" : ""} onClick={() => setActive("Defaulter Books")}>
+            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Defaulter Books")}>
               <FontAwesomeIcon className="space" icon={faExclamationTriangle} /> Defaulter Books
             </NavLink>
           </li>

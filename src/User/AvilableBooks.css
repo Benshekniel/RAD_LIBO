@@ -1,16 +1,16 @@
 /* Table and Container Styles */
-.books-container {
+.books-container-ab {
   display: flex;
 }
 
-.manage-books-container {
+.manage-abooks-container {
   flex-grow: 1;
   padding: 20px;
   margin: 20px;
   position: relative;
 }
 
-.table-container-mb {
+.table-container-ab {
   max-height: 500px;
   overflow-y: auto;
   margin-top: 100px;
@@ -20,27 +20,27 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.books-table {
+.books-table-ab {
   width: 100%;
   border-collapse: collapse;
 }
 
-.books-table th,
-.books-table td {
+.books-table-ab th,
+.books-table-ab td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
-.books-table th {
+.books-table-ab th {
   background-color: #f6f6e9;
 }
 
-.books-table tr:hover {
+.books-table-ab tr:hover {
   background-color: #f1f1f1;
 }
 
-.book-image {
+.book-image-ab {
   width: 50px;
   height: 75px;
   object-fit: cover;

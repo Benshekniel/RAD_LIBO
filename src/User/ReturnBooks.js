@@ -99,11 +99,11 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="dashboard-container">
+      <div className="dashboard-container-re">
         <Sidebar />
         <div>
          <SearchBar />
-            <div className="table-container">
+            <div className="table-container-re">
               <table>
                 <thead>
                   <tr>
