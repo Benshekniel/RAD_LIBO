@@ -62,8 +62,8 @@
  .sidebar-us-menu ul li a{
   display: flex;
   align-items: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 18px;
+  padding-bottom: 18px;
   text-decoration: none;
   color: black;
  }
