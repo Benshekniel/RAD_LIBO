@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; // Import the CSS file for styling
 import Logo from './Images/Logo.png';
 import UserImage from './Images/Librarian.jpeg';
@@ -24,10 +24,10 @@ const Sidebar = () => {
       <div className="sidebar-menu">
         <ul>
           <li className={active === 'Books' ? 'active' : ''} onClick={() => setActive('Books')}>
-            <FontAwesomeIcon className="space" icon={faBook} /> Books
+            <FontAwesomeIcon className="space" icon={faBook} /> Avilable Books
           </li>
           <li className={active === 'Requested Books' ? 'active' : ''} onClick={() => setActive('Requested Books')}>
-            <FontAwesomeIcon className="space" icon={faBookOpen} /> Requested Books
+            <FontAwesomeIcon className="space" icon={faClipboardList} /> Requested Books
           </li>
           <li className={active === 'Pending to return' ? 'active' : ''} onClick={() => setActive('Pending to return')}>
             <FontAwesomeIcon className="space" icon={faBookOpen} /> Pending to return
