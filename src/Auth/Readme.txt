@@ -1,2 +1,2 @@
 signUP and Login
-hi karu
+hi nimal
