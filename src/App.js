@@ -10,13 +10,13 @@ import AvilableBooks from './User/AvilableBooks';
 import ReturnBooks from './User/ReturnBooks';
 import RequestedBooks from './User/RequestedBooks';
 // import Login from './Auth/Login';
-// import Signup from './Auth/SignUp';
+import Signup from './Auth/SignUp';
 
 
 const App = () => {
   return (
     <>
-    {/* <Login /> */}
+    <Signup />
     <Router>
       <div className="app-container">
         <div className="content-container">
