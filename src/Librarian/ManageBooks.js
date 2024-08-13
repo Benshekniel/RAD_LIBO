@@ -8,6 +8,7 @@ import Cover from "./Images/Cover.jpg";
 
 const ManageBooks = () => {
   const [showAddBookForm, setShowAddBookForm] = useState(false);
+  const [showEditBookForm, setShowEditBookForm] = useState(false);
   const [newBook, setNewBook] = useState({
     title: "",
     author: "",
@@ -18,8 +19,10 @@ const ManageBooks = () => {
     image: "",
   });
 
+  const [editBook, setEditBook] = useState(null);
+
   const books = [
-    // your existing books array
+    // Your existing books array
     {
       id: 1,
       title: "Basic Linear Algebra",
@@ -31,7 +34,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 2,
+      id: 1,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -41,7 +44,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 3,
+      id: 1,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -51,7 +54,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 4,
+      id: 1,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -61,7 +64,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 5,
+      id: 1,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -71,7 +74,7 @@ const ManageBooks = () => {
       image: Cover, // Replace with your image path
     },
     {
-      id: 6,
+      id: 1,
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
@@ -80,23 +83,60 @@ const ManageBooks = () => {
       quantity: 3,
       image: Cover, // Replace with your image path
     },
+    {
+      id: 1,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
+      publicationDate: "September 2018",
+      isbn: "978-3-319-77535-9",
+      quantity: 3,
+      image: Cover, // Replace with your image path
+    },
+    {
+      id: 1,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
+      publicationDate: "September 2018",
+      isbn: "978-3-319-77535-9",
+      quantity: 3,
+      image: Cover, // Replace with your image path
+    },
+    // Add more books here
   ];
 
   const handleAddBookClick = () => {
     setShowAddBookForm(true);
   };
 
+  const handleEditBookClick = (book) => {
+    setEditBook(book);
+    setShowEditBookForm(true);
+  };
+
   const handleCloseForm = () => {
     setShowAddBookForm(false);
+    setShowEditBookForm(false);
+    setEditBook(null);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewBook({ ...newBook, [name]: value });
+    if (showAddBookForm) {
+      setNewBook({ ...newBook, [name]: value });
+    } else if (showEditBookForm) {
+      setEditBook({ ...editBook, [name]: value });
+    }
   };
 
   const handleFileChange = (e) => {
-    setNewBook({ ...newBook, image: URL.createObjectURL(e.target.files[0]) });
+    const fileUrl = URL.createObjectURL(e.target.files[0]);
+    if (showAddBookForm) {
+      setNewBook({ ...newBook, image: fileUrl });
+    } else if (showEditBookForm) {
+      setEditBook({ ...editBook, image: fileUrl });
+    }
   };
 
   const handleAddBook = () => {
@@ -112,6 +152,12 @@ const ManageBooks = () => {
       quantity: "",
       image: "",
     });
+  };
+
+  const handleSaveChanges = () => {
+    // Logic to save the edited book details
+    setShowEditBookForm(false);
+    setEditBook(null);
   };
 
   return (
@@ -157,7 +203,10 @@ const ManageBooks = () => {
                     <td>{book.isbn}</td>
                     <td>{book.quantity}</td>
                     <td>
-                      <button className="action-button edit-button">
+                      <button
+                        className="action-button edit-button"
+                        onClick={() => handleEditBookClick(book)}
+                      >
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
                       <button className="action-button delete-button">
@@ -247,6 +296,88 @@ const ManageBooks = () => {
                 </label>
                 <button className="add-new-book-button" onClick={handleAddBook}>
                   Add New Book
+                </button>
+              </div>
+            </div>
+          )}
+
+          {showEditBookForm && editBook && (
+            <div className="add-book-modal">
+              <div className="add-book-form">
+                <button className="close-button" onClick={handleCloseForm}>
+                  &times;
+                </button>
+                <h2>Edit Book</h2>
+                <label>
+                  Title:
+                  <input
+                    type="text"
+                    name="title"
+                    value={editBook.title}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Author:
+                  <input
+                    type="text"
+                    name="author"
+                    value={editBook.author}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Publisher:
+                  <input
+                    type="text"
+                    name="publisher"
+                    value={editBook.publisher}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Publication Date:
+                  <input
+                    type="date"
+                    name="publicationDate"
+                    value={editBook.publicationDate}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Quantity:
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={editBook.quantity}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  ISBN:
+                  <input
+                    type="text"
+                    name="isbn"
+                    value={editBook.isbn}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Image:
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </label>
+                <button className="add-new-book-button" onClick={handleSaveChanges}>
+                  Save Changes
                 </button>
               </div>
             </div>

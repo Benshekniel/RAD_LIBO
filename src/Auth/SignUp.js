@@ -1,14 +1,16 @@
-// src/signUp.js
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./SignUp.css";
-import logo from "./Images/Logo.png"
-import user from "./Images/user.png"
+import logo from "./Images/Logo.png";
+import user from "./Images/user.png";
+
 const SignUp = () => {
   const [form, setForm] = useState({
     email: "",
     name: "",
     password: "",
     position: "Librarian",
+    year: "",
   });
 
   const handleChange = (e) => {
@@ -26,7 +28,7 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <div className="left-panel">
-      <div className="logo-container">
+        <div className="logo-container">
           <img src={logo} alt="Libo Logo" className="logo-image" />
           <h1 className="logo-text">Libo</h1>
         </div>
@@ -34,7 +36,7 @@ const SignUp = () => {
       <div className="right-panel">
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="profile-icon-sp">
-            <img src={user} alt="Libo Logo" />
+            <img src={user} alt="User Icon" />
           </div>
           <input
             type="email"
@@ -60,6 +62,16 @@ const SignUp = () => {
             onChange={handleChange}
             required
           />
+          {form.position === "User" && (
+            <input
+              type="text"
+              name="year"
+              placeholder="Year"
+              value={form.year}
+              onChange={handleChange}
+              required
+            />
+          )}
           <select
             name="position"
             value={form.position}
@@ -72,7 +84,9 @@ const SignUp = () => {
             Sign Up
           </button>
           <div className="login-link">
+            <NavLink to="/">
             <a href="#">Login In</a>
+            </NavLink>
           </div>
         </form>
       </div>

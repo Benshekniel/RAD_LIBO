@@ -9,18 +9,19 @@ import ManageRequests from './Librarian/ManageRequests';
 import AvilableBooks from './User/AvilableBooks';
 import ReturnBooks from './User/ReturnBooks';
 import RequestedBooks from './User/RequestedBooks';
-// import Login from './Auth/Login';
-import Signup from './Auth/SignUp';
+import Login from './Auth/Login';
+import SignUp from './Auth/SignUp';
 
 
 const App = () => {
   return (
     <>
-    <Signup />
     <Router>
       <div className="app-container">
         <div className="content-container">
           <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/manage-dashboard" element={<Dashboard />} />
             <Route path="/manage-books" element={<ManageBooks />} />
             <Route path="/manage-students" element={<ManageStudents />} />
