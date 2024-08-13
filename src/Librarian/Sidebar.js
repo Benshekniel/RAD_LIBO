@@ -30,34 +30,40 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Books")}>
+            <NavLink to="/manage-books" className={({ isActive }) => isActive ? active-NavLink : ""} onClick={() => setActive("Manage Books")}>
               <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-students" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Students")}>
+            <NavLink to="/manage-students" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Manage Students")}>
               <FontAwesomeIcon className="space" icon={faUserGraduate} /> Manage Students
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Requests")}>
+            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Manage Requests")}>
               <FontAwesomeIcon className="space" icon={faClipboardList} /> Manage Requests
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Issued Books")}>
+            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Issued Books")}>
               <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Defaulter Books")}>
+            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Defaulter Books")}>
               <FontAwesomeIcon className="space" icon={faExclamationTriangle} /> Defaulter Books
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="sidebar-logout">
-        <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
+        <NavLink 
+          to="/" 
+          className={active === 'Logout' ? 'active' : ''} 
+          onClick={() => setActive('Logout')}
+        >
+          <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
+        </NavLink>
       </div>
     </div>
   );

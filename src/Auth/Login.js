@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Login.css";
 import Logo from './Images/Logo.png';
 import User from './Images/user.png';
@@ -13,7 +14,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-left">
-        <div className="form-container">
+        <div className="form-container-lg">
           <div className="profile-icon">
             <img src={User} alt="Libo Logo" />
           </div>
@@ -34,7 +35,10 @@ function Login() {
             />
 
             <div className="form-footer">
-              <a href="#" className="signup-link">Sign Up</a>
+            <NavLink to="/signup" className="signup-link">
+              Sign Up
+            </NavLink>
+
               <button type="submit" className="login-button">Login</button>
             </div>
           </form>

@@ -8,6 +8,8 @@ import Librarian from "./Images/Librarian.jpeg";
 
 const ManageStudents = () => {
   const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+  const [showEditStudentForm, setShowEditStudentForm] = useState(false);
+  const [currentStudentId, setCurrentStudentId] = useState(null);
   const [newStudent, setNewStudent] = useState({
     fullName: "",
     email: "",
@@ -17,8 +19,7 @@ const ManageStudents = () => {
   });
 
   const students = [
-    // your existing Students array
-    
+    // Your existing Students array
     {
       id: 1,
       fullName: "Ema sakudi",
@@ -36,7 +37,7 @@ const ManageStudents = () => {
       image: Librarian, // Replace with your image path
     },
     {
-      id: 3,
+      id: 2,
       fullName: "Ema sakudi",
       email: "email.ensia.edu.dz",
       stu_ID: "123512342",
@@ -44,7 +45,7 @@ const ManageStudents = () => {
       image: Librarian, // Replace with your image path
     },
     {
-      id: 4,
+      id: 2,
       fullName: "Ema sakudi",
       email: "email.ensia.edu.dz",
       stu_ID: "123512342",
@@ -52,7 +53,7 @@ const ManageStudents = () => {
       image: Librarian, // Replace with your image path
     },
     {
-      id: 5,
+      id: 2,
       fullName: "Ema sakudi",
       email: "email.ensia.edu.dz",
       stu_ID: "123512342",
@@ -60,22 +61,61 @@ const ManageStudents = () => {
       image: Librarian, // Replace with your image path
     },
     {
-      id: 6,
+      id: 2,
       fullName: "Ema sakudi",
       email: "email.ensia.edu.dz",
       stu_ID: "123512342",
       year: " 1 st",
       image: Librarian, // Replace with your image path
     },
-    
+    {
+      id: 2,
+      fullName: "Ema sakudi",
+      email: "email.ensia.edu.dz",
+      stu_ID: "123512342",
+      year: " 1 st",
+      image: Librarian, // Replace with your image path
+    },
+    {
+      id: 2,
+      fullName: "Ema sakudi",
+      email: "email.ensia.edu.dz",
+      stu_ID: "123512342",
+      year: " 1 st",
+      image: Librarian, // Replace with your image path
+    },
+    // Add more student data as needed
   ];
 
   const handleAddStudentClick = () => {
     setShowAddStudentForm(true);
+    setNewStudent({
+      fullName: "",
+      email: "",
+      stu_ID: "",
+      year: "",
+      image: "",
+    });
+  };
+
+  const handleEditStudentClick = (studentId) => {
+    const studentToEdit = students.find((student) => student.id === studentId);
+    if (studentToEdit) {
+      setCurrentStudentId(studentId);
+      setNewStudent({
+        fullName: studentToEdit.fullName,
+        email: studentToEdit.email,
+        stu_ID: studentToEdit.stu_ID,
+        year: studentToEdit.year,
+        image: studentToEdit.image,
+      });
+      setShowEditStudentForm(true);
+    }
   };
 
   const handleCloseForm = () => {
     setShowAddStudentForm(false);
+    setShowEditStudentForm(false);
   };
 
   const handleInputChange = (e) => {
@@ -88,9 +128,20 @@ const ManageStudents = () => {
   };
 
   const handleAddStudent = () => {
-    // Logic to add the new Student to your Students array or send to your backend
+    // Logic to add the new student to your students array or send to your backend
     setShowAddStudentForm(false);
-    // Clear form fields
+    setNewStudent({
+      fullName: "",
+      email: "",
+      stu_ID: "",
+      year: "",
+      image: "",
+    });
+  };
+
+  const handleSaveChanges = () => {
+    // Logic to update the student in your students array or send updated data to your backend
+    setShowEditStudentForm(false);
     setNewStudent({
       fullName: "",
       email: "",
@@ -139,7 +190,7 @@ const ManageStudents = () => {
                     <td>{student.stu_ID}</td>
                     <td>{student.year}</td>
                     <td>
-                      <button className="action-button edit-button">
+                      <button className="action-button edit-button" onClick={() => handleEditStudentClick(student.id)}>
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
                       <button className="action-button delete-button">
@@ -209,6 +260,68 @@ const ManageStudents = () => {
                 </label>
                 <button className="add-new-student-button" onClick={handleAddStudent}>
                   Add New Student
+                </button>
+              </div>
+            </div>
+          )}
+
+          {showEditStudentForm && (
+            <div className="add-student-modal">
+              <div className="add-student-form">
+                <button className="close-button" onClick={handleCloseForm}>
+                  &times;
+                </button>
+                <h2>Edit Student</h2>
+                <label>
+                  Full name:
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={newStudent.fullName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Email address:
+                  <input
+                    type="email"
+                    name="email"
+                    value={newStudent.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Student ID:
+                  <input
+                    type="text"
+                    name="stu_ID"
+                    value={newStudent.stu_ID}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Year:
+                  <input
+                    type="text"
+                    name="year"
+                    value={newStudent.year}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Image:
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </label>
+                <button className="add-new-student-button" onClick={handleSaveChanges}>
+                  Save Changes
                 </button>
               </div>
             </div>

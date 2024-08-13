@@ -86,25 +86,26 @@
 }
 
 .sidebar-menu ul li a:hover,
-.sidebar-menu ul li a.active-link {
+.sidebar-menu ul li a.active-NavLink {
   background-color: #0443A5;
   color: white;
 }
 
-.sidebar-menu ul li a.active-link .fa-icon {
+.sidebar-menu ul li a.active-NavLink .fa-icon {
   color: white;
 }
 
-.sidebar-logout {
+.sidebar-logout a {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  text-decoration: none;
   color: black;
-  padding: 10px 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.sidebar-logout:hover {
+.sidebar-logout a:hover, 
+.sidebar-logout a.active {
   background-color: #0443A5;
   color: white;
 }
-
