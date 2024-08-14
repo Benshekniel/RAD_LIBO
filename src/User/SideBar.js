@@ -42,7 +42,13 @@ const SidebarUs= () => {
         </ul>
       </div>
       <div className="sidebar-us-logout">
-        <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
+        <NavLink 
+          to="/" 
+          className={active === 'Logout' ? 'active' : ''} 
+          onClick={() => setActive('Logout')}
+        >
+          <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
+        </NavLink>
       </div>
     </div>
   );

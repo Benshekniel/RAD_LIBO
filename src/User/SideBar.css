@@ -74,23 +74,26 @@
    color: white;
  }
  
-.sidebar-us-menu ul li a.active .fa-icon {
+  .sidebar-us-menu ul li a.active .fa-icon {
   color: white;
 }
+
  .space {
    margin-right: 10px;
    margin-left: 10px;
  }
  
- .sidebar-us-logout {
-   display: flex;
-   align-items: center;
-   cursor: pointer;
-   color: black;
-   padding: 10px 0;
- }
- 
- .sidebar-us-logout:hover {
-   background-color: #0443A5;
-   color:white;
- }
+ .sidebar-us-logout a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar-us-logout a:hover, 
+.sidebar-us-logout a.active {
+  background-color: #0443A5;
+  color: white;
+}
