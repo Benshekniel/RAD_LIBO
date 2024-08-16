@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./SignUp.css";
-import logo from "./Images/Logo.png";
-import user from "./Images/user.png";
+import logo from "../Assets/Logo.png";
+import user from "../Assets/user.png";
 
 const SignUp = () => {
   const [form, setForm] = useState({

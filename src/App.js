@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DefaulterBooks from './Librarian/DefaulterBooks';
-import ManageStudents from './Librarian/ManageStudents';
-import ManageBooks from './Librarian/ManageBooks';
-import IssuedBooks from './Librarian/IssuedBooks';
-import Dashboard from './Librarian/Dashboard';
-import ManageRequests from './Librarian/ManageRequests';
-import AvilableBooks from './User/AvilableBooks';
-import ReturnBooks from './User/ReturnBooks';
-import RequestedBooks from './User/RequestedBooks';
-import Login from './Auth/Login';
-import SignUp from './Auth/SignUp';
+import DefaulterBooks from './Librarian/Pages/DefaulterBooks';
+import ManageStudents from './Librarian/Pages/ManageStudents';
+import ManageBooks from './Librarian/Pages/ManageBooks';
+import IssuedBooks from './Librarian/Pages/IssuedBooks';
+import Dashboard from './Librarian/Pages/Dashboard';
+import ManageRequests from './Librarian/Pages/ManageRequests';
+import AvilableBooks from './User/Pages/AvilableBooks';
+import ReturnBooks from './User/Pages/ReturnBooks';
+import RequestedBooks from './User/Pages/RequestedBooks';
+import Login from './Auth/Pages/Login';
+import SignUp from './Auth/Pages/SignUp';
 
 
 const App = () => {

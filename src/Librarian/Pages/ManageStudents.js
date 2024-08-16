@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./ManageStudents.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "./SearchBar";
-import Sidebar from "./Sidebar";
-import Librarian from "./Images/Librarian.jpeg";
+import SearchBar from "../Components/SearchBar";
+import Sidebar from "../Components/Sidebar";
+import Librarian from "../Assets/Librarian.jpeg";
 
 const ManageStudents = () => {
   const [showAddStudentForm, setShowAddStudentForm] = useState(false);

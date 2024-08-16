@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTachometerAlt, faBook, faUserGraduate, faClipboardList, faBookOpen, faExclamationTriangle, faSignOutAlt, } from "@fortawesome/free-solid-svg-icons";
 import "./Sidebar.css";
-import Logo from "./Images/Logo.png";
-import Librarian from "./Images/Librarian.jpeg";
+import Logo from "../Assets/Logo.png";
+import Librarian from "../Assets/Librarian.jpeg";
 
 const Sidebar = () => {
   const [active, setActive] = useState("Dashboard");

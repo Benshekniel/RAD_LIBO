@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./RequestedBooks.css";
-import SearchBar from "./SearchBar";
-import Sidebar from "./SideBar";
+import SearchBar from "../Components/SearchBar";
+import Sidebar from "../Components/SideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import Cover from "./Images/Cover.jpg";
+import Cover from "../Assets/Cover.jpg";
 
 const ManageBooks = () => {
   const [books, setBooks] = useState([

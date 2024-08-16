@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; // Import the CSS file for styling
-import Logo from './Images/Logo.png';
-import UserImage from './Images/Librarian.jpeg';
+import Logo from '../Assets/Logo.png';
+import UserImage from '../Assets/Librarian.jpeg';
 
 const SidebarUs= () => {
   const [active, setActive] = useState('Books');

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./AvilableBooks.css";
-import SearchBar from "./SearchBar";
-import Sidebar from "./SideBar";
-import Cover from "./Images/Cover.jpg";
+import SearchBar from "../Components/SearchBar";
+import Sidebar from "../Components/SideBar";
+import Cover from "../Assets/Cover.jpg";
 
 const ManageBooks = () => {
   const [selectedBook, setSelectedBook] = useState(null);
