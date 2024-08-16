@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Login.css";
-import Logo from './Images/Logo.png';
-import User from './Images/user.png';
+import Logo from '../Assets/Logo.png';
+import User from '../Assets/user.png';
 
 function Login() {
   const [role, setRole] = useState("User");

@@ -1,8 +1,8 @@
 import React from "react";
 import "./DefaulterBooks.css";
-import SearchBar from "./SearchBar";
-import Sidebar from "./Sidebar";
-import Cover from "./Images/Cover.jpg"; // Replace with your image path
+import SearchBar from "../Components/SearchBar";
+import Sidebar from "../Components/Sidebar";
+import Cover from "../Assets/Cover.jpg"; // Replace with your image path
 
 const ManageRequests = () => {
   // Dummy data for defaulters

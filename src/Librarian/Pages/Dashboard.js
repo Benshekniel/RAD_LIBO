@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./ReturnBooks.css"; // Import CSS for Dashboard styling
-import Sidebar from "./SideBar";
-import SearchBar from "./SearchBar"; 
+import "./Dashboard.css"; // Import CSS for Dashboard styling
+import Sidebar from "../Components/Sidebar";
 
 const Dashboard = () => {
   // Placeholder data for statistics
@@ -19,7 +18,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -27,7 +26,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -35,7 +34,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -43,7 +42,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -51,7 +50,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -59,7 +58,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -67,7 +66,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -75,7 +74,7 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
     {
@@ -83,27 +82,38 @@ const Dashboard = () => {
       Member: "ZOUAK Omar",
       Title: "QUANTUM COMPUTING",
       Author: "Chris BERNHARDT",
-      due: "2 days",
+      Overdue: "2 days",
       ReturnDate: "Mar 18th, 2022",
     },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-    },
-
   ];
 
   return (
     <div>
-      <div className="dashboard-container-re">
+      <div className="dashboard-container">
         <Sidebar />
-        <div>
-         <SearchBar />
-            <div className="table-container-re">
+        <div className="dashboard-content">
+          <h1>Dashboard</h1>
+          <div className="dashboard-stats">
+            <div className="stat-box">
+              <p>Number of Books</p>
+              <h2>{stats.numberOfBooks}</h2>
+            </div>
+            <div className="stat-box">
+              <p>Number of Students</p>
+              <h2>{stats.numberOfStudents}</h2>
+            </div>
+            <div className="stat-box">
+              <p>Issued Books</p>
+              <h2>{stats.issuedBooks}</h2>
+            </div>
+            <div className="stat-box">
+              <p>Defaulter Books</p>
+              <h2>{stats.defaulterBooks}</h2>
+            </div>
+          </div>
+          <div className="overdue-section">
+            <div className="table-container">
+              <h2>Overdue book loans</h2>
               <table>
                 <thead>
                   <tr>
@@ -111,7 +121,7 @@ const Dashboard = () => {
                     <th>Member</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>due</th>
+                    <th>Overdue</th>
                     <th>Return date</th>
                   </tr>
                 </thead>
@@ -122,13 +132,14 @@ const Dashboard = () => {
                       <td>{book.Member}</td>
                       <td>{book.Title}</td>
                       <td>{book.Author}</td>
-                      <td>{book.due}</td>
+                      <td>{book.Overdue}</td>
                       <td>{book.ReturnDate}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+          </div>
         </div>
       </div>
     </div>

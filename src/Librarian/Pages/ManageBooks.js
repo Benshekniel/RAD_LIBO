@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./ManageBooks.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "./SearchBar";
-import Sidebar from "./Sidebar";
-import Cover from "./Images/Cover.jpg";
+import SearchBar from "../Components/SearchBar";
+import Sidebar from "../Components/Sidebar";
+import Cover from "../Assets/Cover.jpg";
 
 const ManageBooks = () => {
   const [showAddBookForm, setShowAddBookForm] = useState(false);
