@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ReturnBooks.css"; // Import CSS for Dashboard styling
 import Sidebar from "../Components/SideBar";
-import SearchBar from "../Components/SearchBar"; 
+import SearchBar from "../Components/SearchBar";
+import Cover from "../Assets/Cover.jpg";
 
 const Dashboard = () => {
   // Placeholder data for statistics
@@ -15,84 +16,49 @@ const Dashboard = () => {
   // Placeholder data for overdue books
   const overdueBooks = [
     {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
       due: "2 days",
       ReturnDate: "Mar 18th, 2022",
+      image: Cover
     },
     {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
       due: "2 days",
       ReturnDate: "Mar 18th, 2022",
+      image: Cover
     },
     {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
       due: "2 days",
       ReturnDate: "Mar 18th, 2022",
+      image: Cover
     },
     {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
       due: "2 days",
       ReturnDate: "Mar 18th, 2022",
+      image: Cover
     },
     {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
       due: "2 days",
       ReturnDate: "Mar 18th, 2022",
-    },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-    },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-    },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-    },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-    },
-    {
-      Stu_ID: "21544123",
-      Member: "ZOUAK Omar",
-      Title: "QUANTUM COMPUTING",
-      Author: "Chris BERNHARDT",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
+      image: Cover
     },
 
   ];
@@ -102,33 +68,39 @@ const Dashboard = () => {
       <div className="dashboard-container-re">
         <Sidebar />
         <div>
-         <SearchBar />
-            <div className="table-container-re">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Stu_ID</th>
-                    <th>Member</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>due</th>
-                    <th>Return date</th>
+          <SearchBar />
+          <div className="table-container-re">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Publisher</th>
+                  <th>due</th>
+                  <th>Return date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {overdueBooks.map((book, index) => (
+                  <tr key={index}>
+                    <td>
+                      <img
+                        src={book.image}
+                        alt={book.title}
+                        className="book-image-re"
+                      />
+                    </td>
+                    <td>{book.title}</td>
+                    <td>{book.author}</td>
+                    <td>{book.publisher}</td>
+                    <td>{book.due}</td>
+                    <td>{book.ReturnDate}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {overdueBooks.map((book, index) => (
-                    <tr key={index}>
-                      <td>{book.Stu_ID}</td>
-                      <td>{book.Member}</td>
-                      <td>{book.Title}</td>
-                      <td>{book.Author}</td>
-                      <td>{book.due}</td>
-                      <td>{book.ReturnDate}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

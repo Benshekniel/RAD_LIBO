@@ -4,7 +4,9 @@
  
  .dashboard-content-re {
    flex-grow: 1;
-   padding: 20px;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
  }
  
  .table-container-re{
@@ -12,8 +14,7 @@
   margin-left: 40px;
 }
  .table-container-re {
-  width: 90%;
-  max-height: 490px;
+  max-height: 500px;
   overflow-y: auto;
   margin-top: 100px;
   background-color: #f6f6e9;
@@ -28,13 +29,15 @@
    border-collapse: collapse;
  }
  
- .table-container-re th, .table-container-re td {
-   border: 1px solid #dddddd;
+ .table-container-re th, 
+ .table-container-re td {
+   border-bottom: 1px solid #dddddd;
    text-align: left;
    padding: 8px;
  }
  
- .table-container-re th {
-   background-color: #f2f2f2;
- }
- 
+ .book-image-re {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}

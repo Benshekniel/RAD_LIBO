@@ -6,7 +6,7 @@ import './SideBar.css'; // Import the CSS file for styling
 import Logo from '../Assets/Logo.png';
 import UserImage from '../Assets/Librarian.jpeg';
 
-const SidebarUs= () => {
+const SidebarUs = () => {
   const [active, setActive] = useState('Books');
 
   return (
@@ -30,21 +30,21 @@ const SidebarUs= () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-returnbooks" className={active === 'Requested Books' ? 'active-NavLink' : ''} onClick={() => setActive('Requested Books')}>
+            <NavLink to="/manage-requestedbooks" className={active === 'Requested Books' ? 'active-NavLink' : ''} onClick={() => setActive('Requested Books')}>
               <FontAwesomeIcon className="space" icon={faClipboardList} /> Requested Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-requestedbooks" className={active === 'Pending to return' ? 'active-NavLink' : ''} onClick={() => setActive('Pending to return')}>
+            <NavLink to="/manage-returnbooks" className={active === 'Pending to return' ? 'active-NavLink' : ''} onClick={() => setActive('Pending to return')}>
               <FontAwesomeIcon className="space" icon={faBookOpen} /> Pending to return
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="sidebar-us-logout">
-        <NavLink 
-          to="/" 
-          className={active === 'Logout' ? 'active' : ''} 
+        <NavLink
+          to="/"
+          className={active === 'Logout' ? 'active' : ''}
           onClick={() => setActive('Logout')}
         >
           <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
