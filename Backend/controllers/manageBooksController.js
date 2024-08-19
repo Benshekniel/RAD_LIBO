@@ -1,11 +1,14 @@
 import manageBooks from '../models/ManageBooks.js';
 import mongoose from 'mongoose';
+
 //to create a book
 const createBook = async (req, res) => {
+   let image = `${req.file.filename}`;
+
    const { title, author, publisher, publication_date, isbn, quantity } = req.body;
 
    try {
-      const Book = await manageBooks.create({ title, author, publisher, publication_date, isbn, quantity });
+      const Book = await manageBooks.create({ title, author, publisher, publication_date, isbn, quantity, image });
       res.status(200).json(Book);
    } catch (e) {
       res.status(400).json({ error: e.message });
