@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// AvilableBooks.js
+import React, { useEffect, useState } from "react";
 import "./AvilableBooks.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/SideBar";
@@ -16,7 +17,7 @@ const ManageBooks = () => {
       publisher: "Springer-Verlag",
       publicationDate: "September 2018",
       isbn: "978-3-319-77535-9",
-      quantity: 3,
+      availability: true,
       image: Cover,
     },
     {
@@ -26,7 +27,7 @@ const ManageBooks = () => {
       publisher: "Springer-Verlag",
       publicationDate: "September 2018",
       isbn: "978-3-319-77535-9",
-      quantity: 4,
+      availability: false,
       image: Cover,
     },
     {
@@ -36,7 +37,7 @@ const ManageBooks = () => {
       publisher: "Springer-Verlag",
       publicationDate: "September 2018",
       isbn: "978-3-319-77535-9",
-      quantity: 1,
+      availability: true,
       image: Cover,
     },
   ];
@@ -85,7 +86,17 @@ const ManageBooks = () => {
                     <td>{book.publisher}</td>
                     <td>{book.publicationDate}</td>
                     <td>{book.isbn}</td>
-                    <td>{book.quantity}</td>
+                    <td>
+                      <span
+                        className={
+                          book.availability
+                            ? "available-text-ab"
+                            : "not-available-text-ab"
+                        }
+                      >
+                        {book.availability ? "Available" : "Not Available"}
+                      </span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -104,14 +115,22 @@ const ManageBooks = () => {
                     className="popup-book-image"
                   />
                   <div className="popup-details">
-                    <strong>Title:</strong> {selectedBook.title}<br />
-                    <strong>Author:</strong> {selectedBook.author}<br />
-                    <strong>Publisher:</strong> {selectedBook.publisher}<br />
-                    <strong>ISBN:</strong> {selectedBook.isbn}<br />
-                    <strong>Edition:</strong> {selectedBook.edition || "N/A"}<br />
-                    <strong>Publication date:</strong> {selectedBook.publicationDate}<br />
+                    <strong>Title:</strong> {selectedBook.title}
+                    <br />
+                    <strong>Author:</strong> {selectedBook.author}
+                    <br />
+                    <strong>Publisher:</strong> {selectedBook.publisher}
+                    <br />
+                    <strong>ISBN:</strong> {selectedBook.isbn}
+                    <br />
+                    <strong>Edition:</strong> {selectedBook.edition || "N/A"}
+                    <br />
+                    <strong>Publication date:</strong> {selectedBook.publicationDate}
+                    <br />
                   </div>
-                  <div className="button"><button className="borrow-button">Borrow</button></div>
+                  <div className="button">
+                    <button className={selectedBook.availability ? "borrow-button" : "borrow-button-dd"} disabled="{!selectedBook.availability}">{selectedBook.availability ? "Borrow" : "Not Available"}</button>
+                  </div>
                 </div>
               </div>
             </div>
