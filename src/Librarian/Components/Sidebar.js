@@ -30,7 +30,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-books" className={({ isActive }) => isActive ? active-NavLink : ""} onClick={() => setActive("Manage Books")}>
+            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Books")}>
               <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
             </NavLink>
           </li>

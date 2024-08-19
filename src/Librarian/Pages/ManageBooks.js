@@ -165,7 +165,7 @@ const ManageBooks = () => {
       <Sidebar />
       <div>
         <SearchBar />
-        <div className="manage-books-container">
+        <div className="manage-books-container-mb">
           <div className="header">
             <button className="add-book-button" onClick={handleAddBookClick}>
               Add Book
