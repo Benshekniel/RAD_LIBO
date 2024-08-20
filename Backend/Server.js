@@ -1,17 +1,30 @@
 import express from "express";
 import 'dotenv/config'
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 import booksRoutes from "./routes/booksRoute.js"
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
+app.use(cors());
+// Get __dirname equivalent in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Serve static files
+app.use('/images', express.static(path.join(__dirname, 'image')));
+
+app.use('/image', express.static(path.join(__dirname, 'image')));
 //Middleware
 app.use((req, res, next) => {
    console.log('path' + req.path + ' method' + req.method);
    next();
 });
 
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.get("/", (req, res) => {
 //    res.send("Hello world");
 // });

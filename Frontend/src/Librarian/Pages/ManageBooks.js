@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios
 import "./ManageBooks.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/Sidebar";
-import Cover from "../Assets/Cover.jpg";
 
 const ManageBooks = () => {
+  const [books, setBooks] = useState([]);
   const [showAddBookForm, setShowAddBookForm] = useState(false);
   const [showEditBookForm, setShowEditBookForm] = useState(false);
   const [newBook, setNewBook] = useState({
@@ -18,93 +19,24 @@ const ManageBooks = () => {
     quantity: "",
     image: "",
   });
-
   const [editBook, setEditBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const books = [
-    // Your existing books array
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      quantity: 3,
-      image: Cover, // Replace with your image path
-    },
-    // Add more books here
-  ];
+  // Fetch books from backend when component mounts
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/libo");
+        setBooks(response.data);
+        console.log(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
 
   const handleAddBookClick = () => {
     setShowAddBookForm(true);
@@ -131,33 +63,85 @@ const ManageBooks = () => {
   };
 
   const handleFileChange = (e) => {
-    const fileUrl = URL.createObjectURL(e.target.files[0]);
+    const file = e.target.files[0];
     if (showAddBookForm) {
-      setNewBook({ ...newBook, image: fileUrl });
+      setNewBook({ ...newBook, image: file });
     } else if (showEditBookForm) {
-      setEditBook({ ...editBook, image: fileUrl });
+      setEditBook({ ...editBook, image: file });
     }
   };
 
-  const handleAddBook = () => {
-    // Logic to add the new book to your books array or send to your backend
-    setShowAddBookForm(false);
-    // Clear form fields
-    setNewBook({
-      title: "",
-      author: "",
-      publisher: "",
-      publicationDate: "",
-      isbn: "",
-      quantity: "",
-      image: "",
-    });
+  const handleAddBook = async () => {
+    const formData = new FormData();
+    formData.append('title', newBook.title);
+    formData.append('author', newBook.author);
+    formData.append('publisher', newBook.publisher);
+    formData.append('publication_date', newBook.publicationDate);
+    formData.append('isbn', newBook.isbn);
+    formData.append('quantity', newBook.quantity);
+    formData.append('image', newBook.image);
+
+    try {
+      await axios.post("http://localhost:4000/libo/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setShowAddBookForm(false);
+      setNewBook({
+        title: "",
+        author: "",
+        publisher: "",
+        publicationDate: "",
+        isbn: "",
+        quantity: "",
+        image: "",
+      });
+      // Refresh books list
+      const response = await axios.get("http://localhost:4000/libo");
+      setBooks(response.data);
+    } catch (error) {
+      console.error("Error adding book:", error);
+    }
   };
 
-  const handleSaveChanges = () => {
-    // Logic to save the edited book details
-    setShowEditBookForm(false);
-    setEditBook(null);
+  const handleSaveChanges = async () => {
+    const updatedBook = {
+      title: editBook.title,
+      author: editBook.author,
+      publisher: editBook.publisher,
+      publication_date: editBook.publicationDate,
+      isbn: editBook.isbn,
+      quantity: editBook.quantity,
+      // Convert the image file to a base64 string if necessary
+      image: editBook.image,
+    };
+
+    try {
+      await axios.patch(`http://localhost:4000/libo/${editBook._id}`, updatedBook, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setShowEditBookForm(false);
+      setEditBook(null);
+
+      // Refresh books list
+      const response = await axios.get("http://localhost:4000/libo");
+      setBooks(response.data);
+    } catch (error) {
+      console.error("Error editing book:", error);
+    }
+  };
+  const handleDeleteBook = async (_id) => {
+    try {
+      await axios.delete(`http://localhost:4000/libo/${_id}`);
+      // Refresh books list
+      setBooks(books.filter(book => book._id !== _id));
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
   };
 
   return (
@@ -173,50 +157,57 @@ const ManageBooks = () => {
           </div>
 
           <div className="table-container-mb">
-            <table className="books-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Publisher</th>
-                  <th>Publication date</th>
-                  <th>ISBN</th>
-                  <th>Quantity</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {books.map((book) => (
-                  <tr key={book.id}>
-                    <td>
-                      <img
-                        src={book.image}
-                        alt={book.title}
-                        className="book-image"
-                      />
-                    </td>
-                    <td>{book.title}</td>
-                    <td>{book.author}</td>
-                    <td>{book.publisher}</td>
-                    <td>{book.publicationDate}</td>
-                    <td>{book.isbn}</td>
-                    <td>{book.quantity}</td>
-                    <td>
-                      <button
-                        className="action-button edit-button"
-                        onClick={() => handleEditBookClick(book)}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                      <button className="action-button delete-button">
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
-                    </td>
+            {loading ? (
+              <p>Loading books...</p>
+            ) : (
+              <table className="books-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Publication date</th>
+                    <th>ISBN</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {books.map((book) => (
+                    <tr key={book._id}>
+                      <td>
+                        <img
+                          src={`http://localhost:4000/images/${book.image}`}
+                          alt={book.title}
+                          className="book-image"
+                        />
+                      </td>
+                      <td>{book.title}</td>
+                      <td>{book.author}</td>
+                      <td>{book.publisher}</td>
+                      <td>{book.publication_date}</td>
+                      <td>{book.isbn}</td>
+                      <td>{book.quantity}</td>
+                      <td>
+                        <button
+                          className="action-button edit-button"
+                          onClick={() => handleEditBookClick(book)}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button
+                          className="action-button delete-button"
+                          onClick={() => handleDeleteBook(book._id)}
+                        >
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
 
           {showAddBookForm && (
@@ -292,6 +283,7 @@ const ManageBooks = () => {
                     type="file"
                     accept="image/*"
                     onChange={handleFileChange}
+                    required
                   />
                 </label>
                 <button className="add-new-book-button" onClick={handleAddBook}>
@@ -366,14 +358,6 @@ const ManageBooks = () => {
                     value={editBook.isbn}
                     onChange={handleInputChange}
                     required
-                  />
-                </label>
-                <label>
-                  Image:
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
                   />
                 </label>
                 <button className="add-new-book-button" onClick={handleSaveChanges}>

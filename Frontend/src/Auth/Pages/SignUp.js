@@ -63,14 +63,16 @@ const SignUp = () => {
             required
           />
           {form.position === "User" && (
-            <input
-              type="text"
+            <select
               name="year"
-              placeholder="Year"
               value={form.year}
               onChange={handleChange}
-              required
-            />
+            >
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
+              <option value="3rd">3rd</option>
+              <option value="4th">4th</option>
+            </select>
           )}
           <select
             name="position"
@@ -85,7 +87,7 @@ const SignUp = () => {
           </button>
           <div className="login-link">
             <NavLink to="/">
-            <a href="#">Login In</a>
+              <a href="#">Login In</a>
             </NavLink>
           </div>
         </form>
