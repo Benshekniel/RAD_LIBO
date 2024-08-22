@@ -135,12 +135,16 @@ const ManageBooks = () => {
     }
   };
   const handleDeleteBook = async (id) => {
-    try {
-      await axios.delete(`http://localhost:4000/libo/book/${id}`);
-      // Refresh books list
-      setBooks(books.filter(book => book._id !== id));
-    } catch (error) {
-      console.error("Error deleting book:", error);
+    const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:4000/libo/book/${id}`);
+        // Refresh books list
+        setBooks(books.filter(book => book._id !== id));
+      } catch (error) {
+        console.error("Error deleting book:", error);
+      }
     }
   };
 

@@ -127,11 +127,15 @@ const ManageStudents = () => {
   };
 
   const handleDeleteStudent = async (studentId) => {
-    try {
-      await axios.delete(`http://localhost:4000/libo/student/${studentId}`);
-      setStudents(students.filter(student => student._id !== studentId));
-    } catch (error) {
-      console.error("Error deleting student:", error);
+    const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:4000/libo/student/${studentId}`);
+        setStudents(students.filter(student => student._id !== studentId));
+      } catch (error) {
+        console.error("Error deleting student:", error);
+      }
     }
   };
 
