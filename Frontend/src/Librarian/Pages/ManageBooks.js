@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 import "./ManageBooks.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +26,7 @@ const ManageBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/libo");
+        const response = await axios.get("http://localhost:4000/libo/book");
         setBooks(response.data);
         console.log(response.data);
         setLoading(false);
@@ -82,7 +82,7 @@ const ManageBooks = () => {
     formData.append('image', newBook.image);
 
     try {
-      await axios.post("http://localhost:4000/libo/add", formData, {
+      await axios.post("http://localhost:4000/libo/book/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -98,7 +98,7 @@ const ManageBooks = () => {
         image: "",
       });
       // Refresh books list
-      const response = await axios.get("http://localhost:4000/libo");
+      const response = await axios.get("http://localhost:4000/libo/book");
       setBooks(response.data);
     } catch (error) {
       console.error("Error adding book:", error);
@@ -118,7 +118,7 @@ const ManageBooks = () => {
     };
 
     try {
-      await axios.patch(`http://localhost:4000/libo/${editBook._id}`, updatedBook, {
+      await axios.patch(`http://localhost:4000/libo/book/${editBook._id}`, updatedBook, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -128,17 +128,17 @@ const ManageBooks = () => {
       setEditBook(null);
 
       // Refresh books list
-      const response = await axios.get("http://localhost:4000/libo");
+      const response = await axios.get("http://localhost:4000/libo/book");
       setBooks(response.data);
     } catch (error) {
       console.error("Error editing book:", error);
     }
   };
-  const handleDeleteBook = async (_id) => {
+  const handleDeleteBook = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/libo/${_id}`);
+      await axios.delete(`http://localhost:4000/libo/book/${id}`);
       // Refresh books list
-      setBooks(books.filter(book => book._id !== _id));
+      setBooks(books.filter(book => book._id !== id));
     } catch (error) {
       console.error("Error deleting book:", error);
     }

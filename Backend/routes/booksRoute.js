@@ -9,7 +9,7 @@ const app = express();
 const Storage = multer.diskStorage({
    destination: "image",
    filename: (req, file, cb) => {
-      cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+      cb(null, "book_" + Date.now() + path.extname(file.originalname))
    }
 
 })
