@@ -9,6 +9,7 @@ const SignUp = () => {
     email: "",
     name: "",
     password: "",
+    student_id: "",
     position: "Librarian",
     year: "",
   });
@@ -59,6 +60,14 @@ const SignUp = () => {
             name="password"
             placeholder="Password"
             value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="student_id"
+            name="student_id"
+            placeholder="student_id"
+            value={form.student_id}
             onChange={handleChange}
             required
           />

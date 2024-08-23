@@ -20,7 +20,7 @@ function Login() {
           </div>
           <h2>{role}</h2>
           <form>
-            <label htmlFor="email">Name</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
