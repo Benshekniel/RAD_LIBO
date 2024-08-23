@@ -13,6 +13,7 @@ const ManageStudents = () => {
   const [newStudent, setNewStudent] = useState({
     name: "",
     email: "",
+    password: "",
     stu_ID: "",
     year: "",
     image: "",
@@ -72,6 +73,7 @@ const ManageStudents = () => {
     const formData = new FormData();
     formData.append('name', newStudent.name);
     formData.append('email', newStudent.email);
+    formData.append('password', newStudent.password);
     formData.append('stu_ID', newStudent.stu_ID);
     formData.append('year', newStudent.year);
     formData.append('image', newStudent.image);
@@ -218,6 +220,16 @@ const ManageStudents = () => {
                     type="email"
                     name="email"
                     value={newStudent.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Password:
+                  <input
+                    type="password"
+                    name="password"
+                    value={newStudent.password}
                     onChange={handleInputChange}
                     required
                   />

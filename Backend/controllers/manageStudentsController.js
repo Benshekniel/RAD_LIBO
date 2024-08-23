@@ -5,10 +5,10 @@ import mongoose from 'mongoose';
 const createStudent = async (req, res) => {
    let image = `${req.file.filename}`;
 
-   const { name, email, stu_ID, year } = req.body;
+   const { name, email, password, stu_ID, year } = req.body;
 
    try {
-      const Student = await manageStudents.create({ name, email, stu_ID, year, image });
+      const Student = await manageStudents.create({ name, email, password, stu_ID, year, image });
       res.status(200).json(Student);
    } catch (e) {
       res.status(400).json({ error: e.message });

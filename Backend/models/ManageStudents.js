@@ -11,6 +11,10 @@ const ManageStudents = new Schema({
       type: String,
       required: true,
    },
+   password: {
+      type: String,
+      required: true,
+   },
    stu_ID: {
       type: String,
       required: true,
