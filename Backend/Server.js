@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import booksRoutes from "./routes/booksRoute.js"
 import studentsRoutes from "./routes/studentsRoute.js"
+import borrowsRoutes from "./routes/borrowsRoute.js"
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -42,3 +43,4 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/libo/student', studentsRoutes);
 app.use('/libo/book', booksRoutes);
+app.use('/libo/borrow', borrowsRoutes);

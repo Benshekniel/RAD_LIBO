@@ -1,80 +1,75 @@
 /* Table and Container Styles */
 .books-container-rb {
-   display: flex;
- }
- 
- .manage-books-container-rb {
-   flex-grow: 1;
-   padding: 20px;
-   margin: 20px;
-   position: relative;
- }
- 
- .table-container-rb {
-   max-height: 500px;
-   overflow-y: auto;
-   margin-top: 100px;
-   background-color: #f6f6e9;
-   padding: 10px;
-   border-radius: 5px;
-   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
- }
- 
- .books-table-rb {
-   width: 100%;
-   border-collapse: collapse;
- }
- 
- .books-table-rb th,
- .books-table-rb td {
-   text-align: left;
-   padding: 10px;
-   border-bottom: 1px solid #ddd;
- }
- 
- .books-table-rb th {
-   background-color: #f6f6e9;
- }
- 
- .books-table-rb tr:hover {
-   background-color: #f1f1f1;
- }
- 
- .book-image-rb {
-   width: 50px;
-   height: 75px;
-   object-fit: cover;
- }
- 
- /* Status Styles */
- .status-accepted {
-   color: green;
- }
- 
- .status-pending {
-   color: orange;
- }
- 
- .status-rejected {
-   color: red;
- }
- 
- /* Delete Icon Styles */
- .action-column {
-   text-align: center;
- }
- 
- .delete-icon-rb {
-   cursor: pointer;
-   transition: color 0.3s ease;
- }
- 
- .icon-active {
-   color: red;
- }
- 
- .icon-disabled {
-   color: rgba(255, 0, 0, 0.5);
-   pointer-events: none;
- }
- 
+  display: flex;
+}
+
+.manage-books-container-rb {
+  flex-grow: 1;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+}
+
+.table-container-rb {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 100px;
+  background-color: #f6f6e9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.books-table-rb {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.books-table-rb th,
+.books-table-rb td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.books-table-rb th {
+  background-color: #f6f6e9;
+}
+
+.books-table-rb tr:hover {
+  background-color: #f1f1f1;
+}
+
+.book-image-rb {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
+
+/* Status Styles */
+.status-accepted {
+  color: green;
+}
+
+.status-pending {
+  color: orange;
+}
+
+/* Delete Icon Styles */
+.action-column {
+  text-align: center;
+}
+
+.delete-icon-rb {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-active {
+  color: red;
+}
+
+.icon-disabled {
+  color: rgba(255, 0, 0, 0.5);
+  pointer-events: none;
+}
