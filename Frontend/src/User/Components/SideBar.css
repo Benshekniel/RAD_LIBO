@@ -1,89 +1,88 @@
-.sidebar-us{
-   width: 229px;
-   height: 100vh;
-   background-color: #F6F6E9;
-   padding: 20px;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
- }
- 
- .sidebar-us-logo {
-   display: flex;
-   align-items: center;
-   margin-left: 50px;
-   margin-bottom: 10px;
-   padding: 0%;
- }
- 
- .sidebar-us-logo img {
-   width: 40px;
-   height: 40px;
-   margin-right: 10px;
- }
- 
- .sidebar-us-logo h1 {
-   color: #0443A5;
- }
- 
- .sidebar-us-user {
-   display: flex;
-   align-items: center;
-   margin-bottom: 20px;
- }
- 
- .user-avatar {
-   width: 60px;
-   height: 60px;
-   border-radius: 50%;
-   margin-right: 10px;
- }
- 
- .user-info {
-   display: flex;
-   flex-direction: column;
- }
- 
- .user-info p {
-   margin: 0;
- }
- 
- .user-role {
-   color: grey;
-   font-size: 0.9em;
- }
- 
- .sidebar-us-menu ul {
-   margin-bottom: 200px;
-   list-style: none;
-   padding: 0;
- }
- 
- .sidebar-us-menu ul li a{
+.sidebar-us {
+  width: 229px;
+  height: 100vh;
+  background-color: #F6F6E9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-us-logo {
   display: flex;
   align-items: center;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  margin-left: 50px;
+  margin-bottom: 10px;
+  padding: 0%;
+}
+
+.sidebar-us-logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.sidebar-us-logo h1 {
+  color: #0443A5;
+}
+
+.sidebar-us-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.user-role {
+  color: grey;
+  font-size: 0.9em;
+}
+
+.sidebar-us-menu ul {
+  margin-bottom: 200px;
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-us-menu ul li a {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
   text-decoration: none;
   color: black;
- }
- 
- .sidebar-us-menu ul li a:hover, 
- .sidebar-us-menu ul li a.active{
-   background-color: #0443A5;
-   color: white;
- }
- 
-  .sidebar-us-menu ul li a.active .fa-icon {
+}
+
+.sidebar-us-menu ul li a:hover,
+.sidebar-us-menu ul li a.active {
+  background-color: #0443A5;
   color: white;
 }
 
- .space {
-   margin-right: 10px;
-   margin-left: 10px;
- }
- 
- .sidebar-us-logout a {
+.sidebar-us-menu ul li a.active .fa-icon {
+  color: white;
+}
+
+.space {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.sidebar-us-logout a {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -92,7 +91,7 @@
   padding-bottom: 10px;
 }
 
-.sidebar-us-logout a:hover, 
+.sidebar-us-logout a:hover,
 .sidebar-us-logout a.active {
   background-color: #0443A5;
   color: white;

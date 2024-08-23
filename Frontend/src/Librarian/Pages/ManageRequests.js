@@ -13,108 +13,10 @@ const ManageRequests = () => {
       author: "B.S. Blyth",
       isbn: "978-3-319-77535-9",
       stu_id: "37657485",
-      stu_rate: true, // true means green, false means red
+      quantity: 3,
       image: Cover,
     },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true, 
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true, 
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true, 
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true, 
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: false,
-      image: Cover,
-    },
-    {
-      id: 4,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      stu_rate: true,
-      image: Cover,
-    },
+
   ];
 
   return (
@@ -132,7 +34,7 @@ const ManageRequests = () => {
                   <th>Author</th>
                   <th>ISBN</th>
                   <th>Stu_ID</th>
-                  <th>Stu_Rate</th>
+                  <th>Quantity</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -150,19 +52,10 @@ const ManageRequests = () => {
                     <td>{request.author}</td>
                     <td>{request.isbn}</td>
                     <td>{request.stu_id}</td>
-                    <td>
-                      <div
-                        className={`rate-indicator ${
-                          request.stu_rate ? "green" : "red"
-                        }`}
-                      />
-                    </td>
+                    <td>{request.quantity}</td>
                     <td>
                       <button className="action-button accept-button">
                         Accept
-                      </button>
-                      <button className="action-button reject-button">
-                        Reject
                       </button>
                     </td>
                   </tr>

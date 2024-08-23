@@ -25,11 +25,6 @@ const Sidebar = () => {
       <div className="sidebar-menu">
         <ul>
           <li>
-            <NavLink to="/manage-dashboard" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Dashboard")}>
-              <FontAwesomeIcon className="space" icon={faTachometerAlt} /> Dashboard
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Books")}>
               <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
             </NavLink>
@@ -49,17 +44,12 @@ const Sidebar = () => {
               <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/manage-defaulter" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Defaulter Books")}>
-              <FontAwesomeIcon className="space" icon={faExclamationTriangle} /> Defaulter Books
-            </NavLink>
-          </li>
         </ul>
       </div>
       <div className="sidebar-logout">
-        <NavLink 
-          to="/" 
-          className={active === 'Logout' ? 'active' : ''} 
+        <NavLink
+          to="/"
+          className={active === 'Logout' ? 'active' : ''}
           onClick={() => setActive('Logout')}
         >
           <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout

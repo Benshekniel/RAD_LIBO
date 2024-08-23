@@ -1,11 +1,13 @@
 .sidebar {
   width: 229px;
-  height: 100vh; /* Changed to viewport height */
+  height: 100vh;
+  /* Changed to viewport height */
   background-color: #F6F6E9;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space out content */
+  justify-content: space-between;
+  /* Space out content */
 }
 
 .sidebar-logo {
@@ -52,18 +54,24 @@
   font-size: 0.9em;
 }
 
+.sidebar-menu {
+  padding-top: 0;
+  padding-bottom: 100px;
+}
+
 .sidebar-menu ul {
   list-style: none;
   padding: 0;
 }
 
 .sidebar-menu ul li {
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .sidebar-menu ul li .fa-icon {
   margin-right: 10px;
 }
+
 .sidebar-menu ul li {
   padding: 2px;
 }
@@ -104,7 +112,7 @@
   padding-bottom: 10px;
 }
 
-.sidebar-logout a:hover, 
+.sidebar-logout a:hover,
 .sidebar-logout a.active {
   background-color: #0443A5;
   color: white;

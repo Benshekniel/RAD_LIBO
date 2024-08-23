@@ -152,43 +152,47 @@ const ManageStudents = () => {
           </div>
 
           <div className="table-container-ms">
-            <table className="students-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Full name</th>
-                  <th>Email</th>
-                  <th>Stu_ID</th>
-                  <th>Year</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!loading && students.map((student) => (
-                  <tr key={student._id}>
-                    <td className="student-image-td">
-                      <img
-                        src={`http://localhost:4000/image/${student.image}`}
-                        alt={student.name}
-                        className="student-image"
-                      />
-                    </td>
-                    <td>{student.name}</td>
-                    <td>{student.email}</td>
-                    <td>{student.stu_ID}</td>
-                    <td>{student.year}</td>
-                    <td>
-                      <button className="action-button edit-button" onClick={() => handleEditStudentClick(student)}>
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                      <button className="action-button delete-button" onClick={() => handleDeleteStudent(student._id)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
-                    </td>
+            {loading ? (
+              <p>Loading students...</p>
+            ) : (
+              <table className="students-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Full name</th>
+                    <th>Email</th>
+                    <th>Stu_ID</th>
+                    <th>Year</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {!loading && students.map((student) => (
+                    <tr key={student._id}>
+                      <td className="student-image-td">
+                        <img
+                          src={`http://localhost:4000/image/${student.image}`}
+                          alt={student.name}
+                          className="student-image"
+                        />
+                      </td>
+                      <td>{student.name}</td>
+                      <td>{student.email}</td>
+                      <td>{student.stu_ID}</td>
+                      <td>{student.year}</td>
+                      <td>
+                        <button className="action-button edit-button" onClick={() => handleEditStudentClick(student)}>
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button className="action-button delete-button" onClick={() => handleDeleteStudent(student._id)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
 
           {showAddStudentForm && (

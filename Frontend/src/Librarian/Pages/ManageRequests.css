@@ -1,84 +1,61 @@
 /* Modal Styles */
 .requests-container {
-   display: flex;
- }
- 
- .manage-requests-container {
-   flex-grow: 1;
-   padding: 20px;
-   margin: 20px;
-   position: relative;
- }
- 
- .table-container-mr {
-   max-height: 520px;
-   overflow-y: auto;
-   margin-top: 50px;
-   background-color: #f6f6e9;
-   padding: 10px;
-   border-radius: 5px;
-   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
- }
- 
- .requests-table {
-   width: 100%;
-   border-collapse: collapse;
- }
- 
- .requests-table th,
- .requests-table td {
-   text-align: left;
-   padding: 10px;
-   border-bottom: 1px solid #ddd;
- }
- 
- .requests-table th {
-   background-color: #f6f6e9;
- }
- 
- .requests-table tr:hover {
-   background-color: #f1f1f1;
- }
- 
- .request-image {
-   width: 50px;
-   height: 75px;
-   object-fit: cover;
- }
- 
- .action-button {
-   border: none;
-   background: none;
-   cursor: pointer;
-   margin-left: 5px;
- }
- 
- .accept-button {
-   background-color: #28a745;
-   color: white;
-   padding: 5px 10px;
-   border-radius: 5px;
- }
- 
- .reject-button {
-   background-color: #d9534f;
-   color: white;
-   padding: 5px 10px;
-   border-radius: 5px;
- }
- 
- .rate-indicator {
-   margin-left: 35px;
-   width: 20px;
-   height: 20px;
-   border-radius: 50%;
- }
- 
- .rate-indicator.green {
-   background-color: green;
- }
- 
- .rate-indicator.red {
-   background-color: red;
- }
- 
+  display: flex;
+}
+
+.manage-requests-container {
+  flex-grow: 1;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+}
+
+.table-container-mr {
+  max-height: 520px;
+  overflow-y: auto;
+  margin-top: 50px;
+  background-color: #f6f6e9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.requests-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.requests-table th,
+.requests-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.requests-table th {
+  background-color: #f6f6e9;
+}
+
+.requests-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.request-image {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.action-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.accept-button {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 18px;
+  border-radius: 5px;
+}

@@ -4,7 +4,7 @@ import Sidebar from "../Components/SideBar";
 import SearchBar from "../Components/SearchBar";
 import Cover from "../Assets/Cover.jpg";
 
-const Dashboard = () => {
+const ReturnBooks = () => {
   // Placeholder data for statistics
   const [stats, setStats] = useState({
     numberOfBooks: 45,
@@ -20,46 +20,11 @@ const Dashboard = () => {
       title: "Basic Linear Algebra",
       author: "B.S. Blyth",
       publisher: "Springer-Verlag",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
+      publicationDate: "September 2018",
+      isbn: "978-3-319-77535-9",
       image: Cover
     },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-      image: Cover
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-      image: Cover
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-      image: Cover
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      due: "2 days",
-      ReturnDate: "Mar 18th, 2022",
-      image: Cover
-    },
+
 
   ];
 
@@ -77,8 +42,8 @@ const Dashboard = () => {
                   <th>Title</th>
                   <th>Author</th>
                   <th>Publisher</th>
-                  <th>due</th>
-                  <th>Return date</th>
+                  <th>Publication Date</th>
+                  <th>ISBN</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,8 +59,8 @@ const Dashboard = () => {
                     <td>{book.title}</td>
                     <td>{book.author}</td>
                     <td>{book.publisher}</td>
-                    <td>{book.due}</td>
-                    <td>{book.ReturnDate}</td>
+                    <td>{book.publicationDate}</td>
+                    <td>{book.isbn}</td>
                   </tr>
                 ))}
               </tbody>
@@ -107,4 +72,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ReturnBooks;

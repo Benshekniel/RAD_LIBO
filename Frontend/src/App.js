@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DefaulterBooks from './Librarian/Pages/DefaulterBooks';
 import ManageStudents from './Librarian/Pages/ManageStudents';
 import ManageBooks from './Librarian/Pages/ManageBooks';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
-import Dashboard from './Librarian/Pages/Dashboard';
 import ManageRequests from './Librarian/Pages/ManageRequests';
 import AvilableBooks from './User/Pages/AvilableBooks';
 import ReturnBooks from './User/Pages/ReturnBooks';
@@ -16,27 +14,25 @@ import SignUp from './Auth/Pages/SignUp';
 const App = () => {
   return (
     <>
-    <Router>
-      <div className="app-container">
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/manage-dashboard" element={<Dashboard />} />
-            <Route path="/manage-books" element={<ManageBooks />} />
-            <Route path="/manage-students" element={<ManageStudents />} />
-            <Route path="/manage-requests" element={<ManageRequests />} />
-            <Route path="/manage-issued" element={<IssuedBooks />} />
-            <Route path="/manage-defaulter" element={<DefaulterBooks />} />
-            <Route path="/manage-avilablebooks" element={<AvilableBooks />} />
-            <Route path="/manage-returnbooks" element={<ReturnBooks />} />
-            <Route path="/manage-requestedbooks" element={<RequestedBooks />} />
+      <Router>
+        <div className="app-container">
+          <div className="content-container">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/manage-books" element={<ManageBooks />} />
+              <Route path="/manage-students" element={<ManageStudents />} />
+              <Route path="/manage-requests" element={<ManageRequests />} />
+              <Route path="/manage-issued" element={<IssuedBooks />} />
+              <Route path="/manage-avilablebooks" element={<AvilableBooks />} />
+              <Route path="/manage-returnbooks" element={<ReturnBooks />} />
+              <Route path="/manage-requestedbooks" element={<RequestedBooks />} />
 
-            {/* Add more routes as needed */}
-          </Routes>
+              {/* Add more routes as needed */}
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
     </>
   );
 };
