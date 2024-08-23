@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import "./SignUp.css";
 import logo from "../Assets/Logo.png";
 import user from "../Assets/user.png";
 
 const SignUp = () => {
+  const [role, setRole] = useState("User");
+  const [/* students */, setStudents] = useState([]);
+  const [/* showAddStudentForm */, setShowAddStudentForm] = useState(false);
+  const [newStudent, setNewStudent] = useState({
+    name: "",
+    email: "",
+    stu_ID: "",
+    year: "",
+    image: "",
+  });
   const [form, setForm] = useState({
     email: "",
     name: "",
@@ -13,6 +24,10 @@ const SignUp = () => {
     position: "Librarian",
     year: "",
   });
+
+  const handleRoleClick = (selectedRole) => {
+    setRole(selectedRole);
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -24,6 +39,69 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted", form);
+
+    if(role === "User") {
+      const handleAddStudent = async () => {
+        const formData = new FormData();
+        formData.append('name', newStudent.name);
+        formData.append('email', newStudent.email);
+        formData.append('stu_ID', newStudent.stu_ID);
+        formData.append('year', newStudent.year);
+        formData.append('image', newStudent.image);
+    
+        try {
+          await axios.post("http://localhost:4000/libo/student/add", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          setShowAddStudentForm(false);
+          setNewStudent({
+            name: "",
+            email: "",
+            stu_ID: "",
+            year: "",
+            image: "",
+          });
+          // Refresh books list
+          const response = await axios.get(`http://localhost:4000/libo/student`);
+          setStudents(response.data);
+        } catch (error) {
+          console.error("Error adding student:", error);
+        }
+      };
+    } /* else if(role==="Librarian"){
+      const handleAddStudent = async () => {
+        const formData = new FormData();
+        formData.append('name', newStudent.name);
+        formData.append('email', newStudent.email);
+        formData.append('stu_ID', newStudent.stu_ID);
+        formData.append('year', newStudent.year);
+        formData.append('image', newStudent.image);
+    
+        try {
+          await axios.post("http://localhost:4000/libo/student/add", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          setShowAddStudentForm(false);
+          setNewStudent({
+            name: "",
+            email: "",
+            stu_ID: "",
+            year: "",
+            image: "",
+          });
+          // Refresh books list
+          const response = await axios.get(`http://localhost:4000/libo/student`);
+          setStudents(response.data);
+        } catch (error) {
+          console.error("Error adding student:", error);
+        }
+      };
+    } */
+    
   };
 
   return (
@@ -63,6 +141,7 @@ const SignUp = () => {
             onChange={handleChange}
             required
           />
+          {form.position === "User" && (
           <input
             type="student_id"
             name="student_id"
@@ -71,6 +150,7 @@ const SignUp = () => {
             onChange={handleChange}
             required
           />
+        )}
           {form.position === "User" && (
             <select
               name="year"
@@ -88,8 +168,8 @@ const SignUp = () => {
             value={form.position}
             onChange={handleChange}
           >
-            <option value="Librarian">Librarian</option>
-            <option value="User">User</option>
+            <option onClick={() => handleRoleClick("Librarian")} value="Librarian">Librarian</option>
+            <option  onClick={() => handleRoleClick("User")} value="User">User</option>
           </select>
           <button type="submit" className="signup-button">
             Sign Up
