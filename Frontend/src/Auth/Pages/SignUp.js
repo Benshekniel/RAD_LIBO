@@ -40,6 +40,16 @@ const SignUp = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("Student added successfully!");
+
+      // Reset form fields after successful sign-up
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        stu_ID: "",
+        year: "",
+        image: null,
+      });
     } catch (err) {
       console.error("Error adding student:", err);
     }
@@ -91,6 +101,7 @@ const SignUp = () => {
             required
           />
           <select name="year" value={form.year} onChange={handleChange}>
+            <option value="" disabled>Select Year</option>
             <option value="1st">1st</option>
             <option value="2nd">2nd</option>
             <option value="3rd">3rd</option>

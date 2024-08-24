@@ -32,8 +32,15 @@ function Login() {
 
       if (response.ok) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('role', role); // Store the role in localStorage
         setUserdata({ email, role });
-        navigate(role === 'student' ? '/manage-avilablebooks' : '/manage-books');
+
+        // Navigate based on the role
+        if (role === 'student') {
+          navigate('/manage-avilablebooks');
+        } else if (role === 'librarian') {
+          navigate('/manage-books');
+        }
       } else {
         alert(data.message);
       }
