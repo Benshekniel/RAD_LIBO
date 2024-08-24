@@ -79,7 +79,7 @@ const ManageStudents = () => {
     formData.append('image', newStudent.image);
 
     try {
-      await axios.post("http://localhost:4000/libo/student/add", formData, {
+      await axios.post("http://localhost:4000/libo/student/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

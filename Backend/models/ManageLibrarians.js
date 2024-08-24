@@ -1,24 +1,17 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const ManageLibrarians = new Schema(
-   {
-      name: {
-         type: String,
-         required: true,
-      },
-      email: {
-         type: String,
-         required: true,
-      },
-      password: {
-         type: String,
-         required: true,
-      }
+const ManageLibrarians = new Schema({
+   email: {
+      type: String,
+      required: true,
+      unique: true
    },
+   password: {
+      type: String,
+      required: true
+   }
+});
 
-
-);
-
-export default mongoose.model("Librarian", ManageLibrarians);
+export default mongoose.model('Librarian', ManageLibrarians);

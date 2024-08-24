@@ -9,6 +9,7 @@ const SignUp = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    password: "",
     stu_ID: "",
     year: "",
     image: null, // For storing the image file
@@ -25,16 +26,17 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData();
     formData.append("name", form.name);
     formData.append("email", form.email);
+    formData.append("password", form.password);
     formData.append("stu_ID", form.stu_ID);
     formData.append("year", form.year);
     formData.append("image", form.image); // Append image file
 
     try {
-      await axios.post("http://localhost:4000/libo/student/add", formData, {
+      await axios.post("http://localhost:4000/libo/student/register", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("Student added successfully!");
@@ -59,8 +61,16 @@ const SignUp = () => {
           <input
             type="email"
             name="email"
-            placeholder="Email@ensia.edu.dz"
+            placeholder="email"
             value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={form.password}
             onChange={handleChange}
             required
           />

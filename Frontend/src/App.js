@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import ManageStudents from './Librarian/Pages/ManageStudents';
 import ManageBooks from './Librarian/Pages/ManageBooks';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
@@ -10,6 +10,16 @@ import RequestedBooks from './User/Pages/RequestedBooks';
 import Login from './Auth/Pages/Login';
 import SignUp from './Auth/Pages/SignUp';
 
+// PrivateRoute component to protect routes
+const PrivateRoute = ({ element: Component, ...rest }) => {
+  const token = localStorage.getItem('token');
+
+  return token ? (
+    <Component {...rest} />
+  ) : (
+    <Navigate to="/" replace />
+  );
+};
 
 const App = () => {
   return (
@@ -20,13 +30,15 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/manage-books" element={<ManageBooks />} />
-              <Route path="/manage-students" element={<ManageStudents />} />
-              <Route path="/manage-requests" element={<ManageRequests />} />
-              <Route path="/manage-issued" element={<IssuedBooks />} />
-              <Route path="/manage-avilablebooks" element={<AvilableBooks />} />
-              <Route path="/manage-returnbooks" element={<ReturnBooks />} />
-              <Route path="/manage-requestedbooks" element={<RequestedBooks />} />
+
+              {/* Protected routes */}
+              <Route path="/manage-books" element={<PrivateRoute element={ManageBooks} />} />
+              <Route path="/manage-students" element={<PrivateRoute element={ManageStudents} />} />
+              <Route path="/manage-requests" element={<PrivateRoute element={ManageRequests} />} />
+              <Route path="/manage-issued" element={<PrivateRoute element={IssuedBooks} />} />
+              <Route path="/manage-avilablebooks" element={<PrivateRoute element={AvilableBooks} />} />
+              <Route path="/manage-returnbooks" element={<PrivateRoute element={ReturnBooks} />} />
+              <Route path="/manage-requestedbooks" element={<PrivateRoute element={RequestedBooks} />} />
 
               {/* Add more routes as needed */}
             </Routes>

@@ -1,36 +1,66 @@
 import manageStudents from '../models/ManageStudents.js';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-//to create a student
-const createStudent = async (req, res) => {
+// Register Student
+const registerStudent = async (req, res) => {
+   const { name, email, password, stu_ID, year } = req.body;
    let image = `${req.file.filename}`;
 
-   const { name, email, password, stu_ID, year } = req.body;
+   try {
+      const existingStudent = await manageStudents.findOne({ email });
+      if (existingStudent) {
+         return res.status(400).json({ message: "Student already exists" });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const newStudent = new manageStudents({ name, email, password: hashedPassword, stu_ID, year, image });
+
+      await newStudent.save();
+      res.status(201).json({ message: "Student registered successfully" });
+   } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
+   }
+};
+
+// Login Student
+const loginStudent = async (req, res) => {
+   const { email, password } = req.body;
 
    try {
-      const Student = await manageStudents.create({ name, email, password, stu_ID, year, image });
-      res.status(200).json(Student);
+      const student = await manageStudents.findOne({ email });
+      if (!student) {
+         return res.status(404).json({ message: "Student not found" });
+      }
+
+      const isPasswordCorrect = await bcrypt.compare(password, student.password);
+      if (!isPasswordCorrect) {
+         return res.status(400).json({ message: "Invalid credentials" });
+      }
+
+      const token = jwt.sign({ email: student.email, id: student._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      res.status(200).json({ result: student, token });
+   } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
+   }
+};
+
+// To get all students
+const getStudents = async (req, res) => {
+   try {
+      const students = await manageStudents.find({});
+      res.status(200).json(students);
    } catch (e) {
       res.status(400).json({ error: e.message });
    }
 };
 
-//To get all students
-const getStudents = async (req, res) => {
-   try {
-      const students = await manageStudents.find({});
-      res.status(200).json(students);
-   }
-   catch (e) {
-      res.status(400).json({ error: e.message });
-   }
-};
-
-//To get a single student
+// To get a single student
 const getStudent = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Student not found' })
+      return res.status(404).json({ error: 'Student not found' });
    }
    try {
       const student = await manageStudents.findById(id);
@@ -40,12 +70,11 @@ const getStudent = async (req, res) => {
    }
 };
 
-//To update a Student details
-
+// To update a student’s details
 const updateStudent = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Student not found' })
+      return res.status(404).json({ error: 'Student not found' });
    }
    try {
       const student = await manageStudents.findByIdAndUpdate({ _id: id }, { ...req.body });
@@ -55,11 +84,11 @@ const updateStudent = async (req, res) => {
    }
 };
 
-//Delete a Student
+// Delete a student
 const deleteStudent = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Student not found' })
+      return res.status(404).json({ error: 'Student not found' });
    }
    try {
       const student = await manageStudents.findByIdAndDelete(id);
@@ -69,7 +98,4 @@ const deleteStudent = async (req, res) => {
    }
 };
 
-
-export { createStudent, getStudents, getStudent, updateStudent, deleteStudent };
-
-
+export { registerStudent, loginStudent, getStudents, getStudent, updateStudent, deleteStudent };
