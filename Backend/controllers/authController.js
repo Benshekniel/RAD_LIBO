@@ -7,7 +7,7 @@ export const loginUser = async (req, res) => {
    const { email, password, role } = req.body;
 
    try {
-      const UserModel = role === 'User' ? Student : Librarian;
+      const UserModel = role === 'student' ? Student : Librarian;
       const user = await UserModel.findOne({ email });
 
       if (!user) {

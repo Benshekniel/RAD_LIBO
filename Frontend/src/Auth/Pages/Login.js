@@ -20,12 +20,12 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:4000/libo/${role.toLowerCase()}/login`, {
+      const response = await fetch(`http://localhost:4000/libo/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, role }),
       });
 
       const data = await response.json();
@@ -55,7 +55,7 @@ function Login() {
             <input
               type="email"
               id="email"
-              placeholder="Email@ensia.edu.dz"
+              placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -63,7 +63,7 @@ function Login() {
             <input
               type="password"
               id="password"
-              placeholder="enter password"
+              placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

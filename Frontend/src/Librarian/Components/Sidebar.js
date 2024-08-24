@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt, faBook, faUserGraduate, faClipboardList, faBookOpen, faExclamationTriangle, faSignOutAlt, } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faUserGraduate,
+  faClipboardList,
+  faBookOpen,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Sidebar.css";
 import Logo from "../Assets/Logo.png";
 import Librarian from "../Assets/Librarian.jpeg";
 
 const Sidebar = () => {
   const [active, setActive] = useState("Dashboard");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  };
 
   return (
     <div className="sidebar">
@@ -25,35 +37,50 @@ const Sidebar = () => {
       <div className="sidebar-menu">
         <ul>
           <li>
-            <NavLink to="/manage-books" className={({ isActive }) => isActive ? "active-NavLink" : ""} onClick={() => setActive("Manage Books")}>
+            <NavLink
+              to="/manage-books"
+              className={({ isActive }) => (isActive ? "active-NavLink" : "")}
+              onClick={() => setActive("Manage Books")}
+            >
               <FontAwesomeIcon className="space" icon={faBook} /> Manage Books
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-students" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Manage Students")}>
+            <NavLink
+              to="/manage-students"
+              className={({ isActive }) => (isActive ? "active-NavLink" : "")}
+              onClick={() => setActive("Manage Students")}
+            >
               <FontAwesomeIcon className="space" icon={faUserGraduate} /> Manage Students
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-requests" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Manage Requests")}>
+            <NavLink
+              to="/manage-requests"
+              className={({ isActive }) => (isActive ? "active-NavLink" : "")}
+              onClick={() => setActive("Manage Requests")}
+            >
               <FontAwesomeIcon className="space" icon={faClipboardList} /> Manage Requests
             </NavLink>
           </li>
           <li>
-            <NavLink to="/manage-issued" className={({ isActive }) => isActive ? 'active-NavLink' : ""} onClick={() => setActive("Issued Books")}>
+            <NavLink
+              to="/manage-issued"
+              className={({ isActive }) => (isActive ? "active-NavLink" : "")}
+              onClick={() => setActive("Issued Books")}
+            >
               <FontAwesomeIcon className="space" icon={faBookOpen} /> Issued Books
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="sidebar-logout">
-        <NavLink
-          to="/"
+        <a
           className={active === 'Logout' ? 'active' : ''}
-          onClick={() => setActive('Logout')}
+          onClick={handleLogout}
         >
           <FontAwesomeIcon className="space" icon={faSignOutAlt} /> Logout
-        </NavLink>
+        </a>
       </div>
     </div>
   );

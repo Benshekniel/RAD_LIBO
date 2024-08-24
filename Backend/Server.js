@@ -2,6 +2,7 @@ import express from "express";
 import 'dotenv/config'
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import { protect } from './middleware/authMiddleware.js';
 import booksRoutes from "./routes/booksRoute.js";
 import studentsRoutes from "./routes/studentsRoute.js";
 import borrowsRoutes from "./routes/borrowsRoute.js";
