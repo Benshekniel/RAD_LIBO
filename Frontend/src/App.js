@@ -5,6 +5,7 @@ import ManageBooks from './Librarian/Pages/ManageBooks';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
 import ManageRequests from './Librarian/Pages/ManageRequests';
 import AvilableBooks from './User/Pages/AvilableBooks';
+import { UserProvider } from './context/UserContext';
 import ReturnBooks from './User/Pages/ReturnBooks';
 import RequestedBooks from './User/Pages/RequestedBooks';
 import Login from './Auth/Pages/Login';
@@ -21,6 +22,7 @@ const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
 
   if (!allowedRoles.includes(userRole)) {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     return <Navigate to="/" replace />; // Redirect to login if role doesn't match
   }
 
@@ -31,46 +33,48 @@ const App = () => {
   return (
     <>
       <Router>
-        <div className="app-container">
-          <div className="content-container">
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+        <UserProvider>
+          <div className="app-container">
+            <div className="content-container">
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
 
-              {/* Protected routes with role-based access */}
-              <Route
-                path="/manage-books"
-                element={<PrivateRoute element={ManageBooks} allowedRoles={['librarian']} />}
-              />
-              <Route
-                path="/manage-students"
-                element={<PrivateRoute element={ManageStudents} allowedRoles={['librarian']} />}
-              />
-              <Route
-                path="/manage-requests"
-                element={<PrivateRoute element={ManageRequests} allowedRoles={['librarian']} />}
-              />
-              <Route
-                path="/manage-issued"
-                element={<PrivateRoute element={IssuedBooks} allowedRoles={['librarian']} />}
-              />
-              <Route
-                path="/manage-avilablebooks"
-                element={<PrivateRoute element={AvilableBooks} allowedRoles={['student']} />}
-              />
-              <Route
-                path="/manage-returnbooks"
-                element={<PrivateRoute element={ReturnBooks} allowedRoles={['student']} />}
-              />
-              <Route
-                path="/manage-requestedbooks"
-                element={<PrivateRoute element={RequestedBooks} allowedRoles={['student']} />}
-              />
+                {/* Protected routes with role-based access */}
+                <Route
+                  path="/manage-books"
+                  element={<PrivateRoute element={ManageBooks} allowedRoles={['librarian']} />}
+                />
+                <Route
+                  path="/manage-students"
+                  element={<PrivateRoute element={ManageStudents} allowedRoles={['librarian']} />}
+                />
+                <Route
+                  path="/manage-requests"
+                  element={<PrivateRoute element={ManageRequests} allowedRoles={['librarian']} />}
+                />
+                <Route
+                  path="/manage-issued"
+                  element={<PrivateRoute element={IssuedBooks} allowedRoles={['librarian']} />}
+                />
+                <Route
+                  path="/manage-avilablebooks"
+                  element={<PrivateRoute element={AvilableBooks} allowedRoles={['student']} />}
+                />
+                <Route
+                  path="/manage-returnbooks"
+                  element={<PrivateRoute element={ReturnBooks} allowedRoles={['student']} />}
+                />
+                <Route
+                  path="/manage-requestedbooks"
+                  element={<PrivateRoute element={RequestedBooks} allowedRoles={['student']} />}
+                />
 
-              {/* Add more routes as needed */}
-            </Routes>
+                {/* Add more routes as needed */}
+              </Routes>
+            </div>
           </div>
-        </div>
+        </UserProvider>
       </Router>
     </>
   );

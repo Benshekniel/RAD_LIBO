@@ -19,13 +19,22 @@ export const loginUser = async (req, res) => {
          return res.status(400).json({ message: 'Invalid credentials' });
       }
 
+      // Sign JWT
       const token = jwt.sign(
          { id: user._id, role },
          process.env.JWT_SECRET,
          { expiresIn: '1h' }
       );
 
-      res.status(200).json({ token, role });
+      // Set JWT as an HttpOnly cookie
+      res.cookie('token', token, {
+         httpOnly: true, // Accessible only by the web server
+         secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
+         sameSite: 'strict', // Prevent CSRF
+         maxAge: 3600000 // 1 hour
+      });
+
+      res.status(200).json({ role });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

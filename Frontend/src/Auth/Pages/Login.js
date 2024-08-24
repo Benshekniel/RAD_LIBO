@@ -6,7 +6,7 @@ import Logo from '../Assets/Logo.png';
 import User from '../Assets/user.png';
 
 function Login() {
-  const { setUserdata } = useContext(UserContext);
+  const { handleLogin } = useContext(UserContext);
   const [role, setRole] = useState('student');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,20 +27,12 @@ function Login() {
         },
         body: JSON.stringify({ email, password, role }),
       });
-
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('role', role); // Store the role in localStorage
-        setUserdata({ email, role });
-
-        // Navigate based on the role
-        if (role === 'student') {
-          navigate('/manage-avilablebooks');
-        } else if (role === 'librarian') {
-          navigate('/manage-books');
-        }
+        const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms
+        handleLogin(data.token, expirationTime, role);  // Pass role here
+        navigate(role === 'student' ? '/manage-avilablebooks' : '/manage-books');
       } else {
         alert(data.message);
       }
