@@ -246,13 +246,13 @@ const ManageStudents = () => {
                 </label>
                 <label>
                   Year:
-                  <input
-                    type="text"
-                    name="year"
-                    value={newStudent.year}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <select name="year" value={newStudent.year} onChange={handleInputChange}>
+                    <option value="" disabled>Select Year</option>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                    <option value="4th">4th</option>
+                  </select>
                 </label>
                 <label>
                   Image:
@@ -308,13 +308,12 @@ const ManageStudents = () => {
                 </label>
                 <label>
                   Year:
-                  <input
-                    type="text"
-                    name="year"
-                    value={editStudent.year}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <select name="year" value={editStudent.year} onChange={handleInputChange}>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                    <option value="4th">4th</option>
+                  </select>
                 </label>
                 <button className="add-new-student-button" onClick={handleSaveChanges}>
                   Save Changes
