@@ -1,46 +1,29 @@
-// AvilableBooks.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import "./AvilableBooks.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/SideBar";
+import { UserContext } from "../../context/UserContext";
 import Cover from "../Assets/Cover.jpg";
 
-const ManageBooks = () => {
+const AvailableBooks = () => {
+  const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { userdata } = useContext(UserContext);
 
-  const books = [
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      availability: true,
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      availability: false,
-      image: Cover,
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      availability: true,
-      image: Cover,
-    },
-  ];
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/libo/book");
+        setBooks(response.data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
 
   const handleRowClick = (book) => {
     setSelectedBook(book);
@@ -50,6 +33,33 @@ const ManageBooks = () => {
   const closePopup = () => {
     setIsPopupOpen(false);
     setSelectedBook(null);
+  };
+
+  const handleBorrow = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/libo/student/email/${userdata.email}`
+      );
+      const { stu_ID } = response.data;
+
+      const status = selectedBook.quantity > 0; // Determine status based on quantity
+
+      if (status) {
+        await axios.post("http://localhost:4000/libo/borrow", {
+          stu_ID,
+          isbn: selectedBook.isbn,
+          status,
+        });
+
+        alert("Book borrowed successfully!");
+      } else {
+        alert("Sorry, this book is currently not available.");
+      }
+
+      closePopup();
+    } catch (error) {
+      console.error("Error borrowing the book:", error);
+    }
   };
 
   return (
@@ -73,10 +83,10 @@ const ManageBooks = () => {
               </thead>
               <tbody>
                 {books.map((book) => (
-                  <tr key={book.id} onClick={() => handleRowClick(book)}>
+                  <tr key={book._id} onClick={() => handleRowClick(book)}>
                     <td>
                       <img
-                        src={book.image}
+                        src={`http://localhost:4000/images/${book.image}`}
                         alt={book.title}
                         className="book-image-ab"
                       />
@@ -84,7 +94,7 @@ const ManageBooks = () => {
                     <td>{book.title}</td>
                     <td>{book.author}</td>
                     <td>{book.publisher}</td>
-                    <td>{book.publicationDate}</td>
+                    <td>{book.publication_date}</td>
                     <td>{book.isbn}</td>
                     <td>
                       <span
@@ -104,13 +114,16 @@ const ManageBooks = () => {
           </div>
           {isPopupOpen && selectedBook && (
             <div className="popup-overlay" onClick={closePopup}>
-              <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="popup-content"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button className="close-button" onClick={closePopup}>
                   &times;
                 </button>
                 <div className="popup-body">
                   <img
-                    src={selectedBook.image}
+                    src={selectedBook.image || Cover}
                     alt={selectedBook.title}
                     className="popup-book-image"
                   />
@@ -123,13 +136,22 @@ const ManageBooks = () => {
                     <br />
                     <strong>ISBN:</strong> {selectedBook.isbn}
                     <br />
-                    <strong>Edition:</strong> {selectedBook.edition || "N/A"}
-                    <br />
-                    <strong>Publication date:</strong> {selectedBook.publicationDate}
+                    <strong>Publication date:</strong>{" "}
+                    {selectedBook.publication_date}
                     <br />
                   </div>
                   <div className="button">
-                    <button className={selectedBook.availability ? "borrow-button" : "borrow-button-dd"} disabled="{!selectedBook.availability}">{selectedBook.availability ? "Borrow" : "Not Available"}</button>
+                    <button
+                      className={
+                        selectedBook.availability
+                          ? "borrow-button"
+                          : "borrow-button-dd"
+                      }
+                      onClick={handleBorrow}
+                      disabled={!selectedBook.availability}
+                    >
+                      {selectedBook.availability ? "Borrow" : "Not Available"}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -141,4 +163,4 @@ const ManageBooks = () => {
   );
 };
 
-export default ManageBooks;
+export default AvailableBooks;

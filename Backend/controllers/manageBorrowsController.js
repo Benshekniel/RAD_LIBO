@@ -1,7 +1,7 @@
 import manageBorrows from '../models/ManageBorrows.js';
 import mongoose from 'mongoose';
 
-//to create a book
+//to create a borrow
 const createBorrow = async (req, res) => {
 
    const { stu_ID, isbn, status } = req.body;
@@ -14,7 +14,7 @@ const createBorrow = async (req, res) => {
    }
 };
 
-//To get all books
+//To get all borrows
 const getBorrows = async (req, res) => {
    try {
       const borrows = await manageBorrows.find({});
@@ -25,7 +25,7 @@ const getBorrows = async (req, res) => {
    }
 };
 
-//To get a single book
+//To get a single borrow
 const getBorrow = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {

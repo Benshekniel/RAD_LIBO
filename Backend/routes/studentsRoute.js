@@ -1,5 +1,5 @@
 import express from 'express';
-import { loginStudent, registerStudent, getStudents, getStudent, updateStudent, deleteStudent } from '../controllers/manageStudentsController.js';
+import { loginStudent, registerStudent, getStudentByEmail, getStudents, getStudent, updateStudent, deleteStudent } from '../controllers/manageStudentsController.js';
 import multer from 'multer';
 import path from 'path';
 
@@ -28,5 +28,6 @@ router.get('/', getStudents);
 router.get('/:id', getStudent);
 router.patch('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
+router.get('/email/:id', getStudentByEmail);
 
 export default router;

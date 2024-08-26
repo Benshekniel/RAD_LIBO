@@ -23,10 +23,10 @@ app.use('/image', express.static('image'));
 
 const router = express.Router();
 
-router.post('/add', protect, upload.single('image'), createBook)
+router.post('/add', upload.single('image'), createBook)
 router.get('/', getBooks);
 router.get('/:id', getBook);
-router.patch('/:id', protect, updateBook);
-router.delete('/:id', protect, deleteBook);
+router.patch('/:id', updateBook);
+router.delete('/:id', deleteBook);
 
 export default router;

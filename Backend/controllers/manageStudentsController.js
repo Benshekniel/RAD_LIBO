@@ -1,7 +1,9 @@
-import manageStudents from '../models/ManageStudents.js';
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import express from "express";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import manageStudents from '../models/ManageStudents.js'; // Assuming you have a model for students
+
 
 // Register Student
 const registerStudent = async (req, res) => {
@@ -43,6 +45,20 @@ const loginStudent = async (req, res) => {
       res.status(200).json({ result: student, token });
    } catch (error) {
       res.status(500).json({ message: "Something went wrong" });
+   }
+};
+
+// Get student by email
+const getStudentByEmail = async (email) => {
+   try {
+      const student = await manageStudents.findOne({ email });
+      if (student) {
+         return { stu_ID: student.stu_ID };
+      } else {
+         return { message: "Student not found" };
+      }
+   } catch (error) {
+      throw new Error(error.message);
    }
 };
 
@@ -98,4 +114,12 @@ const deleteStudent = async (req, res) => {
    }
 };
 
-export { registerStudent, loginStudent, getStudents, getStudent, updateStudent, deleteStudent };
+export {
+   registerStudent,
+   loginStudent,
+   getStudents,
+   getStudent,
+   getStudentByEmail,
+   updateStudent,
+   deleteStudent
+};

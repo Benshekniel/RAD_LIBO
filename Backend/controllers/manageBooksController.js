@@ -1,7 +1,7 @@
 import manageBooks from '../models/ManageBooks.js';
 import mongoose from 'mongoose';
 
-//to create a book
+// To create a book
 const createBook = async (req, res) => {
    let image = `${req.file.filename}`;
 
@@ -15,37 +15,43 @@ const createBook = async (req, res) => {
    }
 };
 
-//To get all books
+// To get all books with availability status
 const getBooks = async (req, res) => {
    try {
       const books = await manageBooks.find({});
-      res.status(200).json(books);
-   }
-   catch (e) {
-      res.status(400).json({ error: e.message });
-   }
-};
-
-//To get a single book
-const getBook = async (req, res) => {
-   const { id } = req.params;
-   if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Book not found' })
-   }
-   try {
-      const book = await manageBooks.findById(id);
-      res.status(200).json(book);
+      const booksWithAvailability = books.map((book) => ({
+         ...book._doc,
+         availability: book.quantity > 0,
+      }));
+      res.status(200).json(booksWithAvailability);
    } catch (e) {
       res.status(400).json({ error: e.message });
    }
 };
 
-//To update a Book details
+// To get a single book
+const getBook = async (req, res) => {
+   const { id } = req.params;
+   if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Book not found' });
+   }
+   try {
+      const book = await manageBooks.findById(id);
+      const bookWithAvailability = {
+         ...book._doc,
+         availability: book.quantity > 0,
+      };
+      res.status(200).json(bookWithAvailability);
+   } catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
 
+// To update a book's details
 const updateBook = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Book not found' })
+      return res.status(404).json({ error: 'Book not found' });
    }
    try {
       const book = await manageBooks.findByIdAndUpdate({ _id: id }, { ...req.body });
@@ -55,11 +61,11 @@ const updateBook = async (req, res) => {
    }
 };
 
-//Delete a Book
+// Delete a book
 const deleteBook = async (req, res) => {
    const { id } = req.params;
    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Book not found' })
+      return res.status(404).json({ error: 'Book not found' });
    }
    try {
       const book = await manageBooks.findByIdAndDelete(id);
@@ -69,7 +75,4 @@ const deleteBook = async (req, res) => {
    }
 };
 
-
 export { createBook, getBooks, getBook, updateBook, deleteBook };
-
-
