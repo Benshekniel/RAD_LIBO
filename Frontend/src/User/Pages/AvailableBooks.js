@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "./AvilableBooks.css";
+import "./AvailableBooks.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/SideBar";
 import { UserContext } from "../../context/UserContext";
-import Cover from "../Assets/Cover.jpg";
+
 
 const AvailableBooks = () => {
   const [books, setBooks] = useState([]);
@@ -13,6 +13,11 @@ const AvailableBooks = () => {
   const { userdata } = useContext(UserContext);
 
   useEffect(() => {
+    if (!userdata.email) {
+      console.error("User data is not available");
+      return;
+    }
+
     const fetchBooks = async () => {
       try {
         const response = await axios.get("http://localhost:4000/libo/book");
@@ -23,7 +28,16 @@ const AvailableBooks = () => {
     };
 
     fetchBooks();
-  }, []);
+  }, [userdata]);
+
+  const handleSearch = async (query) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/libo/book?title=${query}`);
+      setBooks(response.data); // Update the books state with the search results
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  };
 
   const handleRowClick = (book) => {
     setSelectedBook(book);
@@ -36,6 +50,11 @@ const AvailableBooks = () => {
   };
 
   const handleBorrow = async () => {
+    if (!userdata || !userdata.email) {
+      console.error("User data is not available");
+      return;
+    }
+
     try {
       const response = await axios.get(
         `http://localhost:4000/libo/student/email/${userdata.email}`
@@ -45,7 +64,7 @@ const AvailableBooks = () => {
       const status = selectedBook.quantity > 0; // Determine status based on quantity
 
       if (status) {
-        await axios.post("http://localhost:4000/libo/borrow", {
+        await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,
           status,
@@ -123,7 +142,7 @@ const AvailableBooks = () => {
                 </button>
                 <div className="popup-body">
                   <img
-                    src={selectedBook.image || Cover}
+                    src={`http://localhost:4000/images/${selectedBook.image}`}
                     alt={selectedBook.title}
                     className="popup-book-image"
                   />

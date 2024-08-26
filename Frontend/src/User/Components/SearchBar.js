@@ -1,16 +1,34 @@
 // SearchBar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import './SearchBar.css'; // Import the CSS file for styling
+import './SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
+  const [query, setQuery] = useState('');
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(query); // Pass the query to the parent component
+  };
+
   return (
     <div className="search-bar">
-      <input type="text" placeholder="Search" />
-      <button type="submit">
-        <FontAwesomeIcon icon={faSearch} className="fa-icon" />
-      </button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search"
+          value={query}
+          onChange={handleInputChange}
+        />
+        <button type="submit">
+          <FontAwesomeIcon icon={faSearch} className="fa-icon" />
+        </button>
+      </form>
     </div>
   );
 };

@@ -5,9 +5,8 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
    const [userdata, setUserdata] = useState({
-      id: '',
       email: '',
-      role: 'student',
+      role: '',
    });
    const navigate = useNavigate();
 
@@ -32,11 +31,16 @@ export const UserProvider = ({ children }) => {
       }, expirationTime);
    };
 
-   const handleLogin = (token, expirationTime, role) => {
+   const handleLogin = (token, expirationTime, role, email) => {
       localStorage.setItem('token', token);
       localStorage.setItem('tokenExpiry', expirationTime);
-      localStorage.setItem('role', role); // Add role to localStorage
+      localStorage.setItem('role', role);
+      localStorage.setItem('email', email);
 
+      setUserdata({
+         email: email,
+         role: role,
+      })
       const remainingTime = expirationTime - new Date().getTime();
       setAutoLogout(remainingTime);
    };

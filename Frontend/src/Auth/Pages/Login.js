@@ -26,12 +26,13 @@ function Login() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password, role }),
+
       });
       const data = await response.json();
 
       if (response.ok) {
         const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms
-        handleLogin(data.token, expirationTime, role);  // Pass role here
+        handleLogin(data.token, expirationTime, role, email);  // Pass role here
         navigate(role === 'student' ? '/manage-avilablebooks' : '/manage-books');
       } else {
         alert(data.message);

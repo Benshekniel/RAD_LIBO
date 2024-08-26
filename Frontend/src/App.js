@@ -1,29 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import ManageStudents from './Librarian/Pages/ManageStudents';
 import ManageBooks from './Librarian/Pages/ManageBooks';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
 import ManageRequests from './Librarian/Pages/ManageRequests';
-import AvilableBooks from './User/Pages/AvilableBooks';
+import AvilableBooks from './User/Pages/AvailableBooks';
 import { UserProvider } from './context/UserContext';
 import ReturnBooks from './User/Pages/ReturnBooks';
 import RequestedBooks from './User/Pages/RequestedBooks';
 import Login from './Auth/Pages/Login';
+import { UserContext } from './context/UserContext';
 import SignUp from './Auth/Pages/SignUp';
 
 // PrivateRoute component to protect routes and check user roles
 const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
-  const token = localStorage.getItem('token');
-  const userRole = localStorage.getItem('role'); // Get the user's role from localStorage
+  const { userdata } = useContext(UserContext);
 
-  if (!token) {
+  if (!userdata || !userdata.role) {
     return <Navigate to="/" replace />;
   }
 
-  if (!allowedRoles.includes(userRole)) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    return <Navigate to="/" replace />; // Redirect to login if role doesn't match
+  if (!allowedRoles.includes(userdata.role)) {
+    return <Navigate to="/" replace />;
   }
 
   return <Component {...rest} />;
@@ -74,6 +72,7 @@ const App = () => {
               </Routes>
             </div>
           </div>
+
         </UserProvider>
       </Router>
     </>

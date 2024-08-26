@@ -28,6 +28,6 @@ router.get('/', getStudents);
 router.get('/:id', getStudent);
 router.patch('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
-router.get('/email/:id', getStudentByEmail);
+router.get('/email/:email', getStudentByEmail);
 
 export default router;

@@ -49,18 +49,20 @@ const loginStudent = async (req, res) => {
 };
 
 // Get student by email
-const getStudentByEmail = async (email) => {
+const getStudentByEmail = async (req, res) => {
+   const { email } = req.params;
    try {
       const student = await manageStudents.findOne({ email });
       if (student) {
-         return { stu_ID: student.stu_ID };
+         return res.status(200).json({ stu_ID: student.stu_ID });
       } else {
-         return { message: "Student not found" };
+         return res.status(404).json({ message: "Student not found" });
       }
    } catch (error) {
-      throw new Error(error.message);
+      return res.status(500).json({ message: "Something went wrong" });
    }
 };
+
 
 // To get all students
 const getStudents = async (req, res) => {

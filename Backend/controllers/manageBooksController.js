@@ -75,4 +75,15 @@ const deleteBook = async (req, res) => {
    }
 };
 
-export { createBook, getBooks, getBook, updateBook, deleteBook };
+// Search books by title
+const searchBooksByTitle = async (req, res) => {
+   const { title } = req.query;
+   try {
+      const books = await manageBooks.find({ title: { $regex: title, $options: 'i' } });
+      res.status(200).json(books);
+   } catch (err) {
+      res.status(500).json({ error: 'Server Error' });
+   }
+};
+
+export { createBook, getBooks, getBook, updateBook, deleteBook, searchBooksByTitle };

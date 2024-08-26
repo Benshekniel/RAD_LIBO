@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBook, getBooks, getBook, updateBook, deleteBook } from '../controllers/manageBooksController.js';
+import { createBook, getBooks, getBook, updateBook, deleteBook, searchBooksByTitle } from '../controllers/manageBooksController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import multer from 'multer';
 import path from 'path';
@@ -28,5 +28,6 @@ router.get('/', getBooks);
 router.get('/:id', getBook);
 router.patch('/:id', updateBook);
 router.delete('/:id', deleteBook);
+router.get('/search', searchBooksByTitle);
 
 export default router;
