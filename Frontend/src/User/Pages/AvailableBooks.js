@@ -85,7 +85,7 @@ const AvailableBooks = () => {
     <div className="books-container-ab">
       <Sidebar />
       <div>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="manage-abooks-container">
           <div className="table-container-ab">
             <table className="books-table-ab">
