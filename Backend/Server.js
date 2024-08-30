@@ -8,6 +8,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import booksRoutes from "./routes/booksRoute.js";
+import pastpaperRoutes from "./routes/pastpapersRoute.js";
 import studentsRoutes from "./routes/studentsRoute.js";
 import borrowsRoutes from "./routes/borrowsRoute.js";
 import authRoutes from './routes/authRoute.js';
@@ -48,3 +49,4 @@ app.use('/libo/book', booksRoutes);
 app.use('/libo/borrow', borrowsRoutes);
 app.use('/libo/librarian', librarianRoutes);
 app.use('/libo/auth', authRoutes);
+app.use('/libo/pastpaper', pastpaperRoutes);

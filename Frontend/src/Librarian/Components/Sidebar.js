@@ -47,6 +47,15 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
+              to="/manage-pastpapers"
+              className={({ isActive }) => (isActive ? "active-NavLink" : "")}
+              onClick={() => setActive("Manage Pastpapers")}
+            >
+              <FontAwesomeIcon className="space" icon={faBook} /> Manage Pastpaper
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/manage-students"
               className={({ isActive }) => (isActive ? "active-NavLink" : "")}
               onClick={() => setActive("Manage Students")}

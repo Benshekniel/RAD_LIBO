@@ -1,0 +1,140 @@
+/* Modal Styles */
+.add-pastpaper-modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000;
+}
+
+.add-pastpaper-form {
+   background-color: #f6f6e9;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+   width: 400px;
+   max-width: 90%;
+   position: relative;
+}
+
+.add-pastpaper-form h2 {
+   margin-bottom: 20px;
+   text-align: center;
+}
+
+.add-pastpaper-form input {
+   width: calc(100% - 20px);
+   padding: 10px;
+   margin-bottom: 10px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+}
+
+.add-pastpaper-form select {
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+}
+
+.add-new-pastpaper-button {
+   margin-left: 60px;
+   width: 70%;
+   padding: 10px;
+   background-color: #ffdd44;
+   color: #000;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.close-button {
+   background: none;
+   border: none;
+   font-size: 24px;
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   cursor: pointer;
+}
+
+/* Table and Container Styles */
+.pastpapers-container {
+   display: flex;
+}
+
+.manage-pastpapers-container-mb {
+   flex-grow: 1;
+   padding: 20px;
+   margin: 20px;
+   position: relative;
+}
+
+.add-pastpaper-button {
+   position: absolute;
+   top: 0;
+   right: 0;
+   background-color: #ffdd44;
+   color: #000;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.table-container-mb {
+   max-height: 500px;
+   overflow-y: auto;
+   margin-top: 100px;
+   background-color: #f6f6e9;
+   padding: 10px;
+   border-radius: 5px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pastpapers-table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.pastpapers-table th,
+.pastpapers-table td {
+   text-align: left;
+   padding: 10px;
+   border-bottom: 1px solid #ddd;
+}
+
+.pastpapers-table th {
+   background-color: #f6f6e9;
+}
+
+.pastpapers-table tr:hover {
+   background-color: #f1f1f1;
+}
+
+.pastpaper-image {
+   width: 50px;
+   height: 75px;
+   object-fit: cover;
+}
+
+.action-button {
+   border: none;
+   background: none;
+   cursor: pointer;
+   margin-left: 5px;
+}
+
+.edit-button {
+   color: #0443a5;
+}
+
+.delete-button {
+   color: #d9534f;
+}

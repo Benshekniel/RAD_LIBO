@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import ManageStudents from './Librarian/Pages/ManageStudents';
 import ManageBooks from './Librarian/Pages/ManageBooks';
+import ManagePastpapers from './Librarian/Pages/ManagePastpapers';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
 import ManageRequests from './Librarian/Pages/ManageRequests';
 import AvilableBooks from './User/Pages/AvailableBooks';
@@ -39,6 +40,10 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
 
                 {/* Protected routes with role-based access */}
+                <Route
+                  path="/manage-pastpapers"
+                  element={<PrivateRoute element={ManagePastpapers} allowedRoles={['librarian']} />}
+                />
                 <Route
                   path="/manage-books"
                   element={<PrivateRoute element={ManageBooks} allowedRoles={['librarian']} />}

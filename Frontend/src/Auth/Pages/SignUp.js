@@ -12,8 +12,10 @@ const SignUp = () => {
     password: "",
     stu_ID: "",
     year: "",
-    image: null, // For storing the image file
+    image: null,
   });
+
+  const [error, setError] = useState(""); // State to hold error messages
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,18 +29,28 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Clear any previous errors before validation
+    setError("");
+
     const formData = new FormData();
     formData.append("name", form.name);
     formData.append("email", form.email);
     formData.append("password", form.password);
     formData.append("stu_ID", form.stu_ID);
     formData.append("year", form.year);
-    formData.append("image", form.image); // Append image file
+    formData.append("image", form.image);
 
     try {
-      await axios.post("http://localhost:4000/libo/student/register", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      // Make the POST request to the backend
+      const response = await axios.post(
+        "http://localhost:4000/libo/student/register",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      // If successful, log a success message
       console.log("Student added successfully!");
 
       // Reset form fields after successful sign-up
@@ -50,8 +62,25 @@ const SignUp = () => {
         year: "",
         image: null,
       });
+
+      // Clear any previous errors
+      setError("");
     } catch (err) {
-      console.error("Error adding student:", err);
+      // Handle validation errors from the backend
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else if (err.response && err.response.data && err.response.data.errors) {
+        // If the error response contains specific field errors, display them
+        const errorMessages = Object.values(err.response.data.errors)
+          .map((error) => error.message)
+          .join(" ");
+        setError(errorMessages);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+
+      // Prevent sign-up if there are errors
+      return;
     }
   };
 
@@ -68,10 +97,13 @@ const SignUp = () => {
           <div className="profile-icon-sp">
             <img src={user} alt="User Icon" />
           </div>
+
+          {error && <div className="error-message">{error}</div>} {/* Display error message */}
+
           <input
             type="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={form.email}
             onChange={handleChange}
             required
@@ -79,7 +111,7 @@ const SignUp = () => {
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={form.password}
             onChange={handleChange}
             required
@@ -107,7 +139,7 @@ const SignUp = () => {
             <option value="3rd">3rd</option>
             <option value="4th">4th</option>
           </select>
-          <input type="file" name="image" onChange={handleFileChange} required /> {/* Image upload input */}
+          <input type="file" name="image" onChange={handleFileChange} required />
           <button type="submit" className="signup-button">Sign Up</button>
           <div className="login-link">
             <NavLink to="/">Login In</NavLink>

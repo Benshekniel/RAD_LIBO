@@ -19,12 +19,13 @@
 
 .logo-image {
   width: 100px;
-   height: 100px;
-   margin-right: 10px;}
+  height: 100px;
+  margin-right: 10px;
+}
 
 .logo-text {
   font-size: 60px;
-   color: #0443A5;
+  color: #0443A5;
 }
 
 .right-panel {
@@ -68,6 +69,7 @@
   margin-bottom: 20px;
   background-color: #f6f6e9;
 }
+
 .signup-button {
   width: 40%;
   padding: 10px;
@@ -92,4 +94,15 @@
 
 .login-link a:hover {
   text-decoration: none;
+}
+
+.error-message {
+  color: #ff3333;
+  background-color: #ffeeee;
+  border: 1px solid #ff3333;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
 }
