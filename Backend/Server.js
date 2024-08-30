@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import booksRoutes from "./routes/booksRoute.js";
 import pastpaperRoutes from "./routes/pastpapersRoute.js";
 import studentsRoutes from "./routes/studentsRoute.js";

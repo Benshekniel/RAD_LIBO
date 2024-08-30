@@ -26,11 +26,34 @@ const SignUp = () => {
     setForm({ ...form, image: e.target.files[0] });
   };
 
+  // Email validation regex pattern
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Password validation function
+  const validatePassword = (password) => {
+    // Example: Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit.
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Clear any previous errors before validation
-    setError("");
+    // Client-side validation
+    if (!validateEmail(form.email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!validatePassword(form.password)) {
+      setError(
+        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit."
+      );
+      return;
+    }
 
     const formData = new FormData();
     formData.append("name", form.name);
@@ -41,7 +64,6 @@ const SignUp = () => {
     formData.append("image", form.image);
 
     try {
-      // Make the POST request to the backend
       const response = await axios.post(
         "http://localhost:4000/libo/student/register",
         formData,
@@ -50,8 +72,7 @@ const SignUp = () => {
         }
       );
 
-      // If successful, log a success message
-      console.log("Student added successfully!");
+      alert("Student added successfully!");
 
       // Reset form fields after successful sign-up
       setForm({
@@ -66,21 +87,11 @@ const SignUp = () => {
       // Clear any previous errors
       setError("");
     } catch (err) {
-      // Handle validation errors from the backend
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);
-      } else if (err.response && err.response.data && err.response.data.errors) {
-        // If the error response contains specific field errors, display them
-        const errorMessages = Object.values(err.response.data.errors)
-          .map((error) => error.message)
-          .join(" ");
-        setError(errorMessages);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
-
-      // Prevent sign-up if there are errors
-      return;
     }
   };
 
@@ -101,7 +112,7 @@ const SignUp = () => {
           {error && <div className="error-message">{error}</div>} {/* Display error message */}
 
           <input
-            type="email"
+            type="input"
             name="email"
             placeholder="Email"
             value={form.email}
