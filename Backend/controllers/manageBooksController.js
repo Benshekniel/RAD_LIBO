@@ -77,7 +77,7 @@ const deleteBook = async (req, res) => {
 
 // Search books by title
 const searchBooksByTitle = async (req, res) => {
-   const { title } = req.query;
+   const { title } = req.params;
    try {
       const books = await manageBooks.find({ title: { $regex: title, $options: 'i' } });
       res.status(200).json(books);

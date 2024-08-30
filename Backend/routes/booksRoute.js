@@ -28,6 +28,6 @@ router.get('/', getBooks);
 router.get('/:id', getBook);
 router.patch('/:id', updateBook);
 router.delete('/:id', deleteBook);
-router.get('/search', searchBooksByTitle);
+router.get('/title/:title', searchBooksByTitle);
 
 export default router;

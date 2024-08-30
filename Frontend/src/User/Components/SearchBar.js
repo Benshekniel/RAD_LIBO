@@ -1,4 +1,3 @@
-// SearchBar.js
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -8,12 +7,14 @@ const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    onSearch(newQuery); // Trigger search on input change
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(query); // Pass the query to the parent component
+    onSearch(query); // Pass the query to the parent component on form submission
   };
 
   return (

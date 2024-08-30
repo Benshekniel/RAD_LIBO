@@ -5,9 +5,9 @@ import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/SideBar";
 import { UserContext } from "../../context/UserContext";
 
-
 const AvailableBooks = () => {
   const [books, setBooks] = useState([]);
+  const [searchItems, setSearchItems] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { userdata } = useContext(UserContext);
@@ -31,9 +31,15 @@ const AvailableBooks = () => {
   }, [userdata]);
 
   const handleSearch = async (query) => {
+    if (query.trim() === "") {
+      setSearchItems([]); // Reset to empty array when search input is cleared
+      return;
+    }
+
     try {
-      const response = await axios.get(`http://localhost:4000/libo/book?title=${query}`);
-      setBooks(response.data); // Update the books state with the search results
+      const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`);
+      setSearchItems(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
@@ -61,13 +67,13 @@ const AvailableBooks = () => {
       );
       const { stu_ID } = response.data;
 
-      const status = selectedBook.quantity > 0; // Determine status based on quantity
+      const status = selectedBook.quantity > 0;
 
       if (status) {
         await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,
-          status,
+          status: false,
         });
 
         alert("Book borrowed successfully!");
@@ -80,6 +86,8 @@ const AvailableBooks = () => {
       console.error("Error borrowing the book:", error);
     }
   };
+
+  const displayBooks = searchItems.length > 0 ? searchItems : books;
 
   return (
     <div className="books-container-ab">
@@ -101,7 +109,7 @@ const AvailableBooks = () => {
                 </tr>
               </thead>
               <tbody>
-                {books.map((book) => (
+                {displayBooks.map((book) => (
                   <tr key={book._id} onClick={() => handleRowClick(book)}>
                     <td>
                       <img
