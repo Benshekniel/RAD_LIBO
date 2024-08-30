@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import "./Login.css";
-import Logo from '../Assets/Logo.png';
-import User from '../Assets/user.png';
+import logo from '../Assets/Logo.png';
+import user from '../Assets/user.png';
 
 function Login() {
   const { handleLogin } = useContext(UserContext);
@@ -26,13 +26,12 @@ function Login() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password, role }),
-
       });
       const data = await response.json();
 
       if (response.ok) {
         const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms
-        handleLogin(data.token, expirationTime, role, email);  // Pass role here
+        handleLogin(data.token, expirationTime, role, email);
         navigate(role === 'student' ? '/manage-avilablebooks' : '/manage-books');
       } else {
         alert(data.message);
@@ -44,55 +43,60 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-left">
-        <div className="form-container-lg">
-          <div className="profile-icon">
-            <img src={User} alt="Libo Logo" />
+      <div className="right-panel">
+
+        <form className="login-form" onSubmit={handleSubmit}>
+
+          <div className="profile-icon-sp">
+            <img src={user} alt="User Icon" />
           </div>
-          <h2>{role}</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className="form-footer">
-              <NavLink to="/signup" className="signup-link">
-                Sign Up
-              </NavLink>
-              <button type="submit" className="login-button">Login</button>
-            </div>
-          </form>
-        </div>
+
+          <h2 style={{ color: "white", }}>{role}</h2>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit" className="login-button">Login</button>
+          <div className="signup-link">
+            <NavLink to="/signup">Sign Up</NavLink>
+          </div>
+        </form>
       </div>
-      <div className="login-right">
+
+      <div className="left-panel">
         <div className="role-buttons">
           <button
+            type="button"
             className={`role-button ${role === 'student' ? 'active' : ''}`}
             onClick={() => handleRoleClick('student')}
           >
             User
           </button>
           <button
+            type="button"
             className={`role-button ${role === 'librarian' ? 'active' : ''}`}
             onClick={() => handleRoleClick('librarian')}
           >
             Librarian
           </button>
         </div>
-        <img src={Logo} alt="Libo" className="logo" />
-        <h1>Libo</h1>
+        <div className="logo-container">
+          <img src={logo} alt="Libo Logo" className="logo-image" />
+          <h1 className="logo-text">Libo</h1>
+        </div>
       </div>
     </div>
   );

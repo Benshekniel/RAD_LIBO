@@ -4,10 +4,16 @@ import { useNavigate } from 'react-router-dom';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-   const [userdata, setUserdata] = useState({
-      email: '',
-      role: '',
+   const [userdata, setUserdata] = useState(() => {
+      const token = localStorage.getItem('token');
+      const role = localStorage.getItem('role');
+      const email = localStorage.getItem('email');
+      if (token && role && email) {
+         return { email, role };
+      }
+      return null;
    });
+
    const navigate = useNavigate();
 
    useEffect(() => {
@@ -40,7 +46,7 @@ export const UserProvider = ({ children }) => {
       setUserdata({
          email: email,
          role: role,
-      })
+      });
       const remainingTime = expirationTime - new Date().getTime();
       setAutoLogout(remainingTime);
    };
@@ -48,7 +54,8 @@ export const UserProvider = ({ children }) => {
    const handleLogout = () => {
       localStorage.removeItem('token');
       localStorage.removeItem('tokenExpiry');
-      localStorage.removeItem('role'); // Remove role from localStorage
+      localStorage.removeItem('role');
+      localStorage.removeItem('email');
       setUserdata(null);
       navigate('/');
    };
