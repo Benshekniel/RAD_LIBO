@@ -2,6 +2,33 @@ import manageBorrows from '../models/ManageBorrows.js';
 import manageBooks from '../models/ManageBooks.js';
 import mongoose from 'mongoose';
 
+// Function to get borrow requests for a specific student ID
+const getBorrowRequestsByStudent = async (req, res) => {
+   const { stu_ID } = req.params;
+   try {
+      const borrowRequests = await manageBorrows.find({ stu_ID });
+      const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
+         const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
+         return {
+            _id: request._id,
+            title: bookDetails.title,
+            author: bookDetails.author,
+            isbn: request.isbn,
+            status: request.status,  // Include the status in the response
+            stu_id: request.stu_ID,
+            quantity: bookDetails.quantity,
+            image: bookDetails.image,
+            publisher: bookDetails.publisher,
+            publicationDate: bookDetails.publication_date,
+         };
+      }));
+
+      res.status(200).json(requestsWithBookDetails);
+   }
+   catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
 
 // Function to get borrow requests where status is false
 const getBorrowRequests = async (req, res) => {
@@ -129,4 +156,4 @@ const checkBorrowRequest = async (req, res) => {
 
 
 
-export { checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };

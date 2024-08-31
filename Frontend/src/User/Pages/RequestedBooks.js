@@ -1,47 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import axios from 'axios';
 import "./RequestedBooks.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/SideBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import Cover from "../Assets/Cover.jpg";
 
-const ManageBooks = () => {
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      status: "accepted",
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      status: "pending",
-      image: Cover,
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      status: "Rejected",
-      image: Cover,
-    },
-  ]);
+const RequestedBooks = () => {
+  const { userdata } = useContext(UserContext);
+  const [books, setBooks] = useState([]);
+  const [stuID, setStuID] = useState(null);
 
-  const handleDelete = (bookId) => {
-    setBooks(books.filter((book) => book.id !== bookId));
+  useEffect(() => {
+    const fetchStudentID = async () => {
+      if (userdata?.email) {
+        try {
+          const response = await axios.get(`http://localhost:4000/libo/student/email/${userdata.email}`);
+          setStuID(response.data.stu_ID);
+        } catch (error) {
+          console.error('Error fetching student ID:', error);
+        }
+      }
+    };
+
+    fetchStudentID();
+  }, [userdata]);
+
+  useEffect(() => {
+    const fetchBorrowedBooks = async () => {
+      if (stuID) {
+        try {
+          const response = await axios.get(`http://localhost:4000/libo/borrow/requests/${stuID}`);
+          setBooks(response.data);
+        } catch (error) {
+          console.error('Error fetching borrowed books:', error);
+        }
+      }
+    };
+
+    fetchBorrowedBooks();
+  }, [stuID]);
+
+  const handleDelete = async (bookId) => {
+    try {
+      // Send a DELETE request to the server to delete the borrow request
+      await axios.delete(`http://localhost:4000/libo/borrow/${bookId}`);
+
+      // Update the state to remove the deleted book from the list
+      setBooks(books.filter((book) => book._id !== bookId));
+    } catch (error) {
+      console.error('Error deleting the borrow request:', error);
+    }
   };
 
   return (
@@ -60,16 +70,16 @@ const ManageBooks = () => {
                   <th>Publisher</th>
                   <th>Publication date</th>
                   <th>ISBN</th>
-                  <th width="15px">Status</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {books.map((book) => (
-                  <tr key={book.id}>
+                  <tr key={book._id}>
                     <td>
                       <img
-                        src={book.image}
+                        src={`http://localhost:4000/image/${book.image}`}
                         alt={book.title}
                         className="book-image-rb"
                       />
@@ -101,7 +111,7 @@ const ManageBooks = () => {
                           }`}
                         onClick={
                           book.status !== "accepted"
-                            ? () => handleDelete(book.id)
+                            ? () => handleDelete(book._id)
                             : null
                         }
                       />
@@ -117,4 +127,4 @@ const ManageBooks = () => {
   );
 };
 
-export default ManageBooks;
+export default RequestedBooks;

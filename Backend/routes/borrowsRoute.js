@@ -1,5 +1,5 @@
 import express from 'express';
-import { checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow } from '../controllers/manageBorrowsController.js';
+import { getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow } from '../controllers/manageBorrowsController.js';
 
 const router = express.Router();
 
@@ -10,5 +10,6 @@ router.patch('/:id', updateBorrow);
 router.delete('/:id', deleteBorrow);
 router.get('/requests/pending', getBorrowRequests);
 router.patch('/requests/:id', updateBorrowStatus);
+router.get('/requests/:stu_ID', getBorrowRequestsByStudent);
 router.get('/check/:stu_ID/:isbn', checkBorrowRequest);
 export default router;
