@@ -28,7 +28,16 @@ const ManageBooks = () => {
       status: "Pending",
       image: Cover,
     },
-
+    {
+      id: 3,
+      title: "Basic Linear Algebra",
+      author: "B.S. Blyth",
+      publisher: "Springer-Verlag",
+      publicationDate: "September 2018",
+      isbn: "978-3-319-77535-9",
+      status: "Rejected",
+      image: Cover,
+    },
   ]);
 
   const handleDelete = (bookId) => {
@@ -75,7 +84,9 @@ const ManageBooks = () => {
                         className={
                           book.status === "Accepted"
                             ? "status-accepted"
-                            : "status-pending"
+                            : book.status === "Pending"
+                              ? "status-pending"
+                              : "status-rejected"
                         }
                       >
                         {book.status}
@@ -84,12 +95,12 @@ const ManageBooks = () => {
                     <td className="action-column">
                       <FontAwesomeIcon
                         icon={faTrashAlt}
-                        className={`delete-icon-rb ${book.status === "Pending"
-                            ? "icon-active"
-                            : "icon-disabled"
+                        className={`delete-icon-rb ${book.status === "Accepted"
+                            ? "icon-disabled"
+                            : "icon-active"
                           }`}
                         onClick={
-                          book.status === "Pending"
+                          book.status !== "Accepted"
                             ? () => handleDelete(book.id)
                             : null
                         }
