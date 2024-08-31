@@ -6,12 +6,15 @@ import Sidebar from "../Components/Sidebar";
 
 const ManageRequests = () => {
   const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchRequests = async () => {
       try {
         const response = await axios.get("http://localhost:4000/libo/borrow/requests/pending");
         setRequests(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching requests:", error);
       }
@@ -36,45 +39,49 @@ const ManageRequests = () => {
         <SearchBar />
         <div className="manage-requests-container">
           <div className="table-container-mr">
-            <table className="requests-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>ISBN</th>
-                  <th>Stu_ID</th>
-                  <th>Quantity</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {requests.map((request, index) => (
-                  <tr key={index}>
-                    <td>
-                      <img
-                        src={`http://localhost:4000/image/${request.image}`}
-                        alt={request.title}
-                        className="request-image"
-                      />
-                    </td>
-                    <td>{request.title}</td>
-                    <td>{request.author}</td>
-                    <td>{request.isbn}</td>
-                    <td>{request.stu_id}</td>
-                    <td>{request.quantity}</td>
-                    <td>
-                      <button
-                        className="action-button accept-button"
-                        onClick={() => handleAccept(request._id)}
-                      >
-                        Accept
-                      </button>
-                    </td>
+            {loading ? (
+              <p>Loading requests...</p>
+            ) : (
+              <table className="requests-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Stu_ID</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {requests.map((request, index) => (
+                    <tr key={index}>
+                      <td>
+                        <img
+                          src={`http://localhost:4000/image/${request.image}`}
+                          alt={request.title}
+                          className="request-image"
+                        />
+                      </td>
+                      <td>{request.title}</td>
+                      <td>{request.author}</td>
+                      <td>{request.isbn}</td>
+                      <td>{request.stu_id}</td>
+                      <td>{request.quantity}</td>
+                      <td>
+                        <button
+                          className="action-button accept-button"
+                          onClick={() => handleAccept(request._id)}
+                        >
+                          Accept
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
