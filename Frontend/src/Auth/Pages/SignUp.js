@@ -72,7 +72,7 @@ const SignUp = () => {
         }
       );
 
-      alert("Student added successfully!");
+      alert("Registration successfully!");
 
       // Reset form fields after successful sign-up
       setForm({

@@ -109,7 +109,20 @@ const deleteBorrow = async (req, res) => {
    }
 };
 
+// Function to check if the borrow request already exists
+const checkBorrowRequest = async (req, res) => {
+   const { stu_ID, isbn } = req.params;
 
-export { updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+   try {
+      const existingBorrow = await manageBorrows.findOne({ stu_ID, isbn, status: false });
+      res.status(200).json({ exists: !!existingBorrow });
+   } catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
+
+
+
+export { checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
 
 
