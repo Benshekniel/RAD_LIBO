@@ -7,6 +7,7 @@ import {
   faClipboardList,
   faBookOpen,
   faSignOutAlt,
+  faBarcode
 } from "@fortawesome/free-solid-svg-icons";
 import "./Sidebar.css";
 import Logo from "../Assets/Logo.png";
@@ -51,7 +52,7 @@ const Sidebar = () => {
               className={({ isActive }) => (isActive ? "active-NavLink" : "")}
               onClick={() => setActive("Manage Pastpapers")}
             >
-              <FontAwesomeIcon className="space" icon={faBook} /> Manage Pastpaper
+              <FontAwesomeIcon className="space" icon={faBarcode} /> Manage Pastpaper
             </NavLink>
           </li>
           <li>
