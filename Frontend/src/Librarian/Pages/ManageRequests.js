@@ -20,6 +20,15 @@ const ManageRequests = () => {
     fetchRequests();
   }, []);
 
+  const handleAccept = async (id) => {
+    try {
+      await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`);
+      setRequests(requests.filter(request => request._id !== id));
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
   return (
     <div className="requests-container">
       <Sidebar />
@@ -55,7 +64,10 @@ const ManageRequests = () => {
                     <td>{request.stu_id}</td>
                     <td>{request.quantity}</td>
                     <td>
-                      <button className="action-button accept-button">
+                      <button
+                        className="action-button accept-button"
+                        onClick={() => handleAccept(request._id)}
+                      >
                         Accept
                       </button>
                     </td>

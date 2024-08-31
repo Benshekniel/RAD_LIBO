@@ -10,6 +10,7 @@ const getBorrowRequests = async (req, res) => {
       const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
          const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
          return {
+            _id: request._id,
             title: bookDetails.title,
             author: bookDetails.author,
             isbn: request.isbn,
@@ -22,6 +23,21 @@ const getBorrowRequests = async (req, res) => {
       res.status(200).json(requestsWithBookDetails);
    }
    catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
+
+// Function to update the borrow status
+const updateBorrowStatus = async (req, res) => {
+   const { id } = req.params;
+
+   try {
+      const updatedBorrow = await manageBorrows.findByIdAndUpdate(id, { status: true }, { new: true });
+      if (!updatedBorrow) {
+         return res.status(404).json({ error: "Borrow request not found" });
+      }
+      res.status(200).json(updatedBorrow);
+   } catch (e) {
       res.status(400).json({ error: e.message });
    }
 };
@@ -94,6 +110,6 @@ const deleteBorrow = async (req, res) => {
 };
 
 
-export { getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
 
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow } from '../controllers/manageBorrowsController.js';
+import { updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow } from '../controllers/manageBorrowsController.js';
 
 const router = express.Router();
 
@@ -9,5 +9,5 @@ router.get('/:id', getBorrow);
 router.patch('/:id', updateBorrow);
 router.delete('/:id', deleteBorrow);
 router.get('/requests/pending', getBorrowRequests);
-
+router.patch('/requests/:id', updateBorrowStatus);
 export default router;
