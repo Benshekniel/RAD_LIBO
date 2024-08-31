@@ -15,7 +15,7 @@ const ManageBooks = () => {
       publisher: "Springer-Verlag",
       publicationDate: "September 2018",
       isbn: "978-3-319-77535-9",
-      status: "Accepted",
+      status: "accepted",
       image: Cover,
     },
     {
@@ -25,7 +25,7 @@ const ManageBooks = () => {
       publisher: "Springer-Verlag",
       publicationDate: "September 2018",
       isbn: "978-3-319-77535-9",
-      status: "Pending",
+      status: "pending",
       image: Cover,
     },
     {
@@ -82,9 +82,9 @@ const ManageBooks = () => {
                     <td>
                       <span
                         className={
-                          book.status === "Accepted"
+                          book.status === "accepted"
                             ? "status-accepted"
-                            : book.status === "Pending"
+                            : book.status === "pending"
                               ? "status-pending"
                               : "status-rejected"
                         }
@@ -95,12 +95,12 @@ const ManageBooks = () => {
                     <td className="action-column">
                       <FontAwesomeIcon
                         icon={faTrashAlt}
-                        className={`delete-icon-rb ${book.status === "Accepted"
-                            ? "icon-disabled"
-                            : "icon-active"
+                        className={`delete-icon-rb ${book.status === "accepted"
+                          ? "icon-disabled"
+                          : "icon-active"
                           }`}
                         onClick={
-                          book.status !== "Accepted"
+                          book.status !== "accepted"
                             ? () => handleDelete(book.id)
                             : null
                         }

@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 // Function to get borrow requests where status is false
 const getBorrowRequests = async (req, res) => {
    try {
-      const borrowRequests = await manageBorrows.find({ status: false });
+      const borrowRequests = await manageBorrows.find({ status: "pending" });
       const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
          const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
          return {
@@ -30,9 +30,14 @@ const getBorrowRequests = async (req, res) => {
 // Function to update the borrow status
 const updateBorrowStatus = async (req, res) => {
    const { id } = req.params;
+   const { status } = req.body;  // Accepting status from the request body
 
    try {
-      const updatedBorrow = await manageBorrows.findByIdAndUpdate(id, { status: true }, { new: true });
+      const updatedBorrow = await manageBorrows.findByIdAndUpdate(
+         id,
+         { status: status },  // Updating with the provided status
+         { new: true }
+      );
       if (!updatedBorrow) {
          return res.status(404).json({ error: "Borrow request not found" });
       }
@@ -41,6 +46,7 @@ const updateBorrowStatus = async (req, res) => {
       res.status(400).json({ error: e.message });
    }
 };
+
 
 //to create a borrow
 const createBorrow = async (req, res) => {
@@ -114,7 +120,7 @@ const checkBorrowRequest = async (req, res) => {
    const { stu_ID, isbn } = req.params;
 
    try {
-      const existingBorrow = await manageBorrows.findOne({ stu_ID, isbn, status: false });
+      const existingBorrow = await manageBorrows.findOne({ stu_ID, isbn, status: "pending" });
       res.status(200).json({ exists: !!existingBorrow });
    } catch (e) {
       res.status(400).json({ error: e.message });

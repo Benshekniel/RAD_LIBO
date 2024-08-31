@@ -83,7 +83,7 @@ const AvailableBooks = () => {
         await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,
-          status: false,
+          status: "pending",
         });
 
         alert("Book borrowed successfully!");

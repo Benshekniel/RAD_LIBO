@@ -8,11 +8,12 @@ const ManageRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/libo/borrow/requests/pending");
+        const response = await axios.get(
+          "http://localhost:4000/libo/borrow/requests/pending"
+        );
         setRequests(response.data);
         setLoading(false);
       } catch (error) {
@@ -25,8 +26,21 @@ const ManageRequests = () => {
 
   const handleAccept = async (id) => {
     try {
-      await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`);
-      setRequests(requests.filter(request => request._id !== id));
+      await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`, {
+        status: "accepted",
+      });
+      setRequests(requests.filter((request) => request._id !== id));
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
+  const handleReject = async (id) => {
+    try {
+      await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`, {
+        status: "rejected",
+      });
+      setRequests(requests.filter((request) => request._id !== id));
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -75,6 +89,12 @@ const ManageRequests = () => {
                           onClick={() => handleAccept(request._id)}
                         >
                           Accept
+                        </button>
+                        <button
+                          className="action-button reject-button"
+                          onClick={() => handleReject(request._id)}
+                        >
+                          Reject
                         </button>
                       </td>
                     </tr>

@@ -56,6 +56,13 @@
 .accept-button {
   background-color: #28a745;
   color: white;
-  padding: 5px 18px;
+  padding: 5px 13px;
+  border-radius: 5px;
+}
+
+.reject-button {
+  background-color: red;
+  color: white;
+  padding: 5px 13px;
   border-radius: 5px;
 }
