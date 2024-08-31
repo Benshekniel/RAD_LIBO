@@ -11,9 +11,7 @@ const ManageRequests = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:4000/libo/borrow/requests/pending"
-        );
+        const response = await axios.get("http://localhost:4000/libo/borrow/requests/pending");
         setRequests(response.data);
         setLoading(false);
       } catch (error) {

@@ -5,10 +5,10 @@ import mongoose from 'mongoose';
 const createBook = async (req, res) => {
    let image = `${req.file.filename}`;
 
-   const { title, author, publisher, publication_date, isbn, quantity } = req.body;
+   const { title, author, publisher, publication_date, isbn, quantity, total_quantity } = req.body;
 
    try {
-      const Book = await manageBooks.create({ title, author, publisher, publication_date, isbn, quantity, image });
+      const Book = await manageBooks.create({ title, author, publisher, publication_date, isbn, quantity, image, total_quantity });
       res.status(200).json(Book);
    } catch (e) {
       res.status(400).json({ error: e.message });

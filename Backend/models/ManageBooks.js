@@ -27,6 +27,10 @@ const ManageBooks = new Schema({
       type: Number,
       required: true,
    },
+   total_quantity: {
+      type: Number,
+      required: true,
+   },
    image: {
       type: String,
       required: true

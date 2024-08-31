@@ -17,6 +17,7 @@ const ManageBooks = () => {
     publicationDate: "",
     isbn: "",
     quantity: "",
+    total_quantity: "",
     image: "",
   });
   const [editBook, setEditBook] = useState(null);
@@ -79,6 +80,7 @@ const ManageBooks = () => {
     formData.append('publication_date', newBook.publicationDate);
     formData.append('isbn', newBook.isbn);
     formData.append('quantity', newBook.quantity);
+    formData.append('total_quantity', newBook.total_quantity);
     formData.append('image', newBook.image);
 
     try {
@@ -95,6 +97,7 @@ const ManageBooks = () => {
         publicationDate: "",
         isbn: "",
         quantity: "",
+        total_quantity: "",
         image: "",
       });
       // Refresh books list
@@ -113,6 +116,7 @@ const ManageBooks = () => {
       publication_date: editBook.publicationDate,
       isbn: editBook.isbn,
       quantity: editBook.quantity,
+      total_quantity: editBook.total_quantity,
       // Convert the image file to a base64 string if necessary
       image: editBook.image,
     };
@@ -192,7 +196,7 @@ const ManageBooks = () => {
                       <td>{book.publisher}</td>
                       <td>{book.publication_date}</td>
                       <td>{book.isbn}</td>
-                      <td>{book.quantity}</td>
+                      <td>{book.quantity}/{book.total_quantity}</td>
                       <td>
                         <button
                           className="action-button edit-button"
@@ -262,16 +266,26 @@ const ManageBooks = () => {
                   />
                 </label>
                 <label>
-                  Quantity:
-                  <input
-                    type="number"
-                    name="quantity"
-                    value={newBook.quantity}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </label>
-                <label>
+                  <label>
+                    Quantity:
+                    <input
+                      type="number"
+                      name="quantity"
+                      value={newBook.quantity}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Total_Quantity:
+                    <input
+                      type="number"
+                      name="total_quantity"
+                      value={newBook.total_quantity}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </label>
                   ISBN:
                   <input
                     type="text"
@@ -350,6 +364,16 @@ const ManageBooks = () => {
                     type="number"
                     name="quantity"
                     value={editBook.quantity}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </label>
+                <label>
+                  Total_Quantity:
+                  <input
+                    type="number"
+                    name="total_quantity"
+                    value={editBook.total_quantity}
                     onChange={handleInputChange}
                     required
                   />
