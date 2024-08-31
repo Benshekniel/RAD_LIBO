@@ -1,5 +1,30 @@
 import manageBorrows from '../models/ManageBorrows.js';
+import manageBooks from '../models/ManageBooks.js';
 import mongoose from 'mongoose';
+
+
+// Function to get borrow requests where status is false
+const getBorrowRequests = async (req, res) => {
+   try {
+      const borrowRequests = await manageBorrows.find({ status: false });
+      const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
+         const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
+         return {
+            title: bookDetails.title,
+            author: bookDetails.author,
+            isbn: request.isbn,
+            stu_id: request.stu_ID,
+            quantity: bookDetails.quantity,
+            image: bookDetails.image
+         };
+      }));
+
+      res.status(200).json(requestsWithBookDetails);
+   }
+   catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
 
 //to create a borrow
 const createBorrow = async (req, res) => {
@@ -69,6 +94,6 @@ const deleteBorrow = async (req, res) => {
 };
 
 
-export { createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
 
 

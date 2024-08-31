@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./ManageRequests.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/Sidebar";
-import Cover from "../Assets/Cover.jpg"; // Replace with your image path
 
 const ManageRequests = () => {
-  // Dummy data for requests
-  const requests = [
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      quantity: 3,
-      image: Cover,
-    },
+  const [requests, setRequests] = useState([]);
 
-  ];
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/libo/borrow/requests/pending");
+        setRequests(response.data);
+      } catch (error) {
+        console.error("Error fetching requests:", error);
+      }
+    };
+
+    fetchRequests();
+  }, []);
 
   return (
     <div className="requests-container">
@@ -39,11 +40,11 @@ const ManageRequests = () => {
                 </tr>
               </thead>
               <tbody>
-                {requests.map((request) => (
-                  <tr key={request.id}>
+                {requests.map((request, index) => (
+                  <tr key={index}>
                     <td>
                       <img
-                        src={request.image}
+                        src={`http://localhost:4000/image/${request.image}`}
                         alt={request.title}
                         className="request-image"
                       />
