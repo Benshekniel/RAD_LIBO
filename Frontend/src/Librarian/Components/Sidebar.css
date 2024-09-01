@@ -13,17 +13,18 @@
 .sidebar-logo {
   display: flex;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 35px;
   margin-bottom: 5px;
 }
 
 .sidebar-logo img {
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
   margin-right: 10px;
 }
 
 .sidebar-logo h1 {
+  font-size: 35px;
   color: #0443A5;
 }
 
@@ -56,7 +57,7 @@
 
 .sidebar-menu {
   padding-top: 0;
-  padding-bottom: 100px;
+  padding-bottom: 150px;
 }
 
 .sidebar-menu ul {

@@ -28,13 +28,7 @@ const Sidebar = () => {
         <img src={Logo} alt="Logo" />
         <h1>Libo</h1>
       </div>
-      <div className="sidebar-user">
-        <img src={Librarian} alt="User" className="user-avatar" />
-        <div className="user-info">
-          <p>akhouna labib</p>
-          <p className="user-role">Librarian</p>
-        </div>
-      </div>
+
       <div className="sidebar-menu">
         <ul>
           <li>

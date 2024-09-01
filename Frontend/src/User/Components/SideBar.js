@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; // Import the CSS file for styling
@@ -7,8 +7,8 @@ import Logo from '../Assets/Logo.png';
 import { UserContext } from '../../context/UserContext';
 
 const SidebarUs = () => {
-  const { studentData, handleLogout } = useContext(UserContext);
-  const [active, setActive] = useState('Books'); // Correctly using useState here
+  const { handleLogout } = useContext(UserContext);
+  const [active, setActive] = useState('Books');
   const navigate = useNavigate();
 
   return (
@@ -16,19 +16,6 @@ const SidebarUs = () => {
       <div className="sidebar-us-logo">
         <img src={Logo} alt="Logo" />
         <h1>Libo</h1>
-      </div>
-      <div className="sidebar-us-user">
-        {studentData ? (
-          <>
-            <img src={`http://localhost:4000/image/${studentData.image}`} alt="User" className="user-avatar" />
-            <div className="user-info">
-              <p>{studentData.name}</p>
-              <p className="user-role">Student</p>
-            </div>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
       </div>
       <div className="sidebar-us-menu">
         <ul>
@@ -38,7 +25,7 @@ const SidebarUs = () => {
               className={active === 'Books' ? 'active-NavLink' : ''}
               onClick={() => setActive('Books')}
             >
-              <FontAwesomeIcon className="space" icon={faBook} /> Avilable Books
+              <FontAwesomeIcon className="space" icon={faBook} /> Available Books
             </NavLink>
           </li>
           <li>
