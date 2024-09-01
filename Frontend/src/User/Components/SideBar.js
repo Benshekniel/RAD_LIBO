@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; // Import the CSS file for styling
 import Logo from '../Assets/Logo.png';
-import UserImage from '../Assets/Librarian.jpeg';
+import { UserContext } from '../../context/UserContext';
 
 const SidebarUs = () => {
-  const [active, setActive] = useState('Books');
+  const { studentData, handleLogout } = useContext(UserContext);
+  const [active, setActive] = useState('Books'); // Correctly using useState here
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
 
   return (
     <div className="sidebar-us">
@@ -22,11 +18,17 @@ const SidebarUs = () => {
         <h1>Libo</h1>
       </div>
       <div className="sidebar-us-user">
-        <img src={UserImage} alt="User" className="user-avatar" />
-        <div className="user-info">
-          <p>akhouna labib</p>
-          <p className="user-role">User</p>
-        </div>
+        {studentData ? (
+          <>
+            <img src={`http://localhost:4000/image/${studentData.image}`} alt="User" className="user-avatar" />
+            <div className="user-info">
+              <p>{studentData.name}</p>
+              <p className="user-role">Student</p>
+            </div>
+          </>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
       <div className="sidebar-us-menu">
         <ul>

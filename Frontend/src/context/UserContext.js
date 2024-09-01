@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const UserContext = createContext();
 
@@ -13,6 +14,8 @@ export const UserProvider = ({ children }) => {
       }
       return null;
    });
+
+   const [studentData, setStudentData] = useState(null);
 
    const navigate = useNavigate();
 
@@ -30,6 +33,19 @@ export const UserProvider = ({ children }) => {
          }
       }
    }, []);
+
+   useEffect(() => {
+      if (userdata && userdata.email) {
+         // Fetch the student data by email
+         axios.get(`http://localhost:4000/libo/student/email/${userdata.email}`)
+            .then(response => {
+               setStudentData(response.data);
+            })
+            .catch(error => {
+               console.error("Failed to fetch student data", error);
+            });
+      }
+   }, [userdata]);
 
    const setAutoLogout = (expirationTime) => {
       setTimeout(() => {
@@ -61,7 +77,7 @@ export const UserProvider = ({ children }) => {
    };
 
    return (
-      <UserContext.Provider value={{ userdata, setUserdata, handleLogin, handleLogout }}>
+      <UserContext.Provider value={{ userdata, studentData, setUserdata, handleLogin, handleLogout }}>
          {children}
       </UserContext.Provider>
    );
