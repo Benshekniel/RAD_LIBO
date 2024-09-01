@@ -41,6 +41,15 @@ const SidebarUs = () => {
           </li>
           <li>
             <NavLink
+              to="/manage-avilablepastpapers"
+              className={active === 'Pastpapers' ? 'active-NavLink' : ''}
+              onClick={() => setActive('Pastpapers')}
+            >
+              <FontAwesomeIcon className="space" icon={faBook} /> Avilable Pastpapers
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/manage-requestedbooks"
               className={active === 'Requested Books' ? 'active-NavLink' : ''}
               onClick={() => setActive('Requested Books')}
