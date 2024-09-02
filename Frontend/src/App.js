@@ -10,6 +10,7 @@ import { UserProvider } from './context/UserContext';
 import ReturnBooks from './User/Pages/ReturnBooks';
 import RequestedBooks from './User/Pages/RequestedBooks';
 import Login from './Auth/Pages/Login';
+import LandingPage from './LandingPage';
 import { UserContext } from './context/UserContext';
 import SignUp from './Auth/Pages/SignUp';
 
@@ -36,8 +37,9 @@ const App = () => {
           <div className="app-container">
             <div className="content-container">
               <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
 
                 {/* Protected routes with role-based access */}
                 <Route

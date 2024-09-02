@@ -30,6 +30,43 @@ const getBorrowRequestsByStudent = async (req, res) => {
    }
 };
 
+// Function to get borrow requests for a specific student ID
+const getAcceptedBorrowRequests = async (req, res) => {
+   const { stu_ID } = req.params;
+   try {
+     // Find borrow requests with the accepted status for the given student ID
+     const borrowRequests = await manageBorrows.find({ stu_ID, status: "accepted" });
+ 
+     // For each borrow request, find the corresponding book details
+     const requestsWithBookDetails = await Promise.all(
+       borrowRequests.map(async (request) => {
+         const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
+ 
+         if (!bookDetails) {
+           throw new Error(`Book details not found for ISBN: ${request.isbn}`);
+         }
+ 
+         return {
+           _id: request._id,
+           title: bookDetails.title,
+           author: bookDetails.author,
+           isbn: request.isbn,
+           image: bookDetails.image,
+           publisher: bookDetails.publisher,
+           publicationDate: bookDetails.publication_date,
+         };
+       })
+     );
+ 
+     // Return the aggregated data
+     res.status(200).json(requestsWithBookDetails);
+   } catch (e) {
+     // Handle any errors that occur during the process
+     res.status(400).json({ error: e.message });
+   }
+ };
+ 
+
 // Function to get borrow requests where status is false
 const getBorrowRequests = async (req, res) => {
    try {
@@ -156,4 +193,4 @@ const checkBorrowRequest = async (req, res) => {
 
 
 
-export { getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { getAcceptedBorrowRequests, getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };

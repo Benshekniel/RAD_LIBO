@@ -1,32 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import "./ReturnBooks.css"; // Import CSS for Dashboard styling
 import Sidebar from "../Components/SideBar";
 import SearchBar from "../Components/SearchBar";
-import Cover from "../Assets/Cover.jpg";
+import { UserContext } from "../../context/UserContext";
+
 
 const ReturnBooks = () => {
-  // Placeholder data for statistics
-  const [stats, setStats] = useState({
-    numberOfBooks: 45,
-    numberOfStudents: 105,
-    issuedBooks: 10,
-    defaulterBooks: 6,
-  });
+  const { userdata } = useContext(UserContext);
+  const [books, setBooks] = useState([]);
+  const [stuID, setStuID] = useState(null);
+  useEffect(() => {
+    const fetchStudentID = async () => {
+      if (userdata?.email) {
+        try {
+          const response = await axios.get(`http://localhost:4000/libo/student/email/${userdata.email}`);
+          setStuID(response.data.stu_ID);
+        } catch (error) {
+          console.error('Error fetching student ID:', error);
+        }
+      }
+    };
 
-  // Placeholder data for overdue books
-  const overdueBooks = [
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      publisher: "Springer-Verlag",
-      publicationDate: "September 2018",
-      isbn: "978-3-319-77535-9",
-      image: Cover
-    },
+    fetchStudentID();
+  }, [userdata]);
 
+  useEffect(() => {
+    const fetchBorrowedBooks = async () => {
+      if (stuID) {
+        try {
+          const response = await axios.get(`http://localhost:4000/libo/borrow/accepted/${stuID}`);
+          setBooks(response.data);
+          console.log(books);
 
-  ];
+        } catch (error) {
+          console.error('Error fetching borrowed books:', error);
+        }
+      }
+    };
+
+    fetchBorrowedBooks();
+  }, [stuID]);
 
   return (
     <div>
@@ -47,11 +61,11 @@ const ReturnBooks = () => {
                 </tr>
               </thead>
               <tbody>
-                {overdueBooks.map((book, index) => (
+                {books.map((book, index) => (
                   <tr key={index}>
                     <td>
                       <img
-                        src={book.image}
+                        src={`http://localhost:4000/image/${book.image}`}
                         alt={book.title}
                         className="book-image-re"
                       />
