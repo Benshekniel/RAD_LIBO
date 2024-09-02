@@ -5,7 +5,8 @@ import ManageBooks from './Librarian/Pages/ManageBooks';
 import ManagePastpapers from './Librarian/Pages/ManagePastpapers';
 import IssuedBooks from './Librarian/Pages/IssuedBooks';
 import ManageRequests from './Librarian/Pages/ManageRequests';
-import AvilableBooks from './User/Pages/AvailableBooks';
+import AvailableBooks from './User/Pages/AvailableBooks';
+import AvailablePastpapers from './User/Pages/AvailablePastpapers';
 import { UserProvider } from './context/UserContext';
 import ReturnBooks from './User/Pages/ReturnBooks';
 import RequestedBooks from './User/Pages/RequestedBooks';
@@ -64,7 +65,11 @@ const App = () => {
                 />
                 <Route
                   path="/manage-avilablebooks"
-                  element={<PrivateRoute element={AvilableBooks} allowedRoles={['student']} />}
+                  element={<PrivateRoute element={AvailableBooks} allowedRoles={['student']} />}
+                />
+                <Route
+                  path="/manage-Avilablepastpapers"
+                  element={<PrivateRoute element={AvailablePastpapers} allowedRoles={['student']} />}
                 />
                 <Route
                   path="/manage-returnbooks"
