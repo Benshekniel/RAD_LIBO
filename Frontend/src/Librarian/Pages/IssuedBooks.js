@@ -1,68 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./IssuedBooks.css";
 import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/Sidebar";
-import Cover from "../Assets/Cover.jpg"; // Replace with your image path
 
 const ManageRequests = () => {
-  // Dummy data for issues
-  const issues = [
-    
-    {
-      id: 1,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-    {
-      id: 2,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-    {
-      id: 3,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-    {
-      id: 4,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-    {
-      id: 5,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-    {
-      id: 6,
-      title: "Basic Linear Algebra",
-      author: "B.S. Blyth",
-      isbn: "978-3-319-77535-9",
-      stu_id: "37657485",
-      book_Status: false,
-      image: Cover,
-    },
-  ];
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/libo/borrow/requests/accepted");
+        setRequests(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching requests:", error);
+      }
+    };
+
+    fetchRequests();
+  }, []);
+
+  const handleDelete = async (Id) => {
+    try {
+      await axios.delete(`http://localhost:4000/libo/borrow/${Id}`);
+      setRequests(requests.filter((request) => request._id !== Id));
+    } catch (error) {
+      console.error('Error deleting the borrow request:', error);
+    }
+  };
+
 
   return (
     <div className="issues-container">
@@ -71,40 +39,44 @@ const ManageRequests = () => {
         <SearchBar />
         <div className="manage-issues-container">
           <div className="table-container-ib">
-            <table className="issues-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>ISBN</th>
-                  <th>Stu_ID</th>
-                  <th>Book Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {issues.map((issue) => (
-                  <tr key={issue.id}>
-                    <td>
-                      <img
-                        src={issue.image}
-                        alt={issue.title}
-                        className="issue-image"
-                      />
-                    </td>
-                    <td>{issue.title}</td>
-                    <td>{issue.author}</td>
-                    <td>{issue.isbn}</td>
-                    <td>{issue.stu_id}</td>
-                    <td>
-                      <button className="action-button-issued">
-                        Returned
-                      </button>
-                    </td>
+            {loading ? (
+              <p>Loading requests...</p>
+            ) : (
+              <table className="issues-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Stu_ID</th>
+                    <th>Book Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {requests.map((request) => (
+                    <tr key={request.id}>
+                      <td>
+                        <img
+                          src={`http://localhost:4000/image/${request.image}`}
+                          alt={request.title}
+                          className="issue-image"
+                        />
+                      </td>
+                      <td>{request.title}</td>
+                      <td>{request.author}</td>
+                      <td>{request.isbn}</td>
+                      <td>{request.stu_id}</td>
+                      <td>
+                        <button className="action-button-issued" onClick={() => handleDelete(request._id)}>
+                          Returned
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
