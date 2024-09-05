@@ -54,12 +54,13 @@ const updateBook = async (req, res) => {
       return res.status(404).json({ error: 'Book not found' });
    }
    try {
-      const book = await manageBooks.findByIdAndUpdate({ _id: id }, { ...req.body });
+      const book = await manageBooks.findByIdAndUpdate({ _id: id }, { ...req.body }, { new: true });
       res.status(200).json(book);
    } catch (e) {
       res.status(400).json({ error: e.message });
    }
 };
+
 
 // Delete a book
 const deleteBook = async (req, res) => {

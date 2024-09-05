@@ -67,7 +67,6 @@ const AvailableBooks = () => {
       );
       const { stu_ID } = studentResponse.data;
 
-      // Check if the student has already requested to borrow this book
       const borrowCheckResponse = await axios.get(
         `http://localhost:4000/libo/borrow/check/${stu_ID}/${selectedBook.isbn}`
       );
@@ -77,13 +76,17 @@ const AvailableBooks = () => {
         return;
       }
 
-      const status = selectedBook.quantity > 0;
+      if (selectedBook.quantity > 0) {
+        // Update the quantity (decrease by 1)
+        await axios.patch(`http://localhost:4000/libo/book/${selectedBook._id}`, {
+          quantity: selectedBook.quantity - 1
+        });
 
-      if (status) {
+        // Add borrow request
         await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,
-          status: "pending",
+          status: "pending"
         });
 
         alert("Book borrowed successfully!");
@@ -96,6 +99,7 @@ const AvailableBooks = () => {
       console.error("Error borrowing the book:", error);
     }
   };
+
 
 
   const displayBooks = searchItems.length > 0 ? searchItems : books;

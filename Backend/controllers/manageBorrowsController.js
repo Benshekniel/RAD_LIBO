@@ -97,11 +97,13 @@ const getBorrowAcceptedRequests = async (req, res) => {
       const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
          const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
          return {
+            id: bookDetails._id,
             _id: request._id,
             title: bookDetails.title,
             author: bookDetails.author,
             isbn: request.isbn,
             stu_id: request.stu_ID,
+            quantity: bookDetails.quantity,
             image: bookDetails.image
          };
       }));

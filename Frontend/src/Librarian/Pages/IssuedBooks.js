@@ -22,15 +22,22 @@ const ManageRequests = () => {
     fetchRequests();
   }, []);
 
-  const handleDelete = async (Id) => {
+  const handleDelete = async (requestId, bookId, quantity) => {
     try {
-      await axios.delete(`http://localhost:4000/libo/borrow/${Id}`);
-      setRequests(requests.filter((request) => request._id !== Id));
+      // Increase the book quantity by 1
+      await axios.patch(`http://localhost:4000/libo/book/${bookId}`, {
+        quantity: quantity + 1
+      });
+
+      // Delete the borrow request
+      await axios.delete(`http://localhost:4000/libo/borrow/${requestId}`);
+
+      // Update the state to remove the deleted request
+      setRequests(requests.filter((request) => request._id !== requestId));
     } catch (error) {
-      console.error('Error deleting the borrow request:', error);
+      console.error("Error deleting the borrow request:", error);
     }
   };
-
 
   return (
     <div className="issues-container">
@@ -55,7 +62,7 @@ const ManageRequests = () => {
                 </thead>
                 <tbody>
                   {requests.map((request) => (
-                    <tr key={request.id}>
+                    <tr key={request._id}>
                       <td>
                         <img
                           src={`http://localhost:4000/image/${request.image}`}
@@ -68,7 +75,10 @@ const ManageRequests = () => {
                       <td>{request.isbn}</td>
                       <td>{request.stu_id}</td>
                       <td>
-                        <button className="action-button-issued" onClick={() => handleDelete(request._id)}>
+                        <button
+                          className="action-button-issued"
+                          onClick={() => handleDelete(request._id, request.id, request.quantity)}
+                        >
                           Returned
                         </button>
                       </td>
