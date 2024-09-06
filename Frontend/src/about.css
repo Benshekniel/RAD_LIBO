@@ -1,0 +1,76 @@
+.container {
+   width: 100%;
+   margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+   color: #002F56;
+}
+
+
+/* Navbar Styles */
+.navbar {
+   /* Dark blue with some transparency */
+   background-color: rgba(0, 47, 86, 0.9);
+   padding: 10px;
+   width: 98%;
+   top: 0;
+}
+
+
+
+.nav-logo img {
+   width: 40px;
+   height: auto;
+   margin-right: 10px;
+}
+
+.nav-logo h1 {
+   color: white;
+   font-size: 1.8rem;
+}
+
+/* About Section */
+.about-section {
+   padding: 10px 0;
+   background-color: white;
+   text-align: center;
+}
+
+.about-section h2 {
+   font-size: 2.5rem;
+   margin-bottom: 20px;
+}
+
+.about-section p {
+   font-size: 1.2rem;
+   margin-bottom: 40px;
+   line-height: 1.6;
+   color: #555;
+}
+
+.features {
+   list-style-type: none;
+   padding: 0;
+}
+
+.features li {
+   font-size: 1.2rem;
+   margin-bottom: 10px;
+   color: #333;
+}
+
+/* Footer */
+.footer {
+   background-color: #002F56;
+   padding: 20px;
+   color: white;
+   text-align: center;
+}
+
+.footer p {
+   margin: 0;
+   font-size: 1rem;
+}

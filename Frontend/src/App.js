@@ -14,7 +14,7 @@ import Login from './Auth/Pages/Login';
 import LandingPage from './LandingPage';
 import { UserContext } from './context/UserContext';
 import SignUp from './Auth/Pages/SignUp';
-
+import About from './about';
 // PrivateRoute component to protect routes and check user roles
 const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
   const { userdata } = useContext(UserContext);
@@ -41,6 +41,7 @@ const App = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/about" element={<About />} />
 
                 {/* Protected routes with role-based access */}
                 <Route
