@@ -1,51 +1,106 @@
+/* General Styles */
 .landing-container {
-    position: relative;
-    height: 100vh;
-    background-image: url('./Bgimage1.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .content {
-    text-align: center;
-  }
-  
-  h1 {
-    font-size: 3rem;
-    color: #002F56; /* Dark blue color */
-    margin-bottom: 20px;
-  }
-  
-  p {
-    font-size: 1.5rem;
-    color: #555;
-    margin-bottom: 30px;
-  }
-  
-  .get-started-btn {
-    background-color: #FFD700; /* Gold color */
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .get-started-btn:hover {
-    background-color: #FFC107; /* Darker shade of gold */
-  }
-  
+  position: relative;
+  height: 100vh;
+  background-image: url('./Bgimage1.jpg');
+  background-size: 100%;
+  background-position: center;
+}
+
+.overlay {
+  margin-top: 7%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 3rem;
+  color: #002F56;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.get-started-btn {
+  background-color: #FFD700;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #FFC107;
+}
+
+/* Navbar Styles */
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(0, 47, 86, 0.9);
+  /* Dark blue with some transparency */
+  position: absolute;
+  width: 98%;
+  top: 0;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.nav-logo h1 {
+  color: white;
+  font-size: 1.8rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #FFD700;
+}
+
+.active-link {
+  color: #FFD700;
+  font-weight: bold;
+}
