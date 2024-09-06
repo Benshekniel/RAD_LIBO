@@ -9,6 +9,7 @@ import Sidebar from "../Components/Sidebar";
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
   const [showAddBookForm, setShowAddBookForm] = useState(false);
+  const [searchItems, setSearchItems] = useState([]);
   const [showEditBookForm, setShowEditBookForm] = useState(false);
   const [newBook, setNewBook] = useState({
     title: "",
@@ -38,6 +39,21 @@ const ManageBooks = () => {
 
     fetchBooks();
   }, []);
+
+  const handleSearch = async (query) => {
+    if (query.trim() === "") {
+      setSearchItems([]); // Reset to empty array when search input is cleared
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`);
+      setSearchItems(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  };
 
   const handleAddBookClick = () => {
     setShowAddBookForm(true);
@@ -152,11 +168,13 @@ const ManageBooks = () => {
     }
   };
 
+  const displayBooks = searchItems.length > 0 ? searchItems : books;
+
   return (
     <div className="books-container">
       <Sidebar />
       <div>
-        <SearchBar />
+        <SearchBar  onSearch={handleSearch}/>
         <div className="manage-books-container-mb">
           <div className="header">
             <button className="add-book-button" onClick={handleAddBookClick}>
@@ -182,7 +200,7 @@ const ManageBooks = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {books.map((book) => (
+                  {displayBooks.map((book) => (
                     <tr key={book._id}>
                       <td>
                         <img
