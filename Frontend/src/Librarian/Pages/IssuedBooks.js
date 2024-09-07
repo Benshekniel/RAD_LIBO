@@ -22,22 +22,26 @@ const ManageRequests = () => {
     fetchRequests();
   }, []);
 
+  // Handle book return
   const handleDelete = async (requestId, bookId, quantity) => {
     try {
-      // Increase the book quantity by 1
-      await axios.patch(`http://localhost:4000/libo/book/${bookId}`, {
-        quantity: quantity + 1
-      });
-
-      // Delete the borrow request
-      await axios.delete(`http://localhost:4000/libo/borrow/${requestId}`);
+      // Send both requests in parallel
+      await Promise.all([
+        // Increase the book quantity by 1
+        axios.patch(`http://localhost:4000/libo/book/${bookId}`, {
+          quantity: quantity + 1
+        }),
+        // Delete the borrow request
+        axios.delete(`http://localhost:4000/libo/borrow/${requestId}`)
+      ]);
 
       // Update the state to remove the deleted request
       setRequests(requests.filter((request) => request._id !== requestId));
     } catch (error) {
-      console.error("Error deleting the borrow request:", error);
+      console.error("Error handling the return process:", error);
     }
   };
+
 
   return (
     <div className="issues-container">
