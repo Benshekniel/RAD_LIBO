@@ -9,6 +9,7 @@ import Sidebar from "../Components/Sidebar";
 const ManageStudents = () => {
   const [students, setStudents] = useState([]);
   const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+  const [searchItems, setSearchItems] = useState([]);
   const [showEditStudentForm, setShowEditStudentForm] = useState(false);
   const [newStudent, setNewStudent] = useState({
     name: "",
@@ -35,6 +36,21 @@ const ManageStudents = () => {
 
     fetchStudents();
   }, []);
+
+  const handleSearch = async (query) => {
+    if (query.trim() === "") {
+      setSearchItems([]); // Reset to empty array when search input is cleared
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:4000/libo/student/name/${query}`);
+      setSearchItems(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  };
 
   const handleAddStudentClick = () => {
     setShowAddStudentForm(true);
@@ -141,11 +157,13 @@ const ManageStudents = () => {
     }
   };
 
+  const displayStudents = searchItems.length > 0 ? searchItems : students;
+
   return (
     <div className="students-container">
       <Sidebar />
       <div>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="manage-students-container">
           <div className="header">
             <button className="add-student-button" onClick={handleAddStudentClick}>
@@ -169,7 +187,7 @@ const ManageStudents = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {!loading && students.map((student) => (
+                  {!loading && displayStudents.map((student) => (
                     <tr key={student._id}>
                       <td className="student-image-td">
                         <img

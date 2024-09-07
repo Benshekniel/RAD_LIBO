@@ -121,6 +121,17 @@ const deleteStudent = async (req, res) => {
    }
 };
 
+// Search students by name
+const searchStudentsByName = async (req, res) => {
+   const { name } = req.params;
+   try {
+      const students = await manageStudents.find({ name: { $regex: name, $options: 'i' } });
+      res.status(200).json(students);
+   } catch (err) {
+      res.status(500).json({ error: 'Server Error' });
+   }
+};
+
 export {
    registerStudent,
    loginStudent,
@@ -128,5 +139,6 @@ export {
    getStudent,
    getStudentByEmail,
    updateStudent,
-   deleteStudent
+   deleteStudent,
+   searchStudentsByName
 };

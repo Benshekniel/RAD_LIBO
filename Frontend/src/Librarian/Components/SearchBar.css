@@ -1,34 +1,65 @@
-/* SearchBar.css */
-.search-bar {
-   display: flex;
-   align-items: center;
-   background-color: #0A2A5C;
-   padding: 10px;
-   height: 80px;
-   width: 1230px;
-   
- }
- 
- .search-bar input {
-   background-color: #F6F6E9;
-   border: none;
-   padding: 10px;
-   border-radius: 25px;
-   outline: none;
-   width: 300px;
-   height: 30px;
-   color: black;
-   margin-left: 25px;
- }
- 
- .search-bar button {
-   background-color: transparent;
-   border: none;
-   cursor: pointer;
-   margin-left: -40px;
- }
- 
- .search-bar button .fa-icon {
-   color: black;
- }
- 
+.search-bar-us {
+  display: flex;
+  align-items: center;
+  background-color: #0A2A5C;
+  padding: 10px;
+  height: 80px;
+  width: 1230px;
+  justify-content: space-between;
+}
+
+.search-bar-us form {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-us input {
+  background-color: #F6F6E9;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  outline: none;
+  width: 300px;
+  height: 30px;
+  color: black;
+  margin-left: 25px;
+}
+
+.search-bar-us button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: -40px;
+}
+
+.search-bar-us button .fa-icon {
+  color: black;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.user-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.user-role {
+  color: grey;
+  font-size: 0.9em;
+}
