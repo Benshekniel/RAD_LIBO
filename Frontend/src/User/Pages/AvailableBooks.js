@@ -39,7 +39,6 @@ const AvailableBooks = () => {
     try {
       const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`);
       setSearchItems(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching books:', error);
     }

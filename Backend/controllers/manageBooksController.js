@@ -81,10 +81,18 @@ const searchBooksByTitle = async (req, res) => {
    const { title } = req.params;
    try {
       const books = await manageBooks.find({ title: { $regex: title, $options: 'i' } });
-      res.status(200).json(books);
+
+      // Map over the books array and add the availability for each book
+      const booksWithAvailability = books.map(book => ({
+         ...book._doc,
+         availability: book.quantity > 0
+      }));
+
+      res.status(200).json(booksWithAvailability);
    } catch (err) {
       res.status(500).json({ error: 'Server Error' });
    }
 };
+
 
 export { createBook, getBooks, getBook, updateBook, deleteBook, searchBooksByTitle };
