@@ -71,18 +71,23 @@ const getAcceptedBorrowRequests = async (req, res) => {
 const getBorrowRequests = async (req, res) => {
    try {
       const borrowRequests = await manageBorrows.find({ status: "pending" });
-      const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
-         const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
+      const isbnList = borrowRequests.map(request => request.isbn);
+
+      // Fetch all books in one query using the ISBN list
+      const books = await manageBooks.find({ isbn: { $in: isbnList } });
+
+      const requestsWithBookDetails = borrowRequests.map((request) => {
+         const bookDetails = books.find(book => book.isbn === request.isbn);
          return {
             _id: request._id,
-            title: bookDetails.title,
-            author: bookDetails.author,
+            title: bookDetails?.title,
+            author: bookDetails?.author,
             isbn: request.isbn,
             stu_id: request.stu_ID,
-            quantity: bookDetails.quantity,
-            image: bookDetails.image
+            quantity: bookDetails?.quantity,
+            image: bookDetails?.image
          };
-      }));
+      });
 
       res.status(200).json(requestsWithBookDetails);
    }
@@ -90,6 +95,7 @@ const getBorrowRequests = async (req, res) => {
       res.status(400).json({ error: e.message });
    }
 };
+
 // Function to get borrow requests where status is false
 const getBorrowAcceptedRequests = async (req, res) => {
    try {
