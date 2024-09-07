@@ -30,7 +30,6 @@ function Login() {
       });
 
       const data = await response.json();
-      console.log('Response data:', data.token); // Should log the token now
 
       if (response.ok) {
         const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms

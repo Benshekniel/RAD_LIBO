@@ -31,7 +31,7 @@ export const loginUser = async (req, res) => {
          httpOnly: true, // Accessible only by the web server
          secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
          sameSite: 'strict', // Prevent CSRF
-         secure: false,
+         secure: true,
          maxAge: 3600000 // 1 hour
       });
 
