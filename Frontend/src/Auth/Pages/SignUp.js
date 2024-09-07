@@ -153,7 +153,7 @@ const SignUp = () => {
           <input type="file" name="image" onChange={handleFileChange} required />
           <button type="submit" className="signup-button">Sign Up</button>
           <div className="login-link">
-            <NavLink to="/">Login In</NavLink>
+            <NavLink to="/login">Login</NavLink>
           </div>
         </form>
       </div>

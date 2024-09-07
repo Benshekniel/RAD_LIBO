@@ -28,7 +28,9 @@ const ManageBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/libo/book");
+        const response = await axios.get("http://localhost:4000/libo/book", {
+          withCredentials: true,  // Ensure cookies are sent
+        });
         setBooks(response.data);
         console.log(response.data);
         setLoading(false);
@@ -47,7 +49,9 @@ const ManageBooks = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`);
+      const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`, {
+        withCredentials: true, // Ensure cookies are sent
+      });
       setSearchItems(response.data);
       console.log(response.data);
     } catch (error) {
@@ -101,6 +105,7 @@ const ManageBooks = () => {
 
     try {
       await axios.post("http://localhost:4000/libo/book/add", formData, {
+        withCredentials: true,  // Ensure cookies are sent
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -117,7 +122,9 @@ const ManageBooks = () => {
         image: "",
       });
       // Refresh books list
-      const response = await axios.get("http://localhost:4000/libo/book");
+      const response = await axios.get("http://localhost:4000/libo/book", {
+        withCredentials: true,  // Ensure cookies are sent
+      });
       setBooks(response.data);
     } catch (error) {
       console.error("Error adding book:", error);
@@ -139,6 +146,7 @@ const ManageBooks = () => {
 
     try {
       await axios.patch(`http://localhost:4000/libo/book/${editBook._id}`, updatedBook, {
+        withCredentials: true,  // Ensure cookies are sent
         headers: {
           "Content-Type": "application/json",
         },
@@ -148,7 +156,9 @@ const ManageBooks = () => {
       setEditBook(null);
 
       // Refresh books list
-      const response = await axios.get("http://localhost:4000/libo/book");
+      const response = await axios.get("http://localhost:4000/libo/book", {
+        withCredentials: true,  // Ensure cookies are sent
+      });
       setBooks(response.data);
     } catch (error) {
       console.error("Error editing book:", error);
@@ -159,7 +169,9 @@ const ManageBooks = () => {
 
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:4000/libo/book/${id}`);
+        await axios.delete(`http://localhost:4000/libo/book/${id}`, {
+          withCredentials: true,  // Ensure cookies are sent
+        });
         // Refresh books list
         setBooks(books.filter(book => book._id !== id));
       } catch (error) {
@@ -174,7 +186,7 @@ const ManageBooks = () => {
     <div className="books-container">
       <Sidebar />
       <div>
-        <SearchBar  onSearch={handleSearch}/>
+        <SearchBar onSearch={handleSearch} />
         <div className="manage-books-container-mb">
           <div className="header">
             <button className="add-book-button" onClick={handleAddBookClick}>

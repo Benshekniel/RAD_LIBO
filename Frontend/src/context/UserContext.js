@@ -62,6 +62,7 @@ export const UserProvider = ({ children }) => {
       setUserdata({
          email: email,
          role: role,
+         token: token,
       });
       const remainingTime = expirationTime - new Date().getTime();
       setAutoLogout(remainingTime);

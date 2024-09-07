@@ -31,10 +31,12 @@ export const loginUser = async (req, res) => {
          httpOnly: true, // Accessible only by the web server
          secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
          sameSite: 'strict', // Prevent CSRF
+         secure: false,
          maxAge: 3600000 // 1 hour
       });
 
-      res.status(200).json({ role });
+      // Send token in the response
+      res.status(200).json({ token, role }); // Add token to response
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

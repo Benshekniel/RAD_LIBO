@@ -25,9 +25,12 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email, password, role }),
       });
+
       const data = await response.json();
+      console.log('Response data:', data.token); // Should log the token now
 
       if (response.ok) {
         const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms
@@ -40,6 +43,8 @@ function Login() {
       console.error('Login failed:', error);
     }
   };
+
+
 
   return (
     <div className="login-container">

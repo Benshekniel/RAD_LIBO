@@ -26,8 +26,8 @@ const router = express.Router();
 router.post('/add', upload.single('image'), createBook)
 router.get('/', getBooks);
 router.get('/:id', getBook);
-router.patch('/:id', updateBook);
-router.delete('/:id', deleteBook);
+router.patch('/:id', protect, updateBook);
+router.delete('/:id', protect, deleteBook);
 router.get('/title/:title', searchBooksByTitle);
 
 export default router;
