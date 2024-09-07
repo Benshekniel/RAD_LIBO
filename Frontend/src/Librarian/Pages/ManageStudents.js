@@ -92,7 +92,7 @@ const ManageStudents = () => {
         year: "",
         image: "",
       });
-      // Refresh books list
+      // Refresh students list
       const response = await axios.get(`http://localhost:4000/libo/student`);
       setStudents(response.data);
     } catch (error) {
@@ -120,7 +120,7 @@ const ManageStudents = () => {
       setShowEditStudentForm(false);
       setEditStudent(null);
 
-      // Refresh books list
+      // Refresh students list
       const response = await axios.get(`http://localhost:4000/libo/student`);
       setStudents(response.data);
     } catch (error) {
@@ -129,7 +129,7 @@ const ManageStudents = () => {
   };
 
   const handleDeleteStudent = async (studentId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this book?");
+    const confirmDelete = window.confirm("Are you sure you want to delete this student?");
 
     if (confirmDelete) {
       try {

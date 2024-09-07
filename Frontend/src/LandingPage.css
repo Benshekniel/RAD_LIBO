@@ -8,7 +8,7 @@
 }
 
 .overlay {
-  margin-top: 6.7%;
+  margin-top: 11vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -56,11 +56,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding-top: 5px;
+  padding-left: 15px;
   background-color: rgba(0, 47, 86, 0.9);
   /* Dark blue with some transparency */
   position: absolute;
-  width: 98%;
+  width: 99%;
   top: 0;
 }
 
@@ -86,7 +87,7 @@
 }
 
 .nav-links li {
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .nav-links a {
