@@ -15,7 +15,11 @@ const ManageBorrows = new Schema(
       status: {
          type: String,
          required: true,
-      }
+      },
+      dateOfRequest: {
+         type: Date,
+         default: Date.now,  // Automatically set the current date when the request is created
+      },
    },
    { timestamps: true }
 

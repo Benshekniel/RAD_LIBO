@@ -20,6 +20,7 @@ const getBorrowRequestsByStudent = async (req, res) => {
             image: bookDetails.image,
             publisher: bookDetails.publisher,
             publicationDate: bookDetails.publication_date,
+            dateOfRequest: request.dateOfRequest, // Include the dateOfRequest
          };
       }));
 
@@ -54,6 +55,7 @@ const getAcceptedBorrowRequests = async (req, res) => {
                image: bookDetails.image,
                publisher: bookDetails.publisher,
                publicationDate: bookDetails.publication_date,
+               requestDate: bookDetails.dateOfRequest,
             };
          })
       );
@@ -140,6 +142,8 @@ const updateBorrowStatus = async (req, res) => {
 const createBorrow = async (req, res) => {
 
    const { stu_ID, isbn, status } = req.body;
+   const datetomodify = new Date(); 
+   const dateOfRequest = datetomodify.toLocaleDateString('en-CA');
 
    try {
       const Borrow = await manageBorrows.create({ stu_ID, isbn, status });
