@@ -1,0 +1,10 @@
+.bar {
+   display: flex;
+   align-items: center;
+   background-color: #0A2A5C;
+   padding: 10px;
+   height: 80px;
+   width: 1230px;
+   justify-content: flex-end;
+   /* Align content to the right */
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./IssuedBooks.css";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
 
 const ManageRequests = () => {

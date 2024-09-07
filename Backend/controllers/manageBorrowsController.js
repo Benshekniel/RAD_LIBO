@@ -80,6 +80,7 @@ const getBorrowRequests = async (req, res) => {
          const bookDetails = books.find(book => book.isbn === request.isbn);
          return {
             _id: request._id,
+            bookid: bookDetails?._id,
             title: bookDetails?.title,
             author: bookDetails?.author,
             isbn: request.isbn,

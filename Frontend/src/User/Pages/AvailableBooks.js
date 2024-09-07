@@ -77,12 +77,7 @@ const AvailableBooks = () => {
       }
 
       if (selectedBook.quantity > 0) {
-        // Update the quantity (decrease by 1)
-        await axios.patch(`http://localhost:4000/libo/book/${selectedBook._id}`, {
-          quantity: selectedBook.quantity - 1
-        });
-
-        // Add borrow request
+        // Add borrow request without decreasing quantity
         await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,
@@ -99,8 +94,6 @@ const AvailableBooks = () => {
       console.error("Error borrowing the book:", error);
     }
   };
-
-
 
   const displayBooks = searchItems.length > 0 ? searchItems : books;
 

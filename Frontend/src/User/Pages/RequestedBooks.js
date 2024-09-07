@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./RequestedBooks.css";
 import Sidebar from "../Components/SideBar";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "../Components/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { UserContext } from "../../context/UserContext";
@@ -29,6 +29,9 @@ const RequestedBooks = () => {
 
     fetchStudentID();
   }, [userdata]);
+
+  const handleSearch = async (query) => {
+  };
 
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
@@ -96,8 +99,8 @@ const RequestedBooks = () => {
                             book.status === "accepted"
                               ? "status-accepted"
                               : book.status === "pending"
-                              ? "status-pending"
-                              : "status-rejected"
+                                ? "status-pending"
+                                : "status-rejected"
                           }
                         >
                           {book.status}

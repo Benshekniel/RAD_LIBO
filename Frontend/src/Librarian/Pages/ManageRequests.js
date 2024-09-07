@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ManageRequests.css";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
 
 const ManageRequests = () => {
@@ -22,16 +22,27 @@ const ManageRequests = () => {
     fetchRequests();
   }, []);
 
-  const handleAccept = async (id) => {
+  const handleAccept = async (id, bookid, quantity) => {
     try {
+      // Update the borrow request status to 'accepted'
       await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`, {
         status: "accepted",
       });
+
+      // Check if the quantity is greater than 0 and then decrease it
+      if (quantity > 0) {
+        await axios.patch(`http://localhost:4000/libo/book/${bookid}`, {
+          quantity: quantity - 1,
+        });
+      }
+
+      // Remove the request from the list after acceptance
       setRequests(requests.filter((request) => request._id !== id));
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error("Error updating status or decreasing book quantity:", error);
     }
   };
+
 
   const handleReject = async (id) => {
     try {
@@ -84,7 +95,7 @@ const ManageRequests = () => {
                       <td>
                         <button
                           className="action-button accept-button"
-                          onClick={() => handleAccept(request._id)}
+                          onClick={() => handleAccept(request._id, request.bookid, request.quantity)}
                         >
                           Accept
                         </button>
