@@ -35,7 +35,7 @@ const AvailablePastpapers = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:4000/libo/pastpaper/cs_is/${query}`);
+      const response = await axios.get(`http://localhost:4000/libo/pastpaper/year/${query}`);
       setSearchItems(response.data);
       console.log(response.data);
     } catch (error) {

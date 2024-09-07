@@ -9,6 +9,7 @@ import Sidebar from "../Components/Sidebar";
 const ManagePastpapers = () => {
    const [pastpapers, setPastpapers] = useState([]);
    const [showAddPastpaperForm, setShowAddPastpaperForm] = useState(false);
+   const [searchItems, setSearchItems] = useState([]);
    const [showEditPastpaperForm, setShowEditPastpaperForm] = useState(false);
    const [newPastpaper, setNewPastpaper] = useState({
       cs_is: "",
@@ -37,6 +38,22 @@ const ManagePastpapers = () => {
 
       fetchPastpapers();
    }, []);
+
+   const handleSearch = async (query) => {
+      if (query.trim() === "") {
+        setSearchItems([]); // Reset to empty array when search input is cleared
+        return;
+      }
+  
+      try {
+        const response = await axios.get(`http://localhost:4000/libo/pastpaper/year/${query}`);
+        setSearchItems(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching pastpapers:", error); 
+      }
+    };
+  
 
    const handleAddPastpaperClick = () => {
       setShowAddPastpaperForm(true);
@@ -148,11 +165,14 @@ const ManagePastpapers = () => {
       }
    };
 
+   const displayPastpapers = searchItems.length > 0 ? searchItems : pastpapers;
+
+
    return (
       <div className="pastpapers-container">
          <Sidebar />
          <div>
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
             <div className="manage-pastpapers-container-mb">
                <div className="header">
                   <button className="add-pastpaper-button" onClick={handleAddPastpaperClick}>
@@ -178,7 +198,7 @@ const ManagePastpapers = () => {
                            </tr>
                         </thead>
                         <tbody>
-                           {pastpapers.map((pastpaper) => (
+                           {displayPastpapers.map((pastpaper) => (
                               <tr key={pastpaper._id}>
                                  <td>
                                     <img

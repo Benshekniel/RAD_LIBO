@@ -28,6 +28,6 @@ router.get('/', getPastpapers);
 router.get('/:id', getPastpaper);
 router.patch('/:id', updatePastpaper);
 router.delete('/:id', deletePastpaper);
-router.get('/search', searchPastpapersByYear);
+router.get('/year/:year', searchPastpapersByYear);
 
 export default router;
