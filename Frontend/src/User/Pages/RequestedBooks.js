@@ -19,10 +19,12 @@ const RequestedBooks = () => {
     const fetchStudentID = async () => {
       if (userdata?.email) {
         try {
-          const response = await axios.get(`http://localhost:4000/libo/student/email/${userdata.email}`);
+          const response = await axios.get(
+            `http://localhost:4000/libo/student/email/${userdata.email}`
+          );
           setStuID(response.data.stu_ID);
         } catch (error) {
-          console.error('Error fetching student ID:', error);
+          console.error("Error fetching student ID:", error);
         }
       }
     };
@@ -37,10 +39,12 @@ const RequestedBooks = () => {
     const fetchBorrowedBooks = async () => {
       if (stuID) {
         try {
-          const response = await axios.get(`http://localhost:4000/libo/borrow/requests/${stuID}`);
+          const response = await axios.get(
+            `http://localhost:4000/libo/borrow/requests/${stuID}`
+          );
           setBooks(response.data);
         } catch (error) {
-          console.error('Error fetching borrowed books:', error);
+          console.error("Error fetching borrowed books:", error);
         }
       }
     };
@@ -53,7 +57,7 @@ const RequestedBooks = () => {
       await axios.delete(`http://localhost:4000/libo/borrow/${bookId}`);
       setBooks(books.filter((book) => book._id !== bookId));
     } catch (error) {
-      console.error('Error deleting the borrow request:', error);
+      console.error("Error deleting the borrow request:", error);
     }
   };
 
@@ -69,10 +73,11 @@ const RequestedBooks = () => {
                 <thead>
                   <tr>
                     <th></th>
+                    <th>Date</th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Publisher</th>
-                    <th>Publication date</th>
+                    {/* <th>Publisher</th> */}
+                    {/* <th>Publication date</th> */}
                     <th>ISBN</th>
                     <th>Status</th>
                     <th></th>
@@ -88,10 +93,11 @@ const RequestedBooks = () => {
                           className="book-image-rb"
                         />
                       </td>
+                      <td>{new Date(book.dateOfRequest).toLocaleDateString()}</td>
                       <td>{book.title}</td>
                       <td>{book.author}</td>
-                      <td>{book.publisher}</td>
-                      <td>{book.publicationDate}</td>
+                      {/* <td>{book.publisher}</td> */}
+                      {/* <td>{book.publicationDate}</td> */}
                       <td>{book.isbn}</td>
                       <td>
                         <span
@@ -109,10 +115,9 @@ const RequestedBooks = () => {
                       <td className="action-column">
                         <FontAwesomeIcon
                           icon={faTrashAlt}
-                          className={`delete-icon-rb ${book.status === "accepted"
-                            ? "icon-disabled"
-                            : "icon-active"
-                            }`}
+                          className={`delete-icon-rb ${
+                            book.status === "accepted" ? "icon-disabled" : "icon-active"
+                          }`}
                           onClick={
                             book.status !== "accepted"
                               ? () => handleDelete(book._id)
