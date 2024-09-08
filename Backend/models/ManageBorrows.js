@@ -16,12 +16,16 @@ const ManageBorrows = new Schema(
          type: String,
          required: true,
       },
+      issuedStatus: {
+         type: String,
+         required: true,
+         default: "Not Issued",
+      },
       dateOfRequest: {
          type: Date,
          default: Date.now,  // Automatically set the current date when the request is created
       },
    },
-   { timestamps: true }
 
 );
 

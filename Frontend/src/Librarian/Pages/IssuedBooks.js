@@ -4,7 +4,7 @@ import "./IssuedBooks.css";
 import SearchBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
 
-const ManageRequests = () => {
+const IssuedBooks = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,26 +22,39 @@ const ManageRequests = () => {
     fetchRequests();
   }, []);
 
-  // Handle book return
+  const handleChange = async (requestId) => {
+    try {
+      const response = await axios.patch(`http://localhost:4000/libo/borrow/issued/${requestId}`, {
+        issuedStatus: 'Issued'
+      });
+
+      // Log the updated request for debugging
+      console.log("Updated request:", response.data);
+
+      // Update the request state with the new issuedStatus
+      setRequests(requests.map(request =>
+        request._id === requestId ? { ...request, issuedStatus: response.data.issuedStatus } : request
+      ));
+    } catch (error) {
+      console.error("Error updating issued status:", error);
+    }
+  };
+
+
   const handleDelete = async (requestId, bookId, quantity) => {
     try {
-      // Send both requests in parallel
       await Promise.all([
-        // Increase the book quantity by 1
         axios.patch(`http://localhost:4000/libo/book/${bookId}`, {
           quantity: quantity + 1
         }),
-        // Delete the borrow request
         axios.delete(`http://localhost:4000/libo/borrow/${requestId}`)
       ]);
 
-      // Update the state to remove the deleted request
       setRequests(requests.filter((request) => request._id !== requestId));
     } catch (error) {
       console.error("Error handling the return process:", error);
     }
   };
-
 
   return (
     <div className="issues-container">
@@ -79,9 +92,20 @@ const ManageRequests = () => {
                       <td>{request.isbn}</td>
                       <td>{request.stu_id}</td>
                       <td>
+                        {/* Issue button: Enabled only if the status is not 'Issued' */}
+                        <button
+                          className="action-button-issued"
+                          onClick={() => handleChange(request._id)}
+                          disabled={request.issuedStatus === 'Issued'}
+                        >
+                          {request.issuedStatus === 'Issued' ? 'Issued' : 'Not Issued'}
+                        </button>
+
+                        {/* Return button: Enabled only if the status is 'Issued' */}
                         <button
                           className="action-button-issued"
                           onClick={() => handleDelete(request._id, request.id, request.quantity)}
+                          disabled={request.issuedStatus !== 'Issued'}
                         >
                           Returned
                         </button>
@@ -98,4 +122,4 @@ const ManageRequests = () => {
   );
 };
 
-export default ManageRequests;
+export default IssuedBooks;

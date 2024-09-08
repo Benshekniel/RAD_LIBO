@@ -110,6 +110,7 @@ const getBorrowAcceptedRequests = async (req, res) => {
             _id: request._id,
             title: bookDetails.title,
             author: bookDetails.author,
+            issuedStatus: request.issuedStatus,
             isbn: request.isbn,
             stu_id: request.stu_ID,
             quantity: bookDetails.quantity,
@@ -124,20 +125,25 @@ const getBorrowAcceptedRequests = async (req, res) => {
    }
 };
 
-// Function to update the borrow status
-const updateBorrowStatus = async (req, res) => {
+// Function to update the issuedStatus
+const updateIssuedStatus = async (req, res) => {
    const { id } = req.params;
-   const { status } = req.body;  // Accepting status from the request body
+   const { issuedStatus } = req.body;
+
+   console.log(`Updating borrow request ID: ${id} with status: ${issuedStatus}`);
 
    try {
       const updatedBorrow = await manageBorrows.findByIdAndUpdate(
          id,
-         { status: status },  // Updating with the provided status
+         { issuedStatus: issuedStatus },
          { new: true }
       );
+
       if (!updatedBorrow) {
          return res.status(404).json({ error: "Borrow request not found" });
       }
+
+      console.log("Updated borrow request:", updatedBorrow);
       res.status(200).json(updatedBorrow);
    } catch (e) {
       res.status(400).json({ error: e.message });
@@ -145,11 +151,15 @@ const updateBorrowStatus = async (req, res) => {
 };
 
 
+
+
+
+
 //to create a borrow
 const createBorrow = async (req, res) => {
 
    const { stu_ID, isbn, status } = req.body;
-   const datetomodify = new Date(); 
+   const datetomodify = new Date();
    const dateOfRequest = datetomodify.toLocaleDateString('en-CA');
 
    try {
@@ -200,6 +210,36 @@ const updateBorrow = async (req, res) => {
    }
 };
 
+const updateBorrowStatus = async (req, res) => {
+   const { id } = req.params;
+   const { status } = req.body;  // Assuming 'status' is the field to update
+
+   if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Invalid borrow ID' });
+   }
+
+   if (!status) {
+      return res.status(400).json({ error: 'Status is required' });
+   }
+
+   try {
+      const updatedBorrow = await manageBorrows.findByIdAndUpdate(
+         { _id: id },
+         { status },  // Only updating the status field
+         { new: true }  // Return the updated document
+      );
+
+      if (!updatedBorrow) {
+         return res.status(404).json({ error: 'Borrow not found' });
+      }
+
+      res.status(200).json(updatedBorrow);
+   } catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
+
+
 //Delete a Borrow
 const deleteBorrow = async (req, res) => {
    const { id } = req.params;
@@ -228,4 +268,4 @@ const checkBorrowRequest = async (req, res) => {
 
 
 
-export { getBorrowAcceptedRequests, getAcceptedBorrowRequests, getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { updateIssuedStatus, getBorrowAcceptedRequests, getAcceptedBorrowRequests, getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
