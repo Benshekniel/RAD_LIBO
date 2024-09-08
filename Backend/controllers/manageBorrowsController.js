@@ -141,7 +141,6 @@ const updateIssuedStatus = async (req, res) => {
          return res.status(404).json({ error: "Borrow request not found" });
       }
 
-      console.log("Updated borrow request:", updatedBorrow);
       res.status(200).json(updatedBorrow);
    } catch (e) {
       res.status(400).json({ error: e.message });
@@ -264,7 +263,7 @@ const checkBorrowRequest = async (req, res) => {
 const searchBorrowsByStudentID = async (req, res) => {
    const { stuID } = req.params;  // Assuming 'title' is meant to search by student ID
    try {
-      const borrowRequests = await manageBorrows.find({ stu_ID: { $regex: stuID, $options: 'i' } });
+      const borrowRequests = await manageBorrows.find({ stu_ID: { $regex: stuID, $options: 'i' }, status: "accepted" });
       const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
          const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
          return {
