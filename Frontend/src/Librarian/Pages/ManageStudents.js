@@ -46,7 +46,6 @@ const ManageStudents = () => {
     try {
       const response = await axios.get(`http://localhost:4000/libo/student/name/${query}`);
       setSearchItems(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching books:', error);
     }

@@ -31,7 +31,6 @@ app.use('/image', express.static(path.join(__dirname, 'image')));
 
 // Middleware
 app.use((req, res, next) => {
-   console.log('path' + req.path + ' method' + req.method);
    next();
 });
 

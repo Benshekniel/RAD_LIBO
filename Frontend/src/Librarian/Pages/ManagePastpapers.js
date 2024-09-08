@@ -29,7 +29,6 @@ const ManagePastpapers = () => {
          try {
             const response = await axios.get("http://localhost:4000/libo/pastpaper");
             setPastpapers(response.data);
-            console.log(response.data);
             setLoading(false);
          } catch (error) {
             console.error("Error fetching Pastpapers:", error);
@@ -41,19 +40,19 @@ const ManagePastpapers = () => {
 
    const handleSearch = async (query) => {
       if (query.trim() === "") {
-        setSearchItems([]); // Reset to empty array when search input is cleared
-        return;
+         setSearchItems([]); // Reset to empty array when search input is cleared
+         return;
       }
-  
+
       try {
-        const response = await axios.get(`http://localhost:4000/libo/pastpaper/year/${query}`);
-        setSearchItems(response.data);
-        console.log(response.data);
+         const response = await axios.get(`http://localhost:4000/libo/pastpaper/year/${query}`);
+         setSearchItems(response.data);
+         console.log(response.data);
       } catch (error) {
-        console.error("Error fetching pastpapers:", error); 
+         console.error("Error fetching pastpapers:", error);
       }
-    };
-  
+   };
+
 
    const handleAddPastpaperClick = () => {
       setShowAddPastpaperForm(true);

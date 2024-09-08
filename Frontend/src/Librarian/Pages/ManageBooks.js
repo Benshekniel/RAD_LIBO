@@ -32,7 +32,6 @@ const ManageBooks = () => {
           withCredentials: true,  // Ensure cookies are sent
         });
         setBooks(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -53,7 +52,6 @@ const ManageBooks = () => {
         withCredentials: true, // Ensure cookies are sent
       });
       setSearchItems(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching books:', error);
     }

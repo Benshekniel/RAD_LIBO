@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./IssuedBooks.css";
-import SearchBar from "../Components/NavBar";
+import SearchBar from "../Components/SearchBar";
 import Sidebar from "../Components/Sidebar";
 
 const IssuedBooks = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchItems, setSearchItems] = useState([]);
+
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -28,15 +30,28 @@ const IssuedBooks = () => {
         issuedStatus: 'Issued'
       });
 
-      // Log the updated request for debugging
-      console.log("Updated request:", response.data);
-
       // Update the request state with the new issuedStatus
       setRequests(requests.map(request =>
         request._id === requestId ? { ...request, issuedStatus: response.data.issuedStatus } : request
       ));
     } catch (error) {
       console.error("Error updating issued status:", error);
+    }
+  };
+
+  const handleSearch = async (query) => {
+    if (query.trim() === "") {
+      setSearchItems([]); // Reset when search input is cleared
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:4000/libo/borrow/stuID/${query}`, {
+        withCredentials: true,
+      });
+      setSearchItems(response.data);
+    } catch (error) {
+      console.error('Error fetching Borrows:', error);
     }
   };
 
@@ -56,11 +71,13 @@ const IssuedBooks = () => {
     }
   };
 
+  const displayBorrows = searchItems.length > 0 ? searchItems : requests;
+
   return (
     <div className="issues-container">
       <Sidebar />
       <div>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="manage-issues-container">
           <div className="table-container-ib">
             {loading ? (
@@ -78,7 +95,7 @@ const IssuedBooks = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {requests.map((request) => (
+                  {displayBorrows.map((request) => (
                     <tr key={request._id}>
                       <td>
                         <img

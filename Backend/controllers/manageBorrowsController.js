@@ -130,8 +130,6 @@ const updateIssuedStatus = async (req, res) => {
    const { id } = req.params;
    const { issuedStatus } = req.body;
 
-   console.log(`Updating borrow request ID: ${id} with status: ${issuedStatus}`);
-
    try {
       const updatedBorrow = await manageBorrows.findByIdAndUpdate(
          id,
@@ -149,10 +147,6 @@ const updateIssuedStatus = async (req, res) => {
       res.status(400).json({ error: e.message });
    }
 };
-
-
-
-
 
 
 //to create a borrow
@@ -266,6 +260,32 @@ const checkBorrowRequest = async (req, res) => {
    }
 };
 
+// Search borrows by student ID
+const searchBorrowsByStudentID = async (req, res) => {
+   const { stuID } = req.params;  // Assuming 'title' is meant to search by student ID
+   try {
+      const borrowRequests = await manageBorrows.find({ stu_ID: { $regex: stuID, $options: 'i' } });
+      const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
+         const bookDetails = await manageBooks.findOne({ isbn: request.isbn });
+         return {
+            id: bookDetails._id,
+            _id: request._id,
+            title: bookDetails.title,
+            author: bookDetails.author,
+            issuedStatus: request.issuedStatus,
+            isbn: request.isbn,
+            stu_id: request.stu_ID,  // Ensure correct field name
+            quantity: bookDetails.quantity,
+            image: bookDetails.image
+         };
+      }));
+
+      res.status(200).json(requestsWithBookDetails);
+   }
+   catch (e) {
+      res.status(400).json({ error: e.message });
+   }
+};
 
 
-export { updateIssuedStatus, getBorrowAcceptedRequests, getAcceptedBorrowRequests, getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };
+export { searchBorrowsByStudentID, updateIssuedStatus, getBorrowAcceptedRequests, getAcceptedBorrowRequests, getBorrowRequestsByStudent, checkBorrowRequest, updateBorrowStatus, getBorrowRequests, createBorrow, getBorrows, getBorrow, updateBorrow, deleteBorrow };

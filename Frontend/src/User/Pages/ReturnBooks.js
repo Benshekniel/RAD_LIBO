@@ -35,8 +35,6 @@ const ReturnBooks = () => {
         try {
           const response = await axios.get(`http://localhost:4000/libo/borrow/accepted/${stuID}`);
           setBooks(response.data);
-          console.log(books);
-
         } catch (error) {
           console.error('Error fetching borrowed books:', error);
         }
