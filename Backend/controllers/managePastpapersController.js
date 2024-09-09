@@ -15,15 +15,11 @@ const createPastpaper = async (req, res) => {
    }
 };
 
-// To get all pastpapers with availability status
+// To get all pastpapers
 const getPastpapers = async (req, res) => {
    try {
       const pastpapers = await managePastpapers.find({});
-      const pastpapersWithAvailability = pastpapers.map((pastpaper) => ({
-         ...pastpaper._doc,
-         availability: pastpaper.cs_is > 0,
-      }));
-      res.status(200).json(pastpapersWithAvailability);
+      res.status(200).json(pastpapers);
    } catch (e) {
       res.status(400).json({ error: e.message });
    }
@@ -37,11 +33,7 @@ const getPastpaper = async (req, res) => {
    }
    try {
       const pastpaper = await managePastpapers.findById(id);
-      const pastpaperWithAvailability = {
-         ...pastpaper._doc,
-         availability: pastpaper.cs_is > 0,
-      };
-      res.status(200).json(pastpaperWithAvailability);
+      res.status(200).json(pastpaper);
    } catch (e) {
       res.status(400).json({ error: e.message });
    }
