@@ -36,7 +36,6 @@ export const UserProvider = ({ children }) => {
 
    useEffect(() => {
       if (userdata && userdata.email) {
-         // Fetch the student data by email
          axios.get(`http://localhost:4000/libo/student/email/${userdata.email}`)
             .then(response => {
                setStudentData(response.data);

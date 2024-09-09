@@ -77,7 +77,6 @@ const deletePastpaper = async (req, res) => {
 
 // Search pastpapers by year
 const searchPastpapersByYear = async (req, res) => {
-   // check
    const { year } = req.params;
    try {
       const pastpapers = await managePastpapers.find({ year: { $regex: year, $options: 'i' } });

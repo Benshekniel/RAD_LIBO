@@ -32,7 +32,7 @@ const AvailableBooks = () => {
 
   const handleSearch = async (query) => {
     if (query.trim() === "") {
-      setSearchItems([]); // Reset to empty array when search input is cleared
+      setSearchItems([]);
       return;
     }
 
@@ -76,7 +76,6 @@ const AvailableBooks = () => {
       }
 
       if (selectedBook.quantity > 0) {
-        // Add borrow request without decreasing quantity
         await axios.post("http://localhost:4000/libo/borrow/add", {
           stu_ID,
           isbn: selectedBook.isbn,

@@ -29,7 +29,7 @@ const ManageBooks = () => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get("http://localhost:4000/libo/book", {
-          withCredentials: true,  // Ensure cookies are sent
+          withCredentials: true,
         });
         setBooks(response.data);
         setLoading(false);
@@ -43,13 +43,13 @@ const ManageBooks = () => {
 
   const handleSearch = async (query) => {
     if (query.trim() === "") {
-      setSearchItems([]); // Reset to empty array when search input is cleared
+      setSearchItems([]);
       return;
     }
 
     try {
       const response = await axios.get(`http://localhost:4000/libo/book/title/${query}`, {
-        withCredentials: true, // Ensure cookies are sent
+        withCredentials: true,
       });
       setSearchItems(response.data);
     } catch (error) {
@@ -103,7 +103,7 @@ const ManageBooks = () => {
 
     try {
       await axios.post("http://localhost:4000/libo/book/add", formData, {
-        withCredentials: true,  // Ensure cookies are sent
+        withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -121,7 +121,7 @@ const ManageBooks = () => {
       });
       // Refresh books list
       const response = await axios.get("http://localhost:4000/libo/book", {
-        withCredentials: true,  // Ensure cookies are sent
+        withCredentials: true,
       });
       setBooks(response.data);
     } catch (error) {
@@ -138,13 +138,12 @@ const ManageBooks = () => {
       isbn: editBook.isbn,
       quantity: editBook.quantity,
       total_quantity: editBook.total_quantity,
-      // Convert the image file to a base64 string if necessary
       image: editBook.image,
     };
 
     try {
       await axios.patch(`http://localhost:4000/libo/book/${editBook._id}`, updatedBook, {
-        withCredentials: true,  // Ensure cookies are sent
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
@@ -155,7 +154,7 @@ const ManageBooks = () => {
 
       // Refresh books list
       const response = await axios.get("http://localhost:4000/libo/book", {
-        withCredentials: true,  // Ensure cookies are sent
+        withCredentials: true,
       });
       setBooks(response.data);
     } catch (error) {
@@ -168,9 +167,8 @@ const ManageBooks = () => {
     if (confirmDelete) {
       try {
         await axios.delete(`http://localhost:4000/libo/book/${id}`, {
-          withCredentials: true,  // Ensure cookies are sent
+          withCredentials: true,
         });
-        // Refresh books list
         setBooks(books.filter(book => book._id !== id));
       } catch (error) {
         console.error("Error deleting book:", error);

@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './NavBar.css';
 import { UserContext } from '../../context/UserContext';
 
@@ -11,12 +9,12 @@ const SearchBar = ({ onSearch }) => {
    const handleInputChange = (e) => {
       const newQuery = e.target.value;
       setQuery(newQuery);
-      onSearch(newQuery); // Trigger search on input change
+      onSearch(newQuery);
    };
 
    const handleSubmit = (e) => {
       e.preventDefault();
-      onSearch(query); // Pass the query to the parent component on form submission
+      onSearch(query);
    };
 
    return (

@@ -39,7 +39,7 @@ const ManageStudents = () => {
 
   const handleSearch = async (query) => {
     if (query.trim() === "") {
-      setSearchItems([]); // Reset to empty array when search input is cleared
+      setSearchItems([]);
       return;
     }
 
@@ -107,7 +107,7 @@ const ManageStudents = () => {
         year: "",
         image: "",
       });
-      // Refresh students list
+
       const response = await axios.get(`http://localhost:4000/libo/student`);
       setStudents(response.data);
     } catch (error) {
@@ -135,7 +135,6 @@ const ManageStudents = () => {
       setShowEditStudentForm(false);
       setEditStudent(null);
 
-      // Refresh students list
       const response = await axios.get(`http://localhost:4000/libo/student`);
       setStudents(response.data);
     } catch (error) {

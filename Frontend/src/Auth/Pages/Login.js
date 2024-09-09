@@ -32,7 +32,7 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        const expirationTime = new Date().getTime() + 3600000; // 1 hour in ms
+        const expirationTime = new Date().getTime() + 3600000;
         handleLogin(data.token, expirationTime, role, email);
         navigate(role === 'student' ? '/manage-avilablebooks' : '/manage-books');
       } else {

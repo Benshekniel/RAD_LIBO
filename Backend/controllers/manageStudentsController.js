@@ -1,8 +1,7 @@
-import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import manageStudents from '../models/ManageStudents.js'; // Assuming you have a model for students
+import manageStudents from '../models/ManageStudents.js';
 
 
 // Register Student

@@ -15,13 +15,12 @@ import librarianRoutes from "./routes/librarianRoutes.js";
 
 const app = express();
 app.use(cors({
-   origin: 'http://localhost:3000',  // Allow requests from your frontend
-   credentials: true  // Allow cookies and credentials to be sent
+   origin: 'http://localhost:3000',
+   credentials: true
 }));
 
-app.use(cookieParser()); // Add cookie parser middleware
+app.use(cookieParser());
 
-// Get __dirname equivalent in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

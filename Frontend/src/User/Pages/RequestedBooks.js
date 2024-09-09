@@ -76,8 +76,6 @@ const RequestedBooks = () => {
                     <th>Date</th>
                     <th>Title</th>
                     <th>Author</th>
-                    {/* <th>Publisher</th> */}
-                    {/* <th>Publication date</th> */}
                     <th>ISBN</th>
                     <th>Status</th>
                     <th></th>
@@ -96,8 +94,6 @@ const RequestedBooks = () => {
                       <td>{new Date(book.dateOfRequest).toLocaleDateString()}</td>
                       <td>{book.title}</td>
                       <td>{book.author}</td>
-                      {/* <td>{book.publisher}</td> */}
-                      {/* <td>{book.publicationDate}</td> */}
                       <td>{book.isbn}</td>
                       <td>
                         <span
@@ -115,9 +111,8 @@ const RequestedBooks = () => {
                       <td className="action-column">
                         <FontAwesomeIcon
                           icon={faTrashAlt}
-                          className={`delete-icon-rb ${
-                            book.status === "accepted" ? "icon-disabled" : "icon-active"
-                          }`}
+                          className={`delete-icon-rb ${book.status === "accepted" ? "icon-disabled" : "icon-active"
+                            }`}
                           onClick={
                             book.status !== "accepted"
                               ? () => handleDelete(book._id)

@@ -41,7 +41,7 @@ const IssuedBooks = () => {
 
   const handleSearch = async (query) => {
     if (query.trim() === "") {
-      setSearchItems([]); // Reset when search input is cleared
+      setSearchItems([]);
       return;
     }
 
@@ -109,7 +109,6 @@ const IssuedBooks = () => {
                       <td>{request.isbn}</td>
                       <td>{request.stu_id}</td>
                       <td>
-                        {/* Issue button: Enabled only if the status is not 'Issued' */}
                         <button
                           className="action-button-issued"
                           onClick={() => handleChange(request._id)}
@@ -118,7 +117,6 @@ const IssuedBooks = () => {
                           {request.issuedStatus === 'Issued' ? 'Issued' : 'Not Issued'}
                         </button>
 
-                        {/* Return button: Enabled only if the status is 'Issued' */}
                         <button
                           className="action-button-issued"
                           onClick={() => handleDelete(request._id, request.id, request.quantity)}

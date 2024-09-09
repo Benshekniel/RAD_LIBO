@@ -15,6 +15,7 @@ import LandingPage from './LandingPage';
 import { UserContext } from './context/UserContext';
 import SignUp from './Auth/Pages/SignUp';
 import About from './about';
+
 // PrivateRoute component to protect routes and check user roles
 const PrivateRoute = ({ element: Component, allowedRoles, ...rest }) => {
   const { userdata } = useContext(UserContext);

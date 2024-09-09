@@ -23,7 +23,7 @@ const ManageBorrows = new Schema(
       },
       dateOfRequest: {
          type: Date,
-         default: Date.now,  // Automatically set the current date when the request is created
+         default: Date.now,
       },
    },
 

@@ -14,13 +14,13 @@ const getBorrowRequestsByStudent = async (req, res) => {
             title: bookDetails.title,
             author: bookDetails.author,
             isbn: request.isbn,
-            status: request.status,  // Include the status in the response
+            status: request.status,
             stu_id: request.stu_ID,
             quantity: bookDetails.quantity,
             image: bookDetails.image,
             publisher: bookDetails.publisher,
             publicationDate: bookDetails.publication_date,
-            dateOfRequest: request.dateOfRequest, // Include the dateOfRequest
+            dateOfRequest: request.dateOfRequest,
          };
       }));
 
@@ -60,10 +60,8 @@ const getAcceptedBorrowRequests = async (req, res) => {
          })
       );
 
-      // Return the aggregated data
       res.status(200).json(requestsWithBookDetails);
    } catch (e) {
-      // Handle any errors that occur during the process
       res.status(400).json({ error: e.message });
    }
 };
@@ -75,7 +73,6 @@ const getBorrowRequests = async (req, res) => {
       const borrowRequests = await manageBorrows.find({ status: "pending" });
       const isbnList = borrowRequests.map(request => request.isbn);
 
-      // Fetch all books in one query using the ISBN list
       const books = await manageBooks.find({ isbn: { $in: isbnList } });
 
       const requestsWithBookDetails = borrowRequests.map((request) => {
@@ -205,7 +202,7 @@ const updateBorrow = async (req, res) => {
 
 const updateBorrowStatus = async (req, res) => {
    const { id } = req.params;
-   const { status } = req.body;  // Assuming 'status' is the field to update
+   const { status } = req.body;
 
    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: 'Invalid borrow ID' });
@@ -218,8 +215,8 @@ const updateBorrowStatus = async (req, res) => {
    try {
       const updatedBorrow = await manageBorrows.findByIdAndUpdate(
          { _id: id },
-         { status },  // Only updating the status field
-         { new: true }  // Return the updated document
+         { status },
+         { new: true }
       );
 
       if (!updatedBorrow) {
@@ -261,7 +258,7 @@ const checkBorrowRequest = async (req, res) => {
 
 // Search borrows by student ID
 const searchBorrowsByStudentID = async (req, res) => {
-   const { stuID } = req.params;  // Assuming 'title' is meant to search by student ID
+   const { stuID } = req.params;
    try {
       const borrowRequests = await manageBorrows.find({ stu_ID: { $regex: stuID, $options: 'i' }, status: "accepted" });
       const requestsWithBookDetails = await Promise.all(borrowRequests.map(async (request) => {
@@ -273,7 +270,7 @@ const searchBorrowsByStudentID = async (req, res) => {
             author: bookDetails.author,
             issuedStatus: request.issuedStatus,
             isbn: request.isbn,
-            stu_id: request.stu_ID,  // Ensure correct field name
+            stu_id: request.stu_ID,
             quantity: bookDetails.quantity,
             image: bookDetails.image
          };

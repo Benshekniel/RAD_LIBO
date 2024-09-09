@@ -24,19 +24,16 @@ const ManageRequests = () => {
 
   const handleAccept = async (id, bookid, quantity) => {
     try {
-      // Update the borrow request status to 'accepted'
       await axios.patch(`http://localhost:4000/libo/borrow/requests/${id}`, {
         status: "accepted",
       });
 
-      // Check if the quantity is greater than 0 and then decrease it
       if (quantity > 0) {
         await axios.patch(`http://localhost:4000/libo/book/${bookid}`, {
           quantity: quantity - 1,
         });
       }
 
-      // Remove the request from the list after acceptance
       setRequests(requests.filter((request) => request._id !== id));
     } catch (error) {
       console.error("Error updating status or decreasing book quantity:", error);

@@ -30,7 +30,7 @@ const AvailablePastpapers = () => {
 
   const handleSearch = async (query) => {
     if (query.trim() === "") {
-      setSearchItems([]); // Reset to empty array when search input is cleared
+      setSearchItems([]);
       return;
     }
 

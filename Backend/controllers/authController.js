@@ -28,15 +28,15 @@ export const loginUser = async (req, res) => {
 
       // Set JWT as an HttpOnly cookie
       res.cookie('token', token, {
-         httpOnly: true, // Accessible only by the web server
-         secure: process.env.NODE_ENV === 'production', // Send only over HTTPS
-         sameSite: 'strict', // Prevent CSRF
+         httpOnly: true,
+         secure: process.env.NODE_ENV === 'production',
+         sameSite: 'strict',
          secure: true,
-         maxAge: 3600000 // 1 hour
+         maxAge: 3600000
       });
 
       // Send token in the response
-      res.status(200).json({ token, role }); // Add token to response
+      res.status(200).json({ token, role });
    } catch (error) {
       res.status(500).json({ message: error.message });
    }

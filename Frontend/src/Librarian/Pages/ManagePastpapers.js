@@ -40,7 +40,7 @@ const ManagePastpapers = () => {
 
    const handleSearch = async (query) => {
       if (query.trim() === "") {
-         setSearchItems([]); // Reset to empty array when search input is cleared
+         setSearchItems([]);
          return;
       }
 
@@ -129,7 +129,6 @@ const ManagePastpapers = () => {
          subject: editPastpaper.subject,
          subject_code: editPastpaper.subject_code,
          examination_year: editPastpaper.examination_year,
-         // Convert the image file to a base64 string if necessary
          image: editPastpaper.image,
       };
 
@@ -156,7 +155,6 @@ const ManagePastpapers = () => {
       if (confirmDelete) {
          try {
             await axios.delete(`http://localhost:4000/libo/pastpaper/${id}`);
-            // Refresh pastpapers list
             setPastpapers(pastpapers.filter(pastpaper => pastpaper._id !== id));
          } catch (error) {
             console.error("Error deleting pastpaper:", error);

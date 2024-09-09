@@ -15,7 +15,7 @@ const SignUp = () => {
     image: null,
   });
 
-  const [error, setError] = useState(""); // State to hold error messages
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +34,6 @@ const SignUp = () => {
 
   // Password validation function
   const validatePassword = (password) => {
-    // Example: Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit.
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     return passwordRegex.test(password);
   };
@@ -109,7 +108,7 @@ const SignUp = () => {
             <img src={user} alt="User Icon" />
           </div>
 
-          {error && <div className="error-message">{error}</div>} {/* Display error message */}
+          {error && <div className="error-message">{error}</div>}
 
           <input
             type="input"

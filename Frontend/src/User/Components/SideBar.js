@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBook, faBookOpen, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import './SideBar.css'; // Import the CSS file for styling
+import './SideBar.css';
 import Logo from '../Assets/Logo.png';
 import { UserContext } from '../../context/UserContext';
 
