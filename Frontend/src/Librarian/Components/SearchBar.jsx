@@ -34,7 +34,7 @@ const SearchBar = ({ onSearch }) => {
       </form>
       {studentData && (
         <div className="user-details">
-          <img src={`http://localhost:4000/image/${studentData.image}`} alt="User" className="user-avatar" />
+          <img src={`https://8840-2402-4000-2310-1e7d-d86d-cb02-e7bf-afe4.ngrok-free.app/image/${studentData.image}`} alt="User" className="user-avatar" />
           <div className="user-info">
             <p>{studentData.name}</p>
             <p className="user-role">Student</p>

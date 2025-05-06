@@ -28,7 +28,7 @@ const ManageStudents = new Schema({
    image: {
       type: String,
       required: true,
-   },
+   }
 });
 
 export default mongoose.model("Student", ManageStudents);
